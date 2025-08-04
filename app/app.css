@@ -12,13 +12,60 @@
 
   /* Neutral colors */
   --color-neutral100: #ffffff;
-  --color-neutral200: #f8faff;
-  --color-neutral300: #edeff5;
-  --color-neutral400: #d7dbe7;
-  --color-neutral500: #a1a7bb;
-  --color-neutral600: #6d758f;
-  --color-neutral700: #353e5c;
+  --color-neutral200: #f7f6f5;
+  --color-neutral300: #e5e5e5;
+  --color-neutral400: #cac9cf;
+  --color-neutral500: #a6a6a8;
+  --color-neutral600: #807f86;
+  --color-neutral700: #595667;
   --color-neutral800: #19213d;
+
+  /* Font */
+  --font-Inter: "Inter", sans-serif;
+  --font-Garamond: "EB Garamond", serif;
+
+  /* Font Sizes */
+  /* Headings */
+  --text-heading12: 44px;
+  --text-heading12--line-height: 1.4; /* 140% */
+  --text-heading12--font-weight: 700;
+
+  --text-heading2: 40px;
+  --text-heading2--line-height: 1.4;
+  --text-heading2--font-weight: 700;
+
+  --text-heading3: 32px;
+  --text-heading3--line-height: 1.4;
+  --text-heading3--font-weight: 700;
+
+  --text-heading4: 24px;
+  --text-heading4--line-height: 1.4;
+  --text-heading4--font-weight: 700;
+
+  --text-heading5: 20px;
+  --text-heading5--line-height: 1.4;
+  --text-heading5--font-weight: 700;
+
+  --text-heading6: 18px;
+  --text-heading6--line-height: 1.4;
+  --text-heading6--font-weight: 700;
+
+  /* Body */
+  --text-Paragraph-Large: 18px;
+  --text-Paragraph-Large--line-height: 28px;
+  --text-Paragraph-Large--font-weight: 400;
+
+  --text-Paragraph-Medium: 16px;
+  --text-Paragraph-Medium--line-height: 24px;
+  --text-Paragraph-Medium--font-weight: 400;
+
+  --text-Paragraph-Default: 14px;
+  --text-Paragraph-Default--line-height: 22px;
+  --text-Paragraph-Default--font-weight: 400;
+
+  --text-Paragraph-Small: 12px;
+  --text-Paragraph-Small--line-height: 18px;
+  --text-Paragraph-Small--font-weight: 400;
 }
 
 @theme inline {
@@ -62,7 +109,7 @@
 :root {
   --radius: 0.625rem;
   --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
+  --foreground: #3a3845;
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.145 0 0);
   --popover: oklch(1 0 0);
@@ -96,7 +143,7 @@
 
 .dark,
 :root[class~="dark"] {
-  --background: oklch(0.145 0 0);
+  --background: #3a3845;
   --foreground: oklch(0.985 0 0);
   --card: oklch(0.205 0 0);
   --card-foreground: oklch(0.985 0 0);
@@ -135,5 +182,58 @@
   }
   body {
     @apply bg-background text-foreground;
+  }
+  html {
+    font-family: "Inter";
+  }
+
+  /* Fonts */
+  .Display-12 {
+    @apply text-9xl leading-[72px] font-normal;
+  }
+  .Display-11 {
+    @apply text-8xl leading-[64px] font-normal;
+  }
+  .Display-10 {
+    @apply text-7xl leading-[56px] font-normal text-pa;
+  }
+  .Display-9 {
+    @apply text-6xl leading-[48px] font-normal;
+  }
+  .Display-8 {
+    @apply text-5xl leading-[40px] font-normal;
+  }
+  .Display-7 {
+    @apply text-4xl leading-[32px] font-normal;
+  }
+  .Display-6 {
+    @apply text-3xl leading-[28px] font-normal;
+  }
+  .Display-5 {
+    @apply text-2xl leading-[24px] font-normal;
+  }
+  .Display-4 {
+    @apply text-xl leading-[24px] font-normal;
+  }
+  .Display-3 {
+    @apply text-lg leading-[24px] font-normal;
+  }
+  .Display-2 {
+    @apply text-base leading-[20px] font-normal;
+  }
+  .Display-1 {
+    @apply text-sm leading-[20px] font-normal;
+  }
+  .Paragraph-Large {
+    @apply text-base leading-[28px] font-normal;
+  }
+  .Paragraph-Medium {
+    @apply text-base leading-[24px] font-normal;
+  }
+  .Paragraph-Default {
+    @apply text-sm leading-[22px] font-normal;
+  }
+  .Paragraph-Small {
+    @apply text-xs leading-[18px] font-normal;
   }
 }
