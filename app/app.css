@@ -3,6 +3,24 @@
 
 @custom-variant dark (&:is(.dark *));
 
+@theme {
+  /* Primary palette */
+  --color-warmBlack: #3a3845;
+  --color-beigePeach: #f7ccac;
+  --color-lightBrown: #c69b7b;
+  --color-green: #826f66;
+
+  /* Neutral colors */
+  --color-neutral100: #ffffff;
+  --color-neutral200: #f8faff;
+  --color-neutral300: #edeff5;
+  --color-neutral400: #d7dbe7;
+  --color-neutral500: #a1a7bb;
+  --color-neutral600: #6d758f;
+  --color-neutral700: #353e5c;
+  --color-neutral800: #19213d;
+}
+
 @theme inline {
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
