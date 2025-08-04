@@ -19,7 +19,6 @@ import {
 
 import type { Route } from "./+types/root";
 import "./app.css";
-import { ImportIcon } from "lucide-react";
 
 export const links: Route.LinksFunction = () => [
   { rel: "icon", type: "image/svg+xml", href: "/favicon.svg" },

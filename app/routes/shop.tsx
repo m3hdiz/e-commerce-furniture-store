@@ -1,12 +1,12 @@
-import type { Route } from "./+types/about";
+import type { Route } from "./+types/shop";
 
 export function meta({}: Route.MetaArgs) {
   return [
-    { title: "About Moon" },
+    { title: "Products" },
     { name: "description", content: "since 1650" },
   ];
 }
 
-export default function about() {
+export default function shop() {
   return <></>;
 }
