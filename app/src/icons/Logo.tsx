@@ -2,6 +2,7 @@ export default function LogoWithType() {
   return (
     <>
       <svg
+        className="max-md:h-8"
         width="145"
         height="40"
         viewBox="0 0 145 40"
