@@ -3,6 +3,7 @@ import LogoWithType from "./Logo";
 import Avatar from "~/src/icons/avatar";
 import Heart from "~/src/icons/heart";
 import ShoppingCart from "~/src/icons/Shopping cart";
+import { NavLink } from "react-router";
 
 export default function NavBar() {
   return (
@@ -13,10 +14,18 @@ export default function NavBar() {
         </div>
         <div>
           <ul className="flex gap-15 text-Paragraph-Default">
-            <li>Home</li>
-            <li>Shop</li>
-            <li>About</li>
-            <li>Contact</li>
+            <li>
+              <NavLink to="/">Home</NavLink>
+            </li>
+            <li>
+              <NavLink to="shop">Shop</NavLink>
+            </li>
+            <li>
+              <NavLink to="about">About</NavLink>
+            </li>
+            <li>
+              <NavLink to="contact">Contact</NavLink>
+            </li>
           </ul>
         </div>
         <div>

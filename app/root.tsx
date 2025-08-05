@@ -19,6 +19,7 @@ import {
 
 import type { Route } from "./+types/root";
 import "./app.css";
+import NavBar from "./components/navBar";
 
 export const links: Route.LinksFunction = () => [
   { rel: "icon", type: "image/svg+xml", href: "/favicon.svg" },
@@ -44,6 +45,15 @@ export async function loader({ request }: LoaderFunctionArgs) {
   return {
     theme: getTheme(),
   };
+}
+
+export function Layout({ children }: { children: React.ReactNode }) {
+  return (
+    <>
+      <NavBar />
+      {children}
+    </>
+  );
 }
 
 export default function AppWithProviders() {
