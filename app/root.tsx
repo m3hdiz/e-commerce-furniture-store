@@ -19,7 +19,6 @@ import {
 
 import type { Route } from "./+types/root";
 import "./app.css";
-import NavBar from "./components/navBar";
 
 export const links: Route.LinksFunction = () => [
   { rel: "icon", type: "image/svg+xml", href: "/favicon.svg" },
@@ -47,15 +46,6 @@ export async function loader({ request }: LoaderFunctionArgs) {
   };
 }
 
-export function Layout({ children }: { children: React.ReactNode }) {
-  return (
-    <>
-      <NavBar />
-      {children}
-    </>
-  );
-}
-
 export default function AppWithProviders() {
   const data = useLoaderData<typeof loader>();
   return (
@@ -69,7 +59,7 @@ export function App() {
   const data = useLoaderData<typeof loader>();
   const [theme] = useTheme();
   return (
-    <html lang="fa-IR" className={clsx(theme)}>
+    <html lang="en" className={clsx(theme)}>
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
