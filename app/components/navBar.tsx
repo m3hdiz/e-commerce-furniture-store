@@ -28,7 +28,7 @@ export default function NavBar() {
                 <Menu />
               </Button>
             </SheetTrigger>
-            <SheetContent side="top">
+            <SheetContent side="left">
               <SheetHeader>
                 <SheetTitle className="mx-auto">
                   <NavLink to="/">
