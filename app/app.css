@@ -12,13 +12,112 @@
 
   /* Neutral colors */
   --color-neutral100: #ffffff;
-  --color-neutral200: #f8faff;
-  --color-neutral300: #edeff5;
-  --color-neutral400: #d7dbe7;
-  --color-neutral500: #a1a7bb;
-  --color-neutral600: #6d758f;
-  --color-neutral700: #353e5c;
+  --color-neutral200: #f7f6f5;
+  --color-neutral300: #e5e5e5;
+  --color-neutral400: #cac9cf;
+  --color-neutral500: #a6a6a8;
+  --color-neutral600: #807f86;
+  --color-neutral700: #595667;
   --color-neutral800: #19213d;
+
+  /* Font */
+  --font-Inter: "Inter", sans-serif;
+  --font-Garamond: "EB Garamond", serif;
+
+  /* Font Sizes */
+  --text-Display-12: 96px;
+  --text-Display-12--line-height: 96px;
+  --text-Display-12--font-weight: 400;
+
+  --text-Display-11: 72px;
+  --text-Display-11--line-height: 72px;
+  --text-Display-11--font-weight: 400;
+
+  --text-Display-10: 60px;
+  --text-Display-10--line-height: 60px;
+  --text-Display-10--font-weight: 400;
+
+  --text-Display-9: 48px;
+  --text-Display-9--line-height: 48px;
+  --text-Display-9--font-weight: 400;
+
+  --text-Display-8: 36px;
+  --text-Display-8--line-height: 40px;
+  --text-Display-8--font-weight: 400;
+
+  --text-Display-7: 30px;
+  --text-Display-7--line-height: 36px;
+  --text-Display-7--font-weight: 400;
+
+  --text-Display-6: 24px;
+  --text-Display-6--line-height: 32px;
+  --text-Display-6--font-weight: 400;
+
+  --text-Display-5: 20px;
+  --text-Display-5--line-height: 28px;
+  --text-Display-5--font-weight: 400;
+
+  --text-Display-4: 18px;
+  --text-Display-4--line-height: 24px;
+  --text-Display-4--font-weight: 400;
+
+  --text-Display-3: 16px;
+  --text-Display-3--line-height: 22px;
+  --text-Display-3--font-weight: 400;
+
+  --text-Display-2: 14px;
+  --text-Display-2--line-height: 20px;
+  --text-Display-2--font-weight: 400;
+
+  --text-Display-1: 12px;
+  --text-Display-1--line-height: 18px;
+  --text-Display-1--font-weight: 400;
+
+  /* Body */
+  --text-Paragraph-Large: 18px;
+  --text-Paragraph-Large--line-height: 28px;
+  --text-Paragraph-Large--font-weight: 400;
+
+  --text-Paragraph-Medium: 16px;
+  --text-Paragraph-Medium--line-height: 24px;
+  --text-Paragraph-Medium--font-weight: 400;
+
+  --text-Paragraph-Default: 14px;
+  --text-Paragraph-Default--line-height: 22px;
+  --text-Paragraph-Default--font-weight: 400;
+
+  --text-Paragraph-Small: 12px;
+  --text-Paragraph-Small--line-height: 18px;
+  --text-Paragraph-Small--font-weight: 400;
+
+  /* Headings */
+  --text-Heading-12: 96px;
+  --text-Heading-12--line-height: 96px;
+  --text-Heading-12--font-weight: 400;
+
+  --text-Heading-11: 72px;
+  --text-Heading-11--line-height: 72px;
+  --text-Heading-11--font-weight: 400;
+
+  --text-Heading-10: 60px;
+  --text-Heading-10--line-height: 60px;
+  --text-Heading-10--font-weight: 400;
+
+  --text-Heading-9: 48px;
+  --text-Heading-9--line-height: 48px;
+  --text-Heading-9--font-weight: 400;
+
+  --text-Heading-8: 36px;
+  --text-Heading-8--line-height: 40px;
+  --text-Heading-8--font-weight: 400;
+
+  --text-Heading-7: 30px;
+  --text-Heading-7--line-height: 36px;
+  --text-Heading-7--font-weight: 400;
+
+  --text-Heading-6: 24px;
+  --text-Heading-6--line-height: 32px;
+  --text-Heading-6--font-weight: 400;
 }
 
 @theme inline {
@@ -62,7 +161,7 @@
 :root {
   --radius: 0.625rem;
   --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
+  --foreground: #3a3845;
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.145 0 0);
   --popover: oklch(1 0 0);
@@ -96,7 +195,7 @@
 
 .dark,
 :root[class~="dark"] {
-  --background: oklch(0.145 0 0);
+  --background: #3a3845;
   --foreground: oklch(0.985 0 0);
   --card: oklch(0.205 0 0);
   --card-foreground: oklch(0.985 0 0);
@@ -135,5 +234,27 @@
   }
   body {
     @apply bg-background text-foreground;
+  }
+  html {
+    @apply font-Inter;
+  }
+
+  h1 {
+    @apply font-Garamond;
+  }
+  h2 {
+    @apply font-Garamond;
+  }
+  h3 {
+    @apply font-Garamond;
+  }
+  h4 {
+    @apply font-Garamond;
+  }
+  h5 {
+    @apply font-Garamond;
+  }
+  h6 {
+    @apply font-Garamond;
   }
 }
