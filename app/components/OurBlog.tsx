@@ -15,7 +15,7 @@ const OurBlog = () => {
       <h2 className="text-center font-bold text-3xl text-neutral800 py-4 px-2 ">
         OUR BLOG
       </h2>
-      <div className="flex flex-col md:flex-row  ">
+      <div className="flex flex-col md:flex-row md:h-[300px]">
         <div className="order-1 md:order-2 w-full md:w-1/2 ">
           <img
             src={ourBlog}
@@ -31,12 +31,12 @@ const OurBlog = () => {
             <CardContent className="font-bold text-[28px] text-neutral800 text-center ">
               The secrets to a kitchen room
             </CardContent>
-            <CardDescription className="text-center text-neutral700">
+            <CardDescription className="text-center text-neutral700 ">
               Lorem ipsum dolor sit amet consectetur adipiscing eli mattis sit
               phasellus mollis sit aliquam sit nullam neque ultrices.
             </CardDescription>
           </CardHeader>
-          <CardFooter className="mx-auto">
+          <CardFooter className="mx-auto my-auto">
             <CardAction className="font-bold text-sm text-neutral700 underline">
               READ MORE
             </CardAction>
