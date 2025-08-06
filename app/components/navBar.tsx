@@ -1,5 +1,5 @@
 import Search from "~/src/icons/search";
-import LogoWithType from "../src/icons/Logo";
+import LogoWithType from "../src/icons/LogoWithTypeHeader";
 import Avatar from "~/src/icons/avatar";
 import Heart from "~/src/icons/heart";
 import ShoppingCart from "~/src/icons/Shopping cart";
