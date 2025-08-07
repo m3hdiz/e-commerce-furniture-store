@@ -20,10 +20,10 @@ const OurBlog = () => {
           <img
             src={ourBlog}
             alt="ourBlog"
-            className="w-full h-full object-cover"
+            className="w-full h-[200px] md:h-full object-cover"
           />
         </div>
-        <Card className="bg-neutral200 border-none shadow-none rounded-none order-2 md:order-1 w-full md:w-1/2 ">
+        <Card className="bg-neutral200 border-none shadow-none rounded-none order-2 md:order-1 w-full md:w-1/2 justify-center">
           <CardHeader>
             <CardTitle className="font-semibold text-lg text-neutral600 text-center">
               TableWare
@@ -36,7 +36,7 @@ const OurBlog = () => {
               phasellus mollis sit aliquam sit nullam neque ultrices.
             </CardDescription>
           </CardHeader>
-          <CardFooter className="mx-auto my-auto">
+          <CardFooter className="mx-auto">
             <CardAction className="font-bold text-sm text-neutral700 underline">
               READ MORE
             </CardAction>

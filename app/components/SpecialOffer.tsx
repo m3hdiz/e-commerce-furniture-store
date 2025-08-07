@@ -13,7 +13,7 @@ const SpecialOffer = () => {
   return (
     <div className="md:px-[11vw]">
       <div className="flex flex-col md:flex-row md:h-[300px]  ">
-        <Card className="bg-neutral200 border-none shadow-none rounded-none w-full md:w-1/2">
+        <Card className="bg-neutral200 border-none shadow-none rounded-none w-full md:w-1/2 justify-center">
           <CardHeader>
             <CardTitle className="font-bold text-[28px] text-neutral800 text-center">
               Up to 40% off our Christmas collection
@@ -23,7 +23,7 @@ const SpecialOffer = () => {
               phasellus mollis sit aliquam sit nullam neque ultrices.
             </CardDescription>
           </CardHeader>
-          <CardFooter className="mx-auto my-auto">
+          <CardFooter className="mx-auto">
             <CardAction className="font-bold text-sm text-neutral800 underline">
               SHOP NOW
             </CardAction>
@@ -33,7 +33,7 @@ const SpecialOffer = () => {
           <img
             src={specialOffer}
             alt="specialOffer"
-            className="w-full h-full object-cover"
+            className="w-full h-[200px] md:h-full  object-cover"
           />
         </div>
       </div>
