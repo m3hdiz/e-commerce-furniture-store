@@ -16,6 +16,17 @@ import {
   SheetClose,
 } from "./ui/sheet";
 import { Button } from "./ui/button";
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "./ui/tabs";
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+  CardContent,
+  CardFooter,
+} from "./ui/card";
+import { Label } from "@radix-ui/react-label";
+import { Input } from "./ui/input";
 
 export default function NavBar() {
   return (
@@ -75,14 +86,111 @@ export default function NavBar() {
             </ul>
           </div>
           <div className="max-md:hidden">
-            <ul className="flex gap-6">
+            <ul className="flex items-center gap-6">
               <li>
                 <Search />
               </li>
               <li>
-                <NavLink to="profile">
-                  <Avatar />
-                </NavLink>
+                <Sheet>
+                  <SheetTrigger asChild>
+                    <Button size="avatar" variant="avatar">
+                      <Avatar />
+                    </Button>
+                  </SheetTrigger>
+                  <SheetContent side="right">
+                    <SheetHeader>
+                      <SheetTitle className="mx-auto">
+                        <NavLink to="/">
+                          <LogoWithType />
+                        </NavLink>
+                      </SheetTitle>
+                      <SheetDescription>
+                        Make changes to your profile here. Click save when
+                        you&apos;re done.
+                      </SheetDescription>
+                    </SheetHeader>
+                    <div className="flex w-full max-w-sm flex-col gap-6 px-3">
+                      <Tabs defaultValue="Sign in">
+                        <TabsList>
+                          <TabsTrigger value="Sign in">Sign in</TabsTrigger>
+                          <TabsTrigger value="Sign up">Sign up</TabsTrigger>
+                        </TabsList>
+                        <TabsContent value="Sign in">
+                          <Card>
+                            <CardHeader>
+                              <CardTitle>Sign in</CardTitle>
+                              <CardDescription>
+                                You can Sign in to your account here. If you
+                                don&apos;t have an account yet you can Sign up.
+                              </CardDescription>
+                            </CardHeader>
+                            <CardContent className="grid gap-6">
+                              <div className="grid gap-3">
+                                <Label htmlFor="Username">Username</Label>
+                                <Input
+                                  id="Username"
+                                  placeholder="Your Username"
+                                />
+                              </div>
+                              <div className="grid gap-3">
+                                <Label htmlFor="Password">Password</Label>
+                                <Input
+                                  id="Password"
+                                  placeholder="Your Password"
+                                />
+                              </div>
+                            </CardContent>
+                            <CardFooter>
+                              <Button variant="newOutline">Sign in</Button>
+                            </CardFooter>
+                          </Card>
+                        </TabsContent>
+                        <TabsContent value="Sign up">
+                          <Card>
+                            <CardHeader>
+                              <CardTitle>Sign up</CardTitle>
+                              <CardDescription>
+                                Sign up a new account here. After submit,
+                                you&apos;ll be logged in.
+                              </CardDescription>
+                            </CardHeader>
+                            <CardContent className="grid gap-6">
+                              <div className="grid gap-3">
+                                <Label htmlFor="Username">Username</Label>
+                                <Input id="Username" type="text" />
+                              </div>
+                              <div className="grid gap-3">
+                                <Label htmlFor="Email">Email</Label>
+                                <Input id="Email" type="email" />
+                              </div>
+                              <div className="grid gap-3">
+                                <Label htmlFor="Password">Password</Label>
+                                <Input id="Password" type="Password" />
+                              </div>
+                              <div className="grid gap-3">
+                                <Label htmlFor="repeat Password">
+                                  Repeat Password
+                                </Label>
+                                <Input
+                                  id="repeat Password"
+                                  type="repeat Password"
+                                />
+                              </div>
+                            </CardContent>
+                            <CardFooter>
+                              <Button variant="newOutline">Submit</Button>
+                            </CardFooter>
+                          </Card>
+                        </TabsContent>
+                      </Tabs>
+                    </div>
+                    <SheetFooter>
+                      <SheetClose asChild>
+                        <Button variant="newOutline">Close</Button>
+                      </SheetClose>
+                    </SheetFooter>
+                  </SheetContent>
+                </Sheet>
               </li>
               <li>
                 <NavLink to="favorites">
