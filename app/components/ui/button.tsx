@@ -21,10 +21,10 @@ const buttonVariants = cva(
           "hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50 p-0",
         link: "text-primary underline-offset-4 hover:underline",
         footer:
-          "uppercase text-Display-1 font-semibold border-1 border-neutral100 gap-0.5",
+          "uppercase text-Display-1 font-semibold border-1 border-neutral100 hover:bg-neutral100/20 gap-0.5",
         avatar: "",
         newOutline:
-          "uppercase text-Display-2 font-semibold border-1 border-foreground gap-0.5",
+          "uppercase text-Display-2 font-semibold border-1 border-foreground duration-300 hover:bg-foreground/10 gap-0.5",
         solid:
           "uppercase text-Display-2 font-semibold border-1 bg-foreground hover:bg-foreground/80 text-background gap-0.5",
       },
