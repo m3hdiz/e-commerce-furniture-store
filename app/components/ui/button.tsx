@@ -18,13 +18,15 @@ const buttonVariants = cva(
         secondary:
           "bg-secondary text-secondary-foreground shadow-xs hover:bg-secondary/80",
         ghost:
-          "hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50",
+          "hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50 p-0",
         link: "text-primary underline-offset-4 hover:underline",
         footer:
           "uppercase text-Display-1 font-semibold border-1 border-neutral100 gap-0.5",
         avatar: "",
         newOutline:
-          "uppercase text-Display-1 font-semibold border-1 border-neutral100 gap-0.5",
+          "uppercase text-Display-2 font-semibold border-1 border-foreground gap-0.5",
+        solid:
+          "uppercase text-Display-2 font-semibold border-1 bg-foreground hover:bg-foreground/80 text-background gap-0.5",
       },
       size: {
         default: "h-9 px-4 py-2 has-[>svg]:px-3",
@@ -32,7 +34,7 @@ const buttonVariants = cva(
         lg: "h-10 px-6 has-[>svg]:px-4",
         icon: "size-9",
         footer: "h-10.5 p-4",
-        avatar: "",
+        avatar: "size-5",
       },
     },
     defaultVariants: {
