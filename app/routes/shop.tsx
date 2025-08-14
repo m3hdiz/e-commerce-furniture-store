@@ -1,3 +1,4 @@
+import ProductPagination from "~/components/ProductPagination";
 import type { Route } from "./+types/shop";
 
 export function meta({}: Route.MetaArgs) {
@@ -8,5 +9,9 @@ export function meta({}: Route.MetaArgs) {
 }
 
 export default function shop() {
-  return <></>;
+  return (
+    <>
+      <ProductPagination />
+    </>
+  );
 }
