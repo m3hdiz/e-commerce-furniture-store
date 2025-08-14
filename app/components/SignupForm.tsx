@@ -1,5 +1,5 @@
 import { Label } from "./ui/label";
-import { Form } from "react-router";
+import { useFetcher } from "react-router";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
 import {
@@ -12,6 +12,7 @@ import {
 } from "./ui/card";
 
 export default function SignupForm() {
+  const SignupFetcher = useFetcher();
   return (
     <Card>
       <CardHeader>
@@ -21,7 +22,11 @@ export default function SignupForm() {
         </CardDescription>
       </CardHeader>
       <CardContent className="grid gap-6">
-        <Form method="post" id="signup-form" className="grid gap-6">
+        <SignupFetcher.Form
+          method="post"
+          id="signup-form"
+          className="grid gap-6"
+        >
           <div className="grid gap-3">
             <Label htmlFor="username-reg">Username</Label>
             <Input
@@ -62,18 +67,16 @@ export default function SignupForm() {
               required
             />
           </div>
-        </Form>
+        </SignupFetcher.Form>
       </CardContent>
       <CardFooter>
         <Button
           type="submit"
           form="signup-form"
-          name="_action"
-          value="signup"
           variant="solid"
           className="w-full"
         >
-          Sign Up
+          {SignupFetcher.state !== "idle" ? "Signing Up..." : "Sign Up"}
         </Button>
       </CardFooter>
     </Card>

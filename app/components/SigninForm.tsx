@@ -1,5 +1,5 @@
 import { Label } from "./ui/label";
-import { Form } from "react-router";
+import { useFetcher, type ActionFunctionArgs } from "react-router";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
 import {
@@ -12,6 +12,8 @@ import {
 } from "./ui/card";
 
 export default function SigninForm() {
+  const SigninFetcher = useFetcher();
+
   return (
     <Card>
       <CardHeader>
@@ -22,7 +24,11 @@ export default function SigninForm() {
         </CardDescription>
       </CardHeader>
       <CardContent className="grid gap-6">
-        <Form method="post" id="signin-form" className="grid gap-6">
+        <SigninFetcher.Form
+          method="post"
+          id="signin-form"
+          className="grid gap-6"
+        >
           <div className="grid gap-3">
             <Label htmlFor="username">Username</Label>
             <Input
@@ -43,18 +49,16 @@ export default function SigninForm() {
               required
             />
           </div>
-        </Form>
+        </SigninFetcher.Form>
       </CardContent>
       <CardFooter>
         <Button
           type="submit"
           form="signin-form"
-          name="_action"
-          value="signin"
           variant="solid"
           className="w-full"
         >
-          Sign In
+          {SigninFetcher.state !== "idle" ? "Signing In..." : "Sign In"}
         </Button>
       </CardFooter>
     </Card>

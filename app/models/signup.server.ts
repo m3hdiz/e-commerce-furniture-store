@@ -1,7 +1,7 @@
-export function SignIn() {}
+import { prisma } from "../db.server";
 
 export function SignUp() {
-  return prisma?.data.create({
+  return prisma.data.create({
     data: {
       title: "yellow",
       desc: "yes",

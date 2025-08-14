@@ -3,41 +3,23 @@ import LogoWithType from "../src/icons/LogoWithTypeHeader";
 import Heart from "~/src/icons/heart";
 import ShoppingCart from "~/src/icons/Shopping cart";
 import { NavLink } from "react-router";
-import Menu from "./Menu";
-
-import { SignUp } from "./models/Signning";
+import { Menu as MenuIcon } from "../src/icons/Menu";
 import SigningTab from "./SigningTab";
+// const username = formData.get("username");
+// const email = formData.get("email");
+// const password = formData.get("password");
+// const confirmPassword = formData.get("confirmPassword");
 
-export async function action({ request }) {
-  const formData = await request.formData();
-  switch (formData.get("_action")) {
-    case "signin": {
-      // return SignIn();
-    }
-    case "signup": {
-      return SignUp();
-    }
-    default: {
-      return null;
-    }
-  }
+// // Example basic validation
+// if (password !== confirmPassword) {
+//   return { error: "Passwords do not match" };
+// }
 
-  // const username = formData.get("username");
-  // const email = formData.get("email");
-  // const password = formData.get("password");
-  // const confirmPassword = formData.get("confirmPassword");
+// Normally you'd create the user in the database here
+// return SignUp();
 
-  // // Example basic validation
-  // if (password !== confirmPassword) {
-  //   return { error: "Passwords do not match" };
-  // }
-
-  // Normally you'd create the user in the database here
-  // return SignUp();
-
-  // Redirect after success
-  // return redirect("/welcome");
-}
+// Redirect after success
+// return redirect("/welcome");
 
 export default function NavBar() {
   return (
@@ -45,7 +27,7 @@ export default function NavBar() {
       <div className="px-[11vw]">
         <section className="flex max-md:grid max-md:grid-cols-3 items-center justify-between h-20.5 max-w-[1110px] mx-auto ">
           <div className="md:hidden">
-            <Menu />
+            <MenuIcon />
           </div>
           <div className="justify-self-center">
             <NavLink to="/">
