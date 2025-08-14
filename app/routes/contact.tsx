@@ -1,4 +1,6 @@
+import GetInTouch from "~/components/GetInTouch";
 import type { Route } from "./+types/contact";
+import map from "../src/map.svg";
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -8,5 +10,12 @@ export function meta({}: Route.MetaArgs) {
 }
 
 export default function contact() {
-  return <></>;
+  return (
+    <>
+      <GetInTouch />
+      <section>
+        <img className="m-auto" src={map} alt="" />
+      </section>
+    </>
+  );
 }
