@@ -1,5 +1,6 @@
-import ProductPagination from "~/components/ProductPagination";
 import type { Route } from "./+types/shop";
+import SideBarFiltration from "~/components/SideBarFiltration";
+import ProductPagination from "~/components/ProductPagination";
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -10,8 +11,9 @@ export function meta({}: Route.MetaArgs) {
 
 export default function shop() {
   return (
-    <>
+    <div className="md:flex px-[11vw]">
+      <SideBarFiltration />
       <ProductPagination />
-    </>
+    </div>
   );
 }

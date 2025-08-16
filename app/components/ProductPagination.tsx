@@ -32,8 +32,8 @@ export default function CarouselWithThumbs() {
     [api]
   );
   return (
-    <div className=" px-[11vw] md:w-3/4">
-      <div className="flex items-center gap-2 text-sm mb-1">
+    <div className=" md:w-3/4">
+      <div className="flex items-center gap-2 text-sm mb-1 justify-end">
         <p> Sort by:</p>
         <SortBy />
       </div>
@@ -65,7 +65,7 @@ export default function CarouselWithThumbs() {
           {/* ))} */}
         </CarouselContent>
       </Carousel>
-      <Carousel className="w-2/5 mx-auto md:ml-[4vw] mb-8">
+      <Carousel className="w-2/5 mx-auto md:mr-[4vw] mb-8 ">
         <CarouselContent className="flex">
           {Array.from({ length: count }).map((_, index) => (
             <CarouselItem
