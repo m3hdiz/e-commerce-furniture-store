@@ -32,12 +32,12 @@ export default function CarouselWithThumbs() {
     [api]
   );
   return (
-    <div className=" md:w-3/4">
-      <div className="flex items-center gap-2 text-sm mb-1 justify-end">
-        <p> Sort by:</p>
+    <div className="md:w-3/4">
+      <div className="flex items-center gap-2 sm:text-sm text-xs justify-end mb-1 ">
+        <p className="-mt-20 md:mt-0"> Sort by:</p>
         <SortBy />
       </div>
-      <Carousel setApi={setApi} className="w-full ">
+      <Carousel setApi={setApi} className="w-full">
         <CarouselContent>
           {/* {Array.from({ length: 12 }).map((_, index) => ( */}
           <CarouselItem
