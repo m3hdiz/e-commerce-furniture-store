@@ -14,7 +14,7 @@ import {
 
 function Sidebar() {
   return (
-    <aside className="md:w-[20vw] ">
+    <aside className="w-[20vw] md:mx-auto">
       {/* <div className="flex justify-center items-center gap-3 md:hidden">
         <Filter />
         <h2 className="font-semibold text-sm ">FILTER</h2>
@@ -22,7 +22,7 @@ function Sidebar() {
       <h2 className="font-semibold text-sm md:pb-5 md:border-b border-neutral600 border-b-0 hidden md:block">
         Showing 120 items
       </h2>
-      <div className=" hidden md:block">
+      <div>
         <div className="border-b py-4 border-neutral600 flex flex-col gap-3">
           <h3 className="font-semibold text-sm text-neutral800">Category</h3>
           <label
@@ -173,29 +173,28 @@ function Sidebar() {
 function SideBarFiltration() {
   return (
     <>
-      <div className="md:hidden">
+      <div className="md:hidden w-[20vw]">
         <Sheet>
           <SheetTrigger asChild>
-            <div className="flex justify-center items-center gap-3 md:hidden">
+            <div className="flex justify-center items-center gap-3">
               <Filter />
-              <h2 className="font-semibold text-sm ">FILTER</h2>
+              <h2 className="font-semibold text-sm">FILTER</h2>
             </div>
           </SheetTrigger>
           <SheetContent side="left">
             <SheetHeader>
-              <SheetTitle className="mx-auto"></SheetTitle>
+              <SheetTitle className="mx-auto">Filters</SheetTitle>
               <SheetDescription></SheetDescription>
             </SheetHeader>
             <Sidebar />
-            <SheetFooter>
-              <SheetClose asChild>
-                <Button variant="outline">Close</Button>
-              </SheetClose>
-            </SheetFooter>
+            <SheetFooter></SheetFooter>
           </SheetContent>
         </Sheet>
       </div>
-      <Sidebar />
+
+      <div className="hidden md:block">
+        <Sidebar />
+      </div>
     </>
   );
 }
