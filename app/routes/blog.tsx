@@ -1,3 +1,4 @@
+import SliderBlog from "~/components/SliderBlog";
 import type { Route } from "./+types/blog";
 
 export function meta({}: Route.MetaArgs) {
@@ -8,5 +9,9 @@ export function meta({}: Route.MetaArgs) {
 }
 
 export default function blog() {
-  return <></>;
+  return (
+    <>
+      <SliderBlog />
+    </>
+  );
 }
