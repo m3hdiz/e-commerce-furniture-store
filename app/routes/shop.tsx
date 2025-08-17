@@ -1,3 +1,4 @@
+import SimilarItems from "~/components/SimilarItems";
 import type { Route } from "./+types/shop";
 
 export function meta({}: Route.MetaArgs) {
