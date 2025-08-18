@@ -27,6 +27,7 @@ const buttonVariants = cva(
           "uppercase text-Display-2 font-semibold border-1 border-foreground duration-300 hover:bg-foreground/10 gap-0.5",
         solid:
           "uppercase text-Display-2 font-semibold border-1 bg-foreground hover:bg-foreground/80 text-background gap-0.5",
+        hero: "uppercase text-Display-1 font-semibold bg-white text-green rounded-none gap-0.5",
       },
       size: {
         default: "h-9 px-4 py-2 has-[>svg]:px-3",
@@ -35,6 +36,7 @@ const buttonVariants = cva(
         icon: "size-9",
         footer: "h-10.5 p-4",
         avatar: "size-5",
+        hero: "py-3 px-8",
       },
     },
     defaultVariants: {
