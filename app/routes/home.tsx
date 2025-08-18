@@ -1,3 +1,4 @@
+import type { Route } from "./+types/Home";
 import Hero from "~/components/Hero";
 import CustomerEmail from "~/components/CustomerEmail";
 import HomePageHistory from "~/components/HomePageHistory";
