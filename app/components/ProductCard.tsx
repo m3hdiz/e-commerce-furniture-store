@@ -13,7 +13,7 @@ import Image from "../src/assets/Image.svg";
 const ProductCard = () => {
   return (
     <div>
-      <Card className="border-none shadow-none !px-0 !gap-0 min-h-[500px] ">
+      <Card className="border-none shadow-none !py-0 !px-0 !gap-0 min-h-[500px] ">
         <CardHeader className="!px-1 !py-2">
           <img
             src={Image}
