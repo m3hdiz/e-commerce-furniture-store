@@ -1,3 +1,4 @@
+import ArticlesPagination from "~/components/ArticlesPagination";
 import type { Route } from "./+types/blog";
 
 export function meta({}: Route.MetaArgs) {
@@ -8,5 +9,9 @@ export function meta({}: Route.MetaArgs) {
 }
 
 export default function blog() {
-  return <></>;
+  return (
+    <>
+      <ArticlesPagination />
+    </>
+  );
 }
