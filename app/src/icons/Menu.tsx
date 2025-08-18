@@ -1,4 +1,4 @@
-export default function Menu() {
+export function Menu() {
   return (
     <svg
       width="20"

@@ -1,21 +1,25 @@
 import Search from "~/src/icons/search";
 import LogoWithType from "../src/icons/LogoWithTypeHeader";
-import Avatar from "~/src/icons/avatar";
 import Heart from "~/src/icons/heart";
 import ShoppingCart from "~/src/icons/Shopping cart";
 import { NavLink } from "react-router";
-import Menu from "~/src/icons/Menu";
-import {
-  Sheet,
-  SheetContent,
-  SheetDescription,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-  SheetFooter,
-  SheetClose,
-} from "./ui/sheet";
-import { Button } from "./ui/button";
+import { Menu as MenuIcon } from "../src/icons/Menu";
+import SigningTab from "./SigningTab";
+// const username = formData.get("username");
+// const email = formData.get("email");
+// const password = formData.get("password");
+// const confirmPassword = formData.get("confirmPassword");
+
+// // Example basic validation
+// if (password !== confirmPassword) {
+//   return { error: "Passwords do not match" };
+// }
+
+// Normally you'd create the user in the database here
+// return SignUp();
+
+// Redirect after success
+// return redirect("/welcome");
 
 export default function NavBar() {
   return (
@@ -23,35 +27,7 @@ export default function NavBar() {
       <div className="px-[11vw]">
         <section className="flex max-md:grid max-md:grid-cols-3 items-center justify-between h-20.5 max-w-[1110px] mx-auto ">
           <div className="md:hidden">
-            <Sheet>
-              <SheetTrigger asChild>
-                <Button variant="ghost">
-                  <Menu />
-                </Button>
-              </SheetTrigger>
-              <SheetContent side="left">
-                <SheetHeader>
-                  <SheetTitle className="mx-auto">
-                    <NavLink to="/">
-                      <LogoWithType />
-                    </NavLink>
-                  </SheetTitle>
-                  <SheetDescription>
-                    Make changes to your profile here. Click save when
-                    you&apos;re done.
-                  </SheetDescription>
-                </SheetHeader>
-                <div className="grid flex-1 auto-rows-min gap-6 px-4">
-                  <div className="grid gap-3"></div>
-                  <div className="grid gap-3"></div>
-                </div>
-                <SheetFooter>
-                  <SheetClose asChild>
-                    <Button variant="outline">Close</Button>
-                  </SheetClose>
-                </SheetFooter>
-              </SheetContent>
-            </Sheet>
+            <MenuIcon />
           </div>
           <div className="justify-self-center">
             <NavLink to="/">
@@ -75,14 +51,12 @@ export default function NavBar() {
             </ul>
           </div>
           <div className="max-md:hidden">
-            <ul className="flex gap-6">
+            <ul className="flex items-center gap-6">
               <li>
                 <Search />
               </li>
               <li>
-                <NavLink to="profile">
-                  <Avatar />
-                </NavLink>
+                <SigningTab />
               </li>
               <li>
                 <NavLink to="favorites">
