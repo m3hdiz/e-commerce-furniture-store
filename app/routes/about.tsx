@@ -1,3 +1,4 @@
+import AboutPageHistory from "~/components/aboutPageHistory";
 import type { Route } from "./+types/about";
 
 export function meta({}: Route.MetaArgs) {
@@ -8,5 +9,9 @@ export function meta({}: Route.MetaArgs) {
 }
 
 export default function about() {
-  return <></>;
+  return (
+    <>
+      <AboutPageHistory />
+    </>
+  );
 }
