@@ -1,4 +1,5 @@
 import HowWeWork from "../components/HowWeWork";
+import AboutPageHistory from "~/components/aboutPageHistory";
 import type { Route } from "./+types/about";
 
 export function meta({}: Route.MetaArgs) {
@@ -12,6 +13,7 @@ export default function about() {
   return (
     <>
       <HowWeWork />
+      <AboutPageHistory />
     </>
   );
 }
