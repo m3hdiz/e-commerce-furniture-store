@@ -1,3 +1,4 @@
+import Cart from "~/components/Cart";
 import type { Route } from "./+types/cart";
 
 export function meta({}: Route.MetaArgs) {
@@ -8,5 +9,9 @@ export function meta({}: Route.MetaArgs) {
 }
 
 export default function cart() {
-  return <></>;
+  return (
+    <>
+      <Cart />
+    </>
+  );
 }
