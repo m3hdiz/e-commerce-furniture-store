@@ -150,7 +150,7 @@ export default function PaymentSidebar() {
         <button className="text-Paragraph-Default font-medium">
           <Paypal />
         </button>
-        <button className="w-full border border-neutral400">Place order</button>
+        <button className="border border-neutral400">Place order</button>
       </div>
     </section>
   );
