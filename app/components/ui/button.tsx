@@ -22,6 +22,7 @@ const buttonVariants = cva(
         link: "text-primary underline-offset-4 hover:underline",
         footer:
           "uppercase text-Display-1 font-semibold border-1 border-neutral100 rounded-none gap-0.5",
+        hero: "uppercase text-Display-1 font-semibold bg-white text-green rounded-none gap-0.5",
       },
       size: {
         default: "h-9 px-4 py-2 has-[>svg]:px-3",
@@ -29,6 +30,7 @@ const buttonVariants = cva(
         lg: "h-10 rounded-md px-6 has-[>svg]:px-4",
         icon: "size-9",
         footer: "h-10.5 p-4",
+        hero: "py-3 px-8",
       },
     },
     defaultVariants: {
