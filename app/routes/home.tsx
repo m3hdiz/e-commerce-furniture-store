@@ -1,4 +1,4 @@
-
+import Menu from "~/components/Menu";
 import OurBlog from "~/components/OurBlog";
 import SpecialOffer from "~/components/SpecialOffer";
 import NewArrivals from "~/components/NewArrivals";
@@ -12,6 +12,7 @@ export function meta({}: Route.MetaArgs) {
 export default function Home() {
   return (
     <>
+      <Menu />
       <SpecialOffer />
       <OurBlog />
       <BestSellers />
