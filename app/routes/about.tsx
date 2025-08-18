@@ -1,3 +1,4 @@
+import MeetOurTeam from "~/components/MeetOurTeam";
 import AboutMoon from "~/components/AboutMoon";
 import HowWeWork from "../components/HowWeWork";
 import AboutPageHistory from "~/components/aboutPageHistory";
@@ -13,6 +14,7 @@ export function meta({}: Route.MetaArgs) {
 export default function about() {
   return (
     <>
+      <MeetOurTeam />
       <AboutMoon />
       <HowWeWork />
       <AboutPageHistory />
