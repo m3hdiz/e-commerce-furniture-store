@@ -11,16 +11,16 @@ export function meta({}: Route.MetaArgs) {
 
 export default function checkout() {
   return (
-    <div className="p-5 sm:px-[11vw]">
-      <section className="flex flex-col gap-10 max-w-[1110px] m-auto">
+    <div className="p-5 pb-20 sm:px-[11vw]">
+      <section className="flex flex-col gap-12.5 max-w-[1110px] m-auto">
         <div>breadcrumb</div>
         <div>
-          <p>Billing Details</p>
-          <div className="sm:flex justify-between w-full">
-            <div className="sm:basis-159.5">
+          <p className="mb-10">Billing Details</p>
+          <div className="lg:flex gap-x-14 gap-y-15 justify-between w-full">
+            <div className="lg:flex-1">
               <BillingDetails />
             </div>
-            <div className="sm:basis-104">
+            <div className="lg:w-104 lg:flex-initial">
               <PaymentSidebar />
             </div>
           </div>

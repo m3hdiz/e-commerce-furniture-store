@@ -49,7 +49,7 @@ export default function BillingDetails() {
   };
 
   return (
-    <Form className="grid sm:grid-cols-2 sm:gap-x-5 gap-y-7.5">
+    <Form className="grid sm:grid-cols-2 sm:gap-x-5 gap-y-7.5 max-lg:mb-15">
       <div className="flex flex-col gap-2">
         <label htmlFor="FirstName">First Name *</label>
         <input

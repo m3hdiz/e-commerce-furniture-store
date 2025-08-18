@@ -50,49 +50,56 @@ console.log(calculateCartTotals(cartItems, shipping));
 
 export default function PaymentSidebar() {
   return (
-    <section>
-      <div className="flex justify-between">
-        <p>Product</p>
-        <p>Subtotal</p>
-      </div>
-      {cartItems.map((item) => (
-        <div className="flex justify-between" key={item.id}>
-          <p>{item.Product}</p>
+    <section className="flex flex-col gap-10">
+      <div className="flex flex-col gap-8">
+        <div className="flex justify-between">
+          <p>Product</p>
+          <p>Subtotal</p>
+        </div>
+        <div>
+          {cartItems.map((item) => (
+            <div className="flex justify-between" key={item.id}>
+              <p>{item.Product}</p>
+              <p>
+                {new Intl.NumberFormat("en-US", {
+                  style: "currency",
+                  currency: "USD",
+                }).format(item.Price)}
+              </p>
+            </div>
+          ))}
+        </div>
+        <div>
+          <div className="flex justify-between">
+            <p>Subtotal</p>
+            <p>
+              {new Intl.NumberFormat("en-US", {
+                style: "currency",
+                currency: "USD",
+              }).format(totals.subtotal)}
+            </p>
+          </div>
+          <div className="flex justify-between">
+            <p>Shipping</p>
+            <p>
+              {new Intl.NumberFormat("en-US", {
+                style: "currency",
+                currency: "USD",
+              }).format(totals.shipping)}
+            </p>
+          </div>
+        </div>
+        <div className="flex justify-between">
+          <p>Totals</p>
           <p>
             {new Intl.NumberFormat("en-US", {
               style: "currency",
               currency: "USD",
-            }).format(item.Price)}
+            }).format(totals.total)}
           </p>
         </div>
-      ))}
-      <div className="flex justify-between">
-        <p>Subtotal</p>
-        <p>
-          {new Intl.NumberFormat("en-US", {
-            style: "currency",
-            currency: "USD",
-          }).format(totals.subtotal)}
-        </p>
       </div>
-      <div className="flex justify-between">
-        <p>Shipping</p>
-        <p>
-          {new Intl.NumberFormat("en-US", {
-            style: "currency",
-            currency: "USD",
-          }).format(totals.shipping)}
-        </p>
-      </div>
-      <div className="flex justify-between">
-        <p>Totals</p>
-        <p>
-          {new Intl.NumberFormat("en-US", {
-            style: "currency",
-            currency: "USD",
-          }).format(totals.total)}
-        </p>
-      </div>
+
       <div className="px-12.5 py-10 bg-warmBlack text-neutral100 flex flex-col gap-y-10">
         <p className="text-Display-5 font-medium">Payment</p>
         <div className="flex justify-between">
