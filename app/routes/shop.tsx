@@ -11,9 +11,12 @@ export function meta({}: Route.MetaArgs) {
 
 export default function shop() {
   return (
-    <div className="md:flex px-[11vw]">
-      <SideBarFiltration />
-      <ProductPagination />
-    </div>
+    <>
+      <div>breadcrumb</div>
+      <div className="md:flex px-[11vw]">
+        <SideBarFiltration />
+        <ProductPagination />
+      </div>
+    </>
   );
 }
