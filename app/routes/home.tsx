@@ -1,5 +1,8 @@
+
 import OurBlog from "~/components/OurBlog";
 import SpecialOffer from "~/components/SpecialOffer";
+import NewArrivals from "~/components/NewArrivals";
+import BestSellers from "../components/BestSellers";
 import type { Route } from "./+types/home";
 
 export function meta({}: Route.MetaArgs) {
@@ -11,6 +14,8 @@ export default function Home() {
     <>
       <SpecialOffer />
       <OurBlog />
+      <BestSellers />
+      <NewArrivals />
     </>
   );
 }
