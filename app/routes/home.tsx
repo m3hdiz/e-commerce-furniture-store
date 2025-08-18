@@ -1,4 +1,4 @@
-
+import CustomerEmail from "~/components/CustomerEmail";
 import HomePageHistory from "~/components/HomePageHistory";
 import Menu from "~/components/Menu";
 import OurBlog from "~/components/OurBlog";
@@ -15,6 +15,7 @@ export function meta({}: Route.MetaArgs) {
 export default function Home() {
   return (
     <>
+      <CustomerEmail />
       <HomePageHistory />
       <Menu />
       <SpecialOffer />
