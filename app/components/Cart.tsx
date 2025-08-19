@@ -1,18 +1,7 @@
-import { Link } from "react-router";
-import {
-  Breadcrumb,
-  BreadcrumbList,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbSeparator,
-  BreadcrumbPage,
-} from "./ui/breadcrumb";
 import {
   Table,
   TableBody,
-  TableCaption,
   TableCell,
-  TableFooter,
   TableHead,
   TableHeader,
   TableRow,
@@ -22,6 +11,7 @@ import porcelain from "~/src/porcelain-dinner-plate.svg";
 import julo from "~/src/julo-blue-salad-plate.svg";
 import valo from "~/src/valo-matte-white-vase.svg";
 import DeleteIcon from "~/src/icons/DeleteIcon";
+import { CartBreadcrumb } from "./HeaderBreadcrumb";
 
 const cartItems = [
   {
@@ -68,32 +58,11 @@ function calculateCartTotals(items, taxRatePercent: Number) {
 const taxRate = 8; // for example, 8% tax
 const totals = calculateCartTotals(cartItems, taxRate);
 
-console.log(totals);
-// { subtotal: 356, tax: 28.48, total: 384.48 }
-
 export default function Cart() {
   return (
     <div className="px-5 mt-5 mb-20 sm:px-[11vw]">
       <section className="flex flex-col gap-12.5 justify-center mx-auto max-w-[1110px]">
-        <div>
-          <Breadcrumb>
-            <BreadcrumbList>
-              <BreadcrumbItem>
-                <BreadcrumbLink asChild>
-                  <Link to="/" className="text-neutral600">
-                    Home
-                  </Link>
-                </BreadcrumbLink>
-              </BreadcrumbItem>
-              <BreadcrumbSeparator>
-                <p>/</p>
-              </BreadcrumbSeparator>
-              <BreadcrumbItem>
-                <BreadcrumbPage>Shopping Cart</BreadcrumbPage>
-              </BreadcrumbItem>
-            </BreadcrumbList>
-          </Breadcrumb>
-        </div>
+        <CartBreadcrumb />
         <div className="space-y-10 space-x-0">
           <p className="text-Display-6 font-medium">
             Cart ({cartItems.length} item)

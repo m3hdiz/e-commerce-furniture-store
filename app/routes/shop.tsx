@@ -1,7 +1,7 @@
-import type { Route } from "./+types/shop";
+import type { Route } from "./+types/Shop";
 import SideBarFiltration from "~/components/SideBarFiltration";
 import ProductPagination from "~/components/ProductPagination";
-import { SignUp } from "~/models/signup.server";
+import { ShopBreadcrumb } from "~/components/HeaderBreadcrumb";
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -10,18 +10,16 @@ export function meta({}: Route.MetaArgs) {
   ];
 }
 
-export function action() {
-  return SignUp();
-}
-
-export default function shop() {
+export default function Shop() {
   return (
-    <>
-      <div>breadcrumb</div>
-      <div className="md:flex px-[11vw]">
-        <SideBarFiltration />
-        <ProductPagination />
+    <div className="px-5 mt-5 mb-20 sm:px-[11vw]">
+      <div className="flex flex-col gap-12.5 justify-center mx-auto max-w-[1110px]">
+        <ShopBreadcrumb />
+        <div className="md:flex ">
+          <SideBarFiltration />
+          <ProductPagination />
+        </div>
       </div>
-    </>
+    </div>
   );
 }

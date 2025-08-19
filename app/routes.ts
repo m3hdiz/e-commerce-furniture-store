@@ -6,14 +6,15 @@ import {
 } from "@react-router/dev/routes";
 
 export default [
-  layout("routes/layout.tsx", [
+  layout("routes/Layout.tsx", [
     index("routes/Home.tsx"),
-    route("about", "routes/about.tsx"),
-    route("blog", "routes/blog.tsx"),
-    route("shop", "routes/shop.tsx"),
-    route("cart", "routes/cart.tsx"),
-    route("contact", "routes/contact.tsx"),
-    route("checkout", "routes/checkout.tsx"),
+    route("about", "routes/About.tsx"),
+    route("blog", "routes/Blog.tsx"),
+    route("shop", "routes/Shop.tsx"),
+    route("cart", "routes/Cart.tsx"),
+    route("contact", "routes/Contact.tsx"),
+    route("checkout", "routes/Checkout.tsx"),
     route("product", "routes/ProductPage.tsx"),
+    route("login", "routes/Login.tsx"),
   ]),
 ] satisfies RouteConfig;
