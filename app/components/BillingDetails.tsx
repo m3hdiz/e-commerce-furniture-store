@@ -1,6 +1,17 @@
 import { Form } from "react-router";
 import React from "react";
 import { ChevronLeft } from "lucide-react";
+import { Label } from "./ui/label";
+import { Input } from "./ui/input";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "./ui/select";
 
 export default function BillingDetails() {
   const [country, setCountry] = React.useState("United States");
@@ -51,8 +62,8 @@ export default function BillingDetails() {
   return (
     <Form className="grid sm:grid-cols-2 sm:gap-x-5 gap-y-7.5 max-lg:mb-15">
       <div className="flex flex-col gap-2">
-        <label htmlFor="FirstName">First Name *</label>
-        <input
+        <Label htmlFor="FirstName">First Name *</Label>
+        <Input
           type="text"
           id="FirstName"
           name="FirstName"
@@ -60,8 +71,8 @@ export default function BillingDetails() {
         />
       </div>
       <div className="flex flex-col gap-2">
-        <label htmlFor="LastName">Last Name *</label>
-        <input
+        <Label htmlFor="LastName">Last Name *</Label>
+        <Input
           type="text"
           id="LastName"
           name="LastName"
@@ -69,62 +80,79 @@ export default function BillingDetails() {
         />
       </div>
       <div className="flex flex-col gap-2">
-        <label htmlFor="Company">Company</label>
-        <input type="text" id="Company" name="Company" placeholder="Moon" />
+        <Label htmlFor="Company">Company</Label>
+        <Input type="text" id="Company" name="Company" placeholder="Moon" />
       </div>
       <div className="flex flex-col gap-2">
-        <label htmlFor="CountryRegion">Country / Region *</label>
-        <select
-          id="CountryRegion"
-          name="CountryRegion"
-          value={country}
-          defaultValue=""
-          onChange={(e) => setCountry(e.target.value)}
-          className="border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-        >
-          <option value="" disabled hidden>
-            United States
-          </option>
-          {Object.keys(statesByCountry).map((c) => (
-            <option key={c} value={c}>
-              {c}
-            </option>
-          ))}
-        </select>
+        <Label htmlFor="CountryRegion">Country / Region *</Label>
+        <Select>
+          <SelectTrigger>
+            <SelectValue
+              className="text-Display-2"
+              placeholder="United States"
+            />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectGroup>
+              <SelectItem value="United States">United States</SelectItem>
+              <SelectItem value="Canada">Canada</SelectItem>
+              <SelectItem value="United Kingdom">United Kingdom</SelectItem>
+              <SelectItem value="Australia">Australia</SelectItem>
+              <SelectItem value="Germany">Germany</SelectItem>
+              <SelectItem value="France">France</SelectItem>
+              <SelectItem value="India">India</SelectItem>
+              <SelectItem value="Japan">Japan</SelectItem>
+              <SelectItem value="China">China</SelectItem>
+              <SelectItem value="Brazil">Brazil</SelectItem>
+            </SelectGroup>
+          </SelectContent>
+        </Select>
       </div>
       <div className="sm:col-span-2 flex flex-col gap-2">
-        <label htmlFor="Address">Street address *</label>
-        <input type="text" id="Address" name="Address" placeholder="Address" />
+        <Label htmlFor="Address">Street address *</Label>
+        <Input type="text" id="Address" name="Address" placeholder="Address" />
       </div>
       <div className="flex flex-col gap-2">
-        <label htmlFor="TownCity">Town / City *</label>
-        <input type="text" id="TownCity" name="TownCity" placeholder="City" />
+        <Label htmlFor="TownCity">Town / City *</Label>
+        <Input type="text" id="TownCity" name="TownCity" placeholder="City" />
       </div>
       <div className="flex flex-col gap-2">
-        <label htmlFor="State">State *</label>
-        <select
-          id="State"
-          name="State"
-          defaultValue=""
-          className="border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-        >
-          <option value="" disabled hidden>
-            State
-          </option>
-          {statesByCountry[country].map((s) => (
-            <option key={s} value={s}>
-              {s}
-            </option>
-          ))}
-        </select>
+        <Label htmlFor="State">State *</Label>
+        <Select>
+          <SelectTrigger>
+            <SelectValue className="text-Display-2" placeholder="State" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectGroup>
+              <SelectLabel>States</SelectLabel>
+              <SelectItem value="United States">United States</SelectItem>
+              <SelectItem value="Canada">Canada</SelectItem>
+              <SelectItem value="United Kingdom">United Kingdom</SelectItem>
+              <SelectItem value="Australia">Australia</SelectItem>
+              <SelectItem value="Germany">Germany</SelectItem>
+              <SelectItem value="France">France</SelectItem>
+              <SelectItem value="India">India</SelectItem>
+              <SelectItem value="Japan">Japan</SelectItem>
+              <SelectItem value="China">China</SelectItem>
+              <SelectItem value="Brazil">Brazil</SelectItem>
+            </SelectGroup>
+            <SelectGroup>
+              <SelectLabel>States</SelectLabel>
+              <SelectItem value="United States">United States</SelectItem>
+              <SelectItem value="Canada">Canada</SelectItem>
+              <SelectItem value="United Kingdom">United Kingdom</SelectItem>
+              <SelectItem value="Australia">Australia</SelectItem>
+            </SelectGroup>
+          </SelectContent>
+        </Select>
       </div>
       <div className="flex flex-col gap-2">
-        <label htmlFor="ZIPCode">ZIP Code</label>
-        <input type="text" id="ZIPCode" name="ZIPCode" placeholder="ZIP Code" />
+        <Label htmlFor="ZIPCode">ZIP Code</Label>
+        <Input type="text" id="ZIPCode" name="ZIPCode" placeholder="ZIP Code" />
       </div>
       <div className="flex flex-col gap-2">
-        <label htmlFor="Phone">Phone *</label>
-        <input
+        <Label htmlFor="Phone">Phone *</Label>
+        <Input
           type="tel"
           id="Phone"
           name="Phone"
@@ -132,8 +160,8 @@ export default function BillingDetails() {
         />
       </div>
       <div className="sm:col-span-2 flex flex-col gap-2">
-        <label htmlFor="email">Email</label>
-        <input
+        <Label htmlFor="email">Email</Label>
+        <Input
           type="email"
           id="email"
           name="email"
@@ -141,7 +169,7 @@ export default function BillingDetails() {
         />
       </div>
       <div className="sm:col-span-2 flex flex-col gap-2">
-        <label htmlFor="OrderNotes">Order notes</label>
+        <Label htmlFor="OrderNotes">Order notes</Label>
         <textarea
           id="OrderNotes"
           name="OrderNotes"

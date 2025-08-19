@@ -5,7 +5,7 @@ import { Button } from "./ui/button";
 
 const Hero = () => {
   return (
-    <div className="flex flex-col md:flex-row w-full  md:h-[460px] md:relative">
+    <div className="flex flex-col md:flex-row w-full md:h-[460px] md:relative">
       <div className="w-full ">
         <img
           src={hero}
@@ -27,7 +27,6 @@ const Hero = () => {
           <h2 className="hero-title font-bold text-4xl text-neutral100 text-center">
             BAT TRANG DINNER SET
           </h2>
-
           <Button variant="hero" size="hero">
             SHOP NOW
           </Button>
