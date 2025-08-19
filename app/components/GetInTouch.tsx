@@ -1,3 +1,8 @@
+import ArrowRight from "~/src/icons/ArrowRight";
+import { Button } from "./ui/button";
+import { Input } from "./ui/input";
+import { Label } from "./ui/label";
+
 export default function GetInTouch() {
   return (
     <div className="px-5 py-10 sm:px-[11vw] sm:py-12.5">
@@ -41,37 +46,39 @@ export default function GetInTouch() {
         </div>
         <div className="grid sm:grid-cols-2 gap-x-5 gap-y-7.5 w-full max-w-[822px]">
           <div className="flex flex-col space-y-3">
-            <label className="text-left" htmlFor="Message">
+            <Label className="text-left" htmlFor="Message">
               Name
-            </label>
-            <input className="w-full"></input>
+            </Label>
+            <Input className="w-full"></Input>
           </div>
-          <div className="flex flex-col space-y-3 border">
-            <label className="text-left" htmlFor="Message">
+          <div className="flex flex-col space-y-3">
+            <Label className="text-left" htmlFor="Message">
               Email
-            </label>
-            <input className="w-full"></input>
+            </Label>
+            <Input className="w-full"></Input>
           </div>
-          <div className="flex flex-col space-y-3 border">
-            <label className="text-left" htmlFor="Message">
+          <div className="flex flex-col space-y-3">
+            <Label className="text-left" htmlFor="Message">
               Phone
-            </label>
-            <input></input>
+            </Label>
+            <Input></Input>
           </div>
-          <div className="flex flex-col space-y-3 border">
-            <label className="text-left" htmlFor="Message">
+          <div className="flex flex-col space-y-3">
+            <Label className="text-left" htmlFor="Message">
               Company
-            </label>
-            <input></input>
+            </Label>
+            <Input></Input>
           </div>
           <div className="col-span-full flex flex-col space-y-3">
-            <label className="text-left" htmlFor="Message">
+            <Label className="text-left" htmlFor="Message">
               Message
-            </label>
-            <input className="h-35" name="Message" id="Message"></input>
+            </Label>
+            <Input className="h-35" name="Message" id="Message"></Input>
           </div>
-
-          <button className="col-span-full bg-lightBrown">Send message</button>
+          <Button variant="solid" className="col-span-full flex items-center">
+            Send message
+            <ArrowRight />
+          </Button>
         </div>
       </section>
     </div>

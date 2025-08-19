@@ -24,7 +24,7 @@ const buttonVariants = cva(
           "uppercase text-Display-1 font-semibold border-1 border-neutral100 hover:bg-neutral100/20 gap-0.5",
         avatar: "",
         newOutline:
-          "uppercase text-Display-2 font-semibold border-1 border-foreground duration-300 hover:bg-foreground/10 gap-0.5",
+          "uppercase text-Display-2 font-semibold border-1 border-foreground duration-300 hover:bg-lightBrown/70 gap-0.5",
         solid:
           "uppercase text-Display-2 font-semibold border-1 bg-foreground hover:bg-foreground/80 text-background gap-0.5",
         hero: "uppercase text-Display-1 font-semibold bg-white text-green rounded-none gap-0.5",

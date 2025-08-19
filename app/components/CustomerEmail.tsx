@@ -1,5 +1,6 @@
 import { Form } from "react-router";
 import { Button } from "./ui/button";
+import { Input } from "./ui/input";
 
 const CustomerEmail = () => {
   return (
@@ -10,15 +11,13 @@ const CustomerEmail = () => {
       <p className="text-neutral800 font-bold text-[28px] text-center">
         For news, collections & more
       </p>
-      <input
+      <Input
         type="email"
         name="email"
         placeholder="Enter your email address"
-        className="w-3/5 py-2 placeholder:text-center placeholder:text-neutral700 border-b border-neutral800 text-neutral800 focus:outline-none text-xs sm:text-base "
+        className="w-3/5 py-2 placeholder:text-center border-none border-b border-b-neutral800 focus:outline-none"
       />
-      <Button className="border-neutral800 border text-neutral800 text-neutral800s bg-white hover:bg-lightBrown font-semibold text-xs rounded-none">
-        SING UP
-      </Button>
+      <Button variant="newOutline">SING UP</Button>
     </Form>
   );
 };

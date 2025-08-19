@@ -13,11 +13,11 @@ export function meta({}: Route.MetaArgs) {
 export default function contact() {
   return (
     <>
+      <HeroContact />
       <GetInTouch />
       <section>
         <img className="m-auto" src={map} alt="" />
       </section>
-      <HeroContact />
     </>
   );
 }

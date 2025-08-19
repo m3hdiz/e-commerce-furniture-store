@@ -12,13 +12,15 @@ import {
 const SpecialOffer = () => {
   return (
     <div className="md:px-[11vw]">
-      <div className="flex flex-col md:flex-row md:h-[300px]  ">
+      <div className="flex flex-col md:flex-row md:h-[348px] max-w-[1110px] m-auto">
         <Card className="bg-neutral200 border-none shadow-none rounded-none w-full md:w-1/2 justify-center">
           <CardHeader>
-            <CardTitle className="font-bold text-[28px] text-neutral800 text-center">
-              Up to 40% off our Christmas collection
+            <CardTitle className="font-semibold text-Heading-7 text-center uppercase pb-5">
+              <h2>
+                Up to 40% off our <br /> Christmas collection
+              </h2>
             </CardTitle>
-            <CardDescription className="text-center text-neutral700">
+            <CardDescription className="text-center text-Paragraph-Medium">
               Lorem ipsum dolor sit amet consectetur adipiscing eli mattis sit
               phasellus mollis sit aliquam sit nullam neque ultrices.
             </CardDescription>
