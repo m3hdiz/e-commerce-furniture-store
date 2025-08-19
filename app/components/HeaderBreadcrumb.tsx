@@ -79,3 +79,39 @@ export function CheckoutBreadcrumb() {
     </Breadcrumb>
   );
 }
+
+type ProductBreadcrumbProps = {
+  title: string;
+};
+
+export function ProductBreadcrumb({ title }: ProductBreadcrumbProps) {
+  return (
+    <Breadcrumb>
+      <BreadcrumbList>
+        <BreadcrumbItem>
+          <BreadcrumbLink asChild>
+            <Link to="/" className="text-neutral600">
+              Home
+            </Link>
+          </BreadcrumbLink>
+        </BreadcrumbItem>
+        <BreadcrumbSeparator>
+          <p>/</p>
+        </BreadcrumbSeparator>
+        <BreadcrumbItem>
+          <BreadcrumbLink asChild>
+            <Link to="/Shop" className="text-neutral600">
+              Shop
+            </Link>
+          </BreadcrumbLink>
+        </BreadcrumbItem>
+        <BreadcrumbSeparator>
+          <p>/</p>
+        </BreadcrumbSeparator>
+        <BreadcrumbItem>
+          <BreadcrumbPage>{title}</BreadcrumbPage>
+        </BreadcrumbItem>
+      </BreadcrumbList>
+    </Breadcrumb>
+  );
+}

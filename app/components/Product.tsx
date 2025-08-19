@@ -18,6 +18,7 @@ import {
   LinkedIn,
   Twitter,
 } from "~/src/icons/SocialIcons";
+import { ProductBreadcrumb } from "./HeaderBreadcrumb";
 
 export default function Product() {
   const product = {
@@ -63,7 +64,7 @@ export default function Product() {
   return (
     <div className="px-5 py-5 sm:px-[11vw]">
       <section className="flex flex-col gap-10 max-w-[1110px] m-auto">
-        <div>breadcrumb</div>
+        <ProductBreadcrumb title={product.title} />
         <div className="grid md:grid-cols-2 gap-y-10 md:gap-x-15">
           <div className="flex flex-col gap-8 max-w-[516px]">
             <img src={product.thumbnail} alt={product.title} />
