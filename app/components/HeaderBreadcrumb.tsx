@@ -45,7 +45,7 @@ export function ShopBreadcrumb() {
           <p>/</p>
         </BreadcrumbSeparator>
         <BreadcrumbItem>
-          <BreadcrumbPage>Shopping Cart</BreadcrumbPage>
+          <BreadcrumbPage>Shop</BreadcrumbPage>
         </BreadcrumbItem>
       </BreadcrumbList>
     </Breadcrumb>
