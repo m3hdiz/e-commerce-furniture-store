@@ -51,3 +51,31 @@ export function ShopBreadcrumb() {
     </Breadcrumb>
   );
 }
+
+export function CheckoutBreadcrumb() {
+  return (
+    <Breadcrumb>
+      <BreadcrumbList>
+        <BreadcrumbItem>
+          <BreadcrumbLink asChild>
+            <Link to="/" className="text-neutral600">
+              Home
+            </Link>
+          </BreadcrumbLink>
+        </BreadcrumbItem>
+        <BreadcrumbSeparator>
+          <p>/</p>
+        </BreadcrumbSeparator>
+        <BreadcrumbItem>
+          <BreadcrumbPage className="text-neutral600">Shipping</BreadcrumbPage>
+        </BreadcrumbItem>
+        <BreadcrumbSeparator>
+          <p>/</p>
+        </BreadcrumbSeparator>
+        <BreadcrumbItem>
+          <BreadcrumbPage>Payment</BreadcrumbPage>
+        </BreadcrumbItem>
+      </BreadcrumbList>
+    </Breadcrumb>
+  );
+}
