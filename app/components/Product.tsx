@@ -47,8 +47,6 @@ export default function Product() {
 
   const [quantity, setQuantity] = React.useState(1);
 
-  let quantityAlert = "";
-
   const handleIncrement = () => {
     if (quantity < 20) {
       setQuantity(quantity + 1);
