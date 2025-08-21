@@ -1,5 +1,6 @@
 import React from "react";
 import { Master, Paypal, Visa } from "~/src/icons/CreditCards";
+import { Button } from "./ui/button";
 
 const cartItems = [
   {
@@ -150,7 +151,9 @@ export default function PaymentSidebar() {
         <button className="text-Paragraph-Default font-medium">
           <Paypal />
         </button>
-        <button className="border border-neutral400">Place order</button>
+        <Button variant="newOutline" className="h-12 border-neutral400">
+          Place order
+        </Button>
       </div>
     </section>
   );

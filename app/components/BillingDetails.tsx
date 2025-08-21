@@ -12,52 +12,26 @@ import {
   SelectTrigger,
   SelectValue,
 } from "./ui/select";
+import { Button } from "./ui/button";
 
-export default function BillingDetails() {
-  const [country, setCountry] = React.useState("United States");
+type Countries = {
+  id: number;
+  name: string;
+  states: State[];
+};
 
-  const statesByCountry = {
-    "United States": ["California", "Texas", "Florida", "New York", "Illinois"],
-    Canada: ["Ontario", "Quebec", "British Columbia", "Alberta", "Manitoba"],
-    "United Kingdom": [
-      "England",
-      "Scotland",
-      "Wales",
-      "Northern Ireland",
-      "Isle of Man",
-    ],
-    Australia: [
-      "New South Wales",
-      "Victoria",
-      "Queensland",
-      "Western Australia",
-      "South Australia",
-    ],
-    Germany: [
-      "Bavaria",
-      "Berlin",
-      "Hamburg",
-      "North Rhine-Westphalia",
-      "Baden-Württemberg",
-    ],
-    France: [
-      "Île-de-France",
-      "Provence-Alpes-Côte d'Azur",
-      "Nouvelle-Aquitaine",
-      "Occitanie",
-      "Grand Est",
-    ],
-    India: [
-      "Maharashtra",
-      "Karnataka",
-      "Tamil Nadu",
-      "Uttar Pradesh",
-      "West Bengal",
-    ],
-    Japan: ["Tokyo", "Osaka", "Hokkaido", "Fukuoka", "Aichi"],
-    China: ["Beijing", "Shanghai", "Guangdong", "Sichuan", "Zhejiang"],
-    Brazil: ["São Paulo", "Rio de Janeiro", "Bahia", "Minas Gerais", "Paraná"],
-  };
+type State = {
+  id: number;
+  name: string;
+};
+
+type BillingDetailsProps = {
+  countries: Countries[];
+};
+
+export default function BillingDetails({ countries }: BillingDetailsProps) {
+  const [selectedCountry, setSelectedCountry] =
+    React.useState<Countries | null>(null);
 
   return (
     <Form className="grid sm:grid-cols-2 sm:gap-x-5 gap-y-7.5 max-lg:mb-15">
@@ -85,7 +59,12 @@ export default function BillingDetails() {
       </div>
       <div className="flex flex-col gap-2">
         <Label htmlFor="CountryRegion">Country / Region *</Label>
-        <Select>
+        <Select
+          onValueChange={(value) => {
+            const country = countries.find((c) => c.name === value) || null;
+            setSelectedCountry(country);
+          }}
+        >
           <SelectTrigger>
             <SelectValue
               className="text-Display-2"
@@ -94,16 +73,11 @@ export default function BillingDetails() {
           </SelectTrigger>
           <SelectContent>
             <SelectGroup>
-              <SelectItem value="United States">United States</SelectItem>
-              <SelectItem value="Canada">Canada</SelectItem>
-              <SelectItem value="United Kingdom">United Kingdom</SelectItem>
-              <SelectItem value="Australia">Australia</SelectItem>
-              <SelectItem value="Germany">Germany</SelectItem>
-              <SelectItem value="France">France</SelectItem>
-              <SelectItem value="India">India</SelectItem>
-              <SelectItem value="Japan">Japan</SelectItem>
-              <SelectItem value="China">China</SelectItem>
-              <SelectItem value="Brazil">Brazil</SelectItem>
+              {countries?.map((country) => (
+                <SelectItem key={country.id} value={country.name}>
+                  {country.name}
+                </SelectItem>
+              ))}
             </SelectGroup>
           </SelectContent>
         </Select>
@@ -124,24 +98,14 @@ export default function BillingDetails() {
           </SelectTrigger>
           <SelectContent>
             <SelectGroup>
-              <SelectLabel>States</SelectLabel>
-              <SelectItem value="United States">United States</SelectItem>
-              <SelectItem value="Canada">Canada</SelectItem>
-              <SelectItem value="United Kingdom">United Kingdom</SelectItem>
-              <SelectItem value="Australia">Australia</SelectItem>
-              <SelectItem value="Germany">Germany</SelectItem>
-              <SelectItem value="France">France</SelectItem>
-              <SelectItem value="India">India</SelectItem>
-              <SelectItem value="Japan">Japan</SelectItem>
-              <SelectItem value="China">China</SelectItem>
-              <SelectItem value="Brazil">Brazil</SelectItem>
-            </SelectGroup>
-            <SelectGroup>
-              <SelectLabel>States</SelectLabel>
-              <SelectItem value="United States">United States</SelectItem>
-              <SelectItem value="Canada">Canada</SelectItem>
-              <SelectItem value="United Kingdom">United Kingdom</SelectItem>
-              <SelectItem value="Australia">Australia</SelectItem>
+              {selectedCountry && (
+                <SelectLabel>{selectedCountry.name}</SelectLabel>
+              )}
+              {selectedCountry?.states.map((state) => (
+                <SelectItem key={state.id} value={state.name}>
+                  {state.name}
+                </SelectItem>
+              ))}
             </SelectGroup>
           </SelectContent>
         </Select>
@@ -177,11 +141,16 @@ export default function BillingDetails() {
         />
       </div>
       <div className="sm:col-span-full flex max-sm:flex-col justify-between h-12">
-        <button className="flex items-center border max-sm:justify-center">
+        <Button
+          variant="newOutline"
+          className="flex items-center border-none max-sm:justify-center h-full md:w-1/4 hover:text-lightBrown hover:bg-background"
+        >
           <ChevronLeft />
           Return to cart
-        </button>
-        <button>Continue to shipping</button>
+        </Button>
+        <Button variant="solid" className="h-full md:w-1/2">
+          Continue to shipping
+        </Button>
       </div>
     </Form>
   );

@@ -1,5 +1,5 @@
 import Cart from "~/components/Cart";
-import type { Route } from "./+types/cart";
+import type { Route } from "./+types/Cart";
 
 export function meta({}: Route.MetaArgs) {
   return [

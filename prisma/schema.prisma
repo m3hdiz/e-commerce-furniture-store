@@ -7,3 +7,24 @@ datasource db {
   url       = env("DATABASE_URL")
   directUrl = env("DIRECT_URL")
 }
+
+model Country {
+  id     Int     @id @default(autoincrement())
+  name   String  @unique
+  states State[]
+}
+
+model State {
+  id        Int     @id @default(autoincrement())
+  name      String
+  countryId Int
+  country   Country @relation(fields: [countryId], references: [id])
+
+  @@unique([name, countryId])
+}
+
+model Users {
+  id         String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  created_at DateTime @default(dbgenerated("(now() AT TIME ZONE 'utc+3:30'::text)")) @db.Timestamptz(6)
+  name       String
+}

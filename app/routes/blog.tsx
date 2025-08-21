@@ -1,5 +1,5 @@
 import SliderBlog from "~/components/SliderBlog";
-import type { Route } from "./+types/blog";
+import type { Route } from "./+types/Blog";
 
 export function meta({}: Route.MetaArgs) {
   return [
