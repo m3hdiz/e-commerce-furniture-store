@@ -12,6 +12,8 @@ import julo from "~/src/julo-blue-salad-plate.svg";
 import valo from "~/src/valo-matte-white-vase.svg";
 import DeleteIcon from "~/src/icons/DeleteIcon";
 import { CartBreadcrumb } from "./HeaderBreadcrumb";
+import { Button } from "./ui/button";
+import { Link } from "react-router";
 
 const cartItems = [
   {
@@ -185,9 +187,14 @@ export default function Cart() {
                   }).format(totals.total)}
                 </p>
               </div>
-              <button className="w-full border border-neutral400">
-                Proceed to checkout
-              </button>
+              <Link to="/checkout" prefetch="intent">
+                <Button
+                  variant="newOutline"
+                  className="w-full h-12 border-neutral400"
+                >
+                  Proceed to checkout
+                </Button>
+              </Link>
             </div>
           </div>
         </div>

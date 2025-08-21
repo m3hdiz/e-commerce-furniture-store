@@ -1,10 +1,9 @@
 import { prisma } from "../db.server";
 
 export function SignUp() {
-  return prisma.data.create({
+  return prisma.users.create({
     data: {
-      title: "yellow",
-      desc: "yes",
+      name: "yellow",
     },
   });
 }
