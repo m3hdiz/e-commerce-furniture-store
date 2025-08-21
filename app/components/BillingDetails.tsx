@@ -1,7 +1,7 @@
 import { Await, Form, useLoaderData } from "react-router";
 import React from "react";
 import type { Route } from "./+types/BillingDetails";
-import Users from "../models/users";
+import Countries from "../models/countries";
 import { ChevronLeft } from "lucide-react";
 import { Label } from "./ui/label";
 import { Input } from "./ui/input";
@@ -17,8 +17,8 @@ import {
 import { Button } from "./ui/button";
 
 export async function loader() {
-  const Countries = await Users();
-  return Countries;
+  const data = await Countries();
+  return data;
 }
 
 type Countries = { id: number; name: string; states: State[] };
