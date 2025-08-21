@@ -1,4 +1,4 @@
-import { Form } from "react-router";
+import { Await, data, Form } from "react-router";
 import React from "react";
 import { ChevronLeft } from "lucide-react";
 import { Label } from "./ui/label";
@@ -59,28 +59,46 @@ export default function BillingDetails({ countries }: BillingDetailsProps) {
       </div>
       <div className="flex flex-col gap-2">
         <Label htmlFor="CountryRegion">Country / Region *</Label>
-        <Select
-          onValueChange={(value) => {
-            const country = countries.find((c) => c.name === value) || null;
-            setSelectedCountry(country);
-          }}
+        <React.Suspense
+          fallback={
+            <Select>
+              <SelectTrigger>
+                <SelectValue
+                  className="text-Display-2"
+                  placeholder="Loading Regions..."
+                />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectGroup></SelectGroup>
+              </SelectContent>
+            </Select>
+          }
         >
-          <SelectTrigger>
-            <SelectValue
-              className="text-Display-2"
-              placeholder="United States"
-            />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectGroup>
-              {countries?.map((country) => (
-                <SelectItem key={country.id} value={country.name}>
-                  {country.name}
-                </SelectItem>
-              ))}
-            </SelectGroup>
-          </SelectContent>
-        </Select>
+          <Await resolve={data}>
+            <Select
+              onValueChange={(value) => {
+                const country = countries.find((c) => c.name === value) || null;
+                setSelectedCountry(country);
+              }}
+            >
+              <SelectTrigger>
+                <SelectValue
+                  className="text-Display-2"
+                  placeholder="United States"
+                />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectGroup>
+                  {countries?.map((country) => (
+                    <SelectItem key={country.id} value={country.name}>
+                      {country.name}
+                    </SelectItem>
+                  ))}
+                </SelectGroup>
+              </SelectContent>
+            </Select>
+          </Await>
+        </React.Suspense>
       </div>
       <div className="sm:col-span-2 flex flex-col gap-2">
         <Label htmlFor="Address">Street address *</Label>
@@ -92,23 +110,41 @@ export default function BillingDetails({ countries }: BillingDetailsProps) {
       </div>
       <div className="flex flex-col gap-2">
         <Label htmlFor="State">State *</Label>
-        <Select>
-          <SelectTrigger>
-            <SelectValue className="text-Display-2" placeholder="State" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectGroup>
-              {selectedCountry && (
-                <SelectLabel>{selectedCountry.name}</SelectLabel>
-              )}
-              {selectedCountry?.states.map((state) => (
-                <SelectItem key={state.id} value={state.name}>
-                  {state.name}
-                </SelectItem>
-              ))}
-            </SelectGroup>
-          </SelectContent>
-        </Select>
+        <React.Suspense
+          fallback={
+            <Select>
+              <SelectTrigger>
+                <SelectValue
+                  className="text-Display-2"
+                  placeholder="Loading States..."
+                />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectGroup></SelectGroup>
+              </SelectContent>
+            </Select>
+          }
+        >
+          <Await resolve={data}>
+            <Select>
+              <SelectTrigger>
+                <SelectValue className="text-Display-2" placeholder="State" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectGroup>
+                  {selectedCountry && (
+                    <SelectLabel>{selectedCountry.name}</SelectLabel>
+                  )}
+                  {selectedCountry?.states.map((state) => (
+                    <SelectItem key={state.id} value={state.name}>
+                      {state.name}
+                    </SelectItem>
+                  ))}
+                </SelectGroup>
+              </SelectContent>
+            </Select>
+          </Await>
+        </React.Suspense>
       </div>
       <div className="flex flex-col gap-2">
         <Label htmlFor="ZIPCode">ZIP Code</Label>

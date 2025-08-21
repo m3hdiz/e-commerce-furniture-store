@@ -13,12 +13,12 @@ export function meta({}: Route.MetaArgs) {
 }
 
 export async function loader() {
-  const Countries = Users();
-  return Countries;
+  const data = Users();
+  return data;
 }
 
 export default function checkout() {
-  const data = useLoaderData<typeof loader>();
+  const Countries = useLoaderData<typeof loader>();
 
   return (
     <div className="p-5 pb-20 sm:px-[11vw]">
@@ -28,7 +28,7 @@ export default function checkout() {
           <p className="mb-10">Billing Details</p>
           <div className="lg:flex gap-x-14 gap-y-15 justify-between w-full">
             <div className="lg:flex-1">
-              <BillingDetails countries={data} />
+              <BillingDetails countries={Countries} />
             </div>
             <div className="lg:w-104 lg:flex-initial">
               <PaymentSidebar />

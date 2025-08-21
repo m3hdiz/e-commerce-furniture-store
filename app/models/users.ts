@@ -1,7 +1,7 @@
 import { prisma } from "../db.server";
 
-export default async function Users() {
-  const countries = await prisma.country.findMany({
+export default function Users() {
+  const countries = prisma.country.findMany({
     include: {
       states: true, // fetch related states
     },
