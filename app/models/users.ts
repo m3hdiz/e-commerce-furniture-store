@@ -6,6 +6,5 @@ export default async function Users() {
       states: true, // fetch related states
     },
   });
-  console.log(countries);
   return countries;
 }
