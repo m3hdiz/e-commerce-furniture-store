@@ -1,5 +1,6 @@
 import { Await, Form, useLoaderData } from "react-router";
 import React from "react";
+import type { Route } from "./+types/BillingDetails";
 import Users from "../models/users";
 import { ChevronLeft } from "lucide-react";
 import { Label } from "./ui/label";
@@ -15,16 +16,16 @@ import {
 } from "./ui/select";
 import { Button } from "./ui/button";
 
-export function loader() {
-  const Countries = Users();
+export async function loader() {
+  const Countries = await Users();
   return Countries;
 }
 
 type Countries = { id: number; name: string; states: State[] };
 type State = { id: number; name: string };
 
-export default function BillingDetails() {
-  const countries = useLoaderData<typeof loader>();
+export default function BillingDetails({ loaderData }: Route.ComponentProps) {
+  const countries = loaderData;
 
   const [selectedCountry, setSelectedCountry] =
     React.useState<Countries | null>(null);
@@ -61,7 +62,7 @@ export default function BillingDetails() {
               <SelectTrigger>
                 <SelectValue
                   className="text-Display-2"
-                  placeholder="United States"
+                  placeholder="Loading Countries..."
                 />
               </SelectTrigger>
               <SelectContent></SelectContent>
@@ -69,28 +70,30 @@ export default function BillingDetails() {
           }
         >
           <Await resolve={countries}>
-            <Select
-              onValueChange={(value) => {
-                const country = countries.find((c) => c.name === value) || null;
-                setSelectedCountry(country);
-              }}
-            >
-              <SelectTrigger>
-                <SelectValue
-                  className="text-Display-2"
-                  placeholder="United States"
-                />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectGroup>
-                  {countries?.map((country) => (
-                    <SelectItem key={country.id} value={country.name}>
-                      {country.name}
-                    </SelectItem>
-                  ))}
-                </SelectGroup>
-              </SelectContent>
-            </Select>
+            {(data) => (
+              <Select
+                onValueChange={(value) => {
+                  const country = data.find((c) => c.name === value) || null;
+                  setSelectedCountry(country);
+                }}
+              >
+                <SelectTrigger>
+                  <SelectValue
+                    className="text-Display-2"
+                    placeholder="United States"
+                  />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectGroup>
+                    {data?.map((country) => (
+                      <SelectItem key={country.id} value={country.name}>
+                        {country.name}
+                      </SelectItem>
+                    ))}
+                  </SelectGroup>
+                </SelectContent>
+              </Select>
+            )}
           </Await>
         </React.Suspense>
       </div>
@@ -119,24 +122,24 @@ export default function BillingDetails() {
             </Select>
           }
         >
-          <Await resolve={countries}>
-            <Select>
-              <SelectTrigger>
-                <SelectValue className="text-Display-2" placeholder="State" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectGroup>
-                  {selectedCountry && (
-                    <SelectLabel>{selectedCountry.name}</SelectLabel>
-                  )}
-                  {selectedCountry?.states.map((state) => (
-                    <SelectItem key={state.id} value={state.name}>
-                      {state.name}
-                    </SelectItem>
-                  ))}
-                </SelectGroup>
-              </SelectContent>
-            </Select>
+          <Await resolve={selectedCountry}>
+            {(data) => (
+              <Select>
+                <SelectTrigger>
+                  <SelectValue className="text-Display-2" placeholder="State" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectGroup>
+                    {data && <SelectLabel>{data.name}</SelectLabel>}
+                    {data?.states.map((state) => (
+                      <SelectItem key={state.id} value={state.name}>
+                        {state.name}
+                      </SelectItem>
+                    ))}
+                  </SelectGroup>
+                </SelectContent>
+              </Select>
+            )}
           </Await>
         </React.Suspense>
       </div>
