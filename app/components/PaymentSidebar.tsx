@@ -46,9 +46,6 @@ function calculateCartTotals(items, shipping: number) {
 const shipping = 15;
 const totals = calculateCartTotals(cartItems, shipping);
 
-console.log(calculateCartTotals(cartItems, shipping));
-// { subtotal: 356, shipping: 15, total: 371 }
-
 export default function PaymentSidebar() {
   return (
     <section className="flex flex-col gap-10">

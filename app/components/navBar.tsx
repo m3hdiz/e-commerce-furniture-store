@@ -5,21 +5,6 @@ import ShoppingCart from "~/src/icons/Shopping cart";
 import { NavLink } from "react-router";
 import { Menu as MenuIcon } from "../src/icons/Menu";
 import SigningTab from "./SigningTab";
-// const username = formData.get("username");
-// const email = formData.get("email");
-// const password = formData.get("password");
-// const confirmPassword = formData.get("confirmPassword");
-
-// // Example basic validation
-// if (password !== confirmPassword) {
-//   return { error: "Passwords do not match" };
-// }
-
-// Normally you'd create the user in the database here
-// return SignUp();
-
-// Redirect after success
-// return redirect("/welcome");
 
 export default function NavBar() {
   return (
@@ -37,16 +22,56 @@ export default function NavBar() {
           <div className="max-md:hidden">
             <ul className="flex md:gap-8 lg:gap-15 text-Paragraph-Default">
               <li>
-                <NavLink to="/">Home</NavLink>
+                <NavLink to="/">
+                  {({ isActive }) => (
+                    <span
+                      className={
+                        isActive ? "text-lightBrown text-Display-3" : ""
+                      }
+                    >
+                      Home
+                    </span>
+                  )}
+                </NavLink>
               </li>
               <li>
-                <NavLink to="shop">Shop</NavLink>
+                <NavLink to="shop">
+                  {({ isActive }) => (
+                    <span
+                      className={
+                        isActive ? "text-lightBrown text-Display-3" : ""
+                      }
+                    >
+                      Shop
+                    </span>
+                  )}
+                </NavLink>
               </li>
               <li>
-                <NavLink to="about">About</NavLink>
+                <NavLink to="about">
+                  {({ isActive }) => (
+                    <span
+                      className={
+                        isActive ? "text-lightBrown text-Display-3" : ""
+                      }
+                    >
+                      About
+                    </span>
+                  )}
+                </NavLink>
               </li>
               <li>
-                <NavLink to="contact">Contact</NavLink>
+                <NavLink to="contact">
+                  {({ isActive }) => (
+                    <span
+                      className={
+                        isActive ? "text-lightBrown text-Display-3" : ""
+                      }
+                    >
+                      Contact
+                    </span>
+                  )}
+                </NavLink>
               </li>
             </ul>
           </div>
@@ -60,19 +85,31 @@ export default function NavBar() {
               </li>
               <li>
                 <NavLink to="favorites">
-                  <Heart />
+                  {({ isActive }) => (
+                    <Heart
+                      iconColor={isActive ? "var(--active)" : "var(--icons)"}
+                    />
+                  )}
                 </NavLink>
               </li>
               <li>
                 <NavLink to="cart">
-                  <ShoppingCart />
+                  {({ isActive }) => (
+                    <ShoppingCart
+                      iconColor={isActive ? "var(--active)" : "var(--icons)"}
+                    />
+                  )}
                 </NavLink>
               </li>
             </ul>
           </div>
           <div className="md:hidden justify-self-end">
             <NavLink to="cart">
-              <ShoppingCart />
+              {({ isActive }) => (
+                <ShoppingCart
+                  iconColor={isActive ? "var(--active)" : "var(--icons)"}
+                />
+              )}
             </NavLink>
           </div>
         </section>

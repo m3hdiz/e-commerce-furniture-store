@@ -13,7 +13,8 @@ import valo from "~/src/valo-matte-white-vase.svg";
 import DeleteIcon from "~/src/icons/DeleteIcon";
 import { CartBreadcrumb } from "./HeaderBreadcrumb";
 import { Button } from "./ui/button";
-import { Link } from "react-router";
+import { Link, NavLink } from "react-router";
+import { LoaderCircle, LucideLoaderPinwheel } from "lucide-react";
 
 const cartItems = [
   {
@@ -187,14 +188,18 @@ export default function Cart() {
                   }).format(totals.total)}
                 </p>
               </div>
-              <Link to="/checkout" prefetch="intent">
-                <Button
-                  variant="newOutline"
-                  className="w-full h-12 border-neutral400"
-                >
-                  Proceed to checkout
-                </Button>
-              </Link>
+              <NavLink to="/checkout" prefetch="intent">
+                {({ isPending }) => (
+                  <Button
+                    variant="newOutline"
+                    className="w-full h-12 border-neutral400"
+                  >
+                    {isPending
+                      ? "Proceeding to checkout..."
+                      : "Proceed to checkout"}
+                  </Button>
+                )}
+              </NavLink>
             </div>
           </div>
         </div>
