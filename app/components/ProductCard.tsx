@@ -1,7 +1,6 @@
 import {
   Card,
   CardAction,
-  CardContent,
   CardDescription,
   CardFooter,
   CardHeader,
@@ -9,34 +8,97 @@ import {
 } from "./ui/card";
 
 import Image from "../src/assets/Image.svg";
+import { Button } from "./ui/button";
+
+const products = [
+  {
+    id: 1,
+    name: "Wireless Headphones",
+    desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam saepe sed quam.",
+    price: 199.99,
+  },
+  {
+    id: 2,
+    name: "Gaming Mouse",
+    desc: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Totam consequatur fugit ad quo numquam atque.",
+    price: 49.99,
+  },
+  {
+    id: 3,
+    name: "Mechanical Keyboard",
+    desc: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Consectetur quam asperiores voluptas voluptate rem illo id quos atque quia soluta. ",
+    price: 89.99,
+  },
+  {
+    id: 4,
+    name: "Smartwatch",
+    desc: "Lorem ipsum dolor sit amet, consectetur adipisicing. ",
+    price: 149.99,
+  },
+  {
+    id: 5,
+    name: "Bluetooth Speaker",
+    desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam saepe sed quam.",
+    price: 79.99,
+  },
+  {
+    id: 6,
+    name: "4K Monitor",
+    desc: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. In alias laboriosam cupiditate magni?",
+    price: 329.99,
+  },
+  {
+    id: 7,
+    name: "Laptop Stand",
+    desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi, doloremque ad.",
+    price: 39.99,
+  },
+  {
+    id: 8,
+    name: "External SSD",
+    desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam saepe sed quam.",
+    price: 159.99,
+  },
+  {
+    id: 9,
+    name: "Webcam",
+    desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam saepe sed quam.",
+    price: 59.99,
+  },
+  {
+    id: 10,
+    name: "Wireless Charger",
+    desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam saepe sed quam.",
+    price: 29.99,
+  },
+];
 
 const ProductCard = () => {
   return (
-    <div>
-      <Card className="border-none shadow-none !py-0 !px-0 !gap-0 min-h-[500px] ">
-        <CardHeader className="!px-1 !py-2">
-          <img
-            src={Image}
-            alt="Small Ecru Ceramic Compote"
-            className="w-full"
-          ></img>
-          <CardTitle className="font-semibold text-sm text-warmBlack">
-            Small Ecru Ceramic Compote
+    <>
+      {products.slice(0, 8).map((product) => (
+        <Card key={product.id} className="h-[500px] md:h-[530px]">
+          <CardHeader>
+            <img
+              src={Image}
+              alt="Small Ecru Ceramic Compote"
+              className="w-full"
+            ></img>
+          </CardHeader>
+          <CardTitle className="font-semibold text-Display-2 uppercase">
+            {product.name} <br /> {product.price}
           </CardTitle>
-          <CardContent className="px-0 font-semibold text-sm text-warmBlack ">
-            $49.00
-          </CardContent>
-          <CardDescription className="text-sm text-neutral600 mt-2">
-            Lorem ipsum dolor sit amet conse bolli tetur adipiscing elit.
-          </CardDescription>
-        </CardHeader>
-        <CardFooter className="my-auto mx-0 py-4 px-2">
-          <CardAction className="py-4 px-2 border font-semibold text-xs text-neutral800 w-full text-center  border-neutral800">
-            Add To Cart
-          </CardAction>
-        </CardFooter>
-      </Card>
-    </div>
+          <CardDescription className="text-sm">{product.desc}</CardDescription>
+          <CardFooter className="mt-auto">
+            <CardAction className="w-full">
+              <Button className="w-full" variant="newOutline">
+                Add To Cart
+              </Button>
+            </CardAction>
+          </CardFooter>
+        </Card>
+      ))}
+    </>
   );
 };
 

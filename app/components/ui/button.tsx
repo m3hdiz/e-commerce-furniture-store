@@ -36,7 +36,7 @@ const buttonVariants = cva(
         icon: "size-9",
         footer: "h-10.5 p-4",
         avatar: "size-5",
-        hero: "py-3 px-8",
+        hero: "h-10 w-55",
       },
     },
     defaultVariants: {
