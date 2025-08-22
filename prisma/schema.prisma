@@ -28,3 +28,77 @@ model Users {
   created_at DateTime @default(dbgenerated("(now() AT TIME ZONE 'utc+3:30'::text)")) @db.Timestamptz(6)
   name       String
 }
+
+model User {
+  id  String @id @default(dbgenerated("gen_random_uuid()"))
+  email String @unique
+  name String 
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  reviews  Review[] 
+  favorites Favorite[] 
+}
+
+model Review{
+  id   String @id  @default(dbgenerated("gen_random_uuid()"))
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  authorId String 
+  author User @relation(fields: [authorId],references: [id])
+  rating Float
+  comment   String?
+  productId String
+  product   Product @relation(fields: [productId], references: [id])
+}
+model Favorite{
+  id   String @id  @default(dbgenerated("gen_random_uuid()"))
+  userId String 
+  user User @relation(fields: [userId],references: [id])
+  productId String
+  product   Product @relation(fields: [productId], references: [id])
+  @@unique([userId, productId])
+}
+
+model Product {
+  id          String     @id @default(dbgenerated("gen_random_uuid()"))
+  name        String
+  description String?
+  price       Float
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+
+  reviews     Review[]
+  favorites   Favorite[]
+
+  colors      ProductColor[]
+
+  categoryId  String
+  category    Category   @relation(fields: [categoryId], references: [id])
+
+}
+
+model Color {
+  id       String         @id @default(dbgenerated("gen_random_uuid()"))
+  name     String         @unique 
+  products ProductColor[]
+}
+
+
+model ProductColor {
+  productId String
+  colorId   String
+
+  product Product @relation(fields: [productId], references: [id])
+  color   Color   @relation(fields: [colorId], references: [id])
+
+  @@id([productId, colorId])
+}
+
+model Category {
+  id        String     @id @default(dbgenerated("gen_random_uuid()"))
+  name      String     @unique
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+
+  products  Product[]
+}
