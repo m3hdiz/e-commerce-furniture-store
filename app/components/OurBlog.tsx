@@ -1,3 +1,4 @@
+import { Link } from "react-router";
 import ourBlog from "../src/assets/ourBlog.svg";
 import {
   Card,
@@ -12,33 +13,35 @@ import {
 const OurBlog = () => {
   return (
     <div className="md:px-[11vw]">
-      <h2 className="text-center font-bold text-3xl text-neutral800 py-4 px-2 ">
+      <h2 className="font-semibold text-Heading-7 text-center uppercase pb-12 max-md:pt-7.5">
         OUR BLOG
       </h2>
-      <div className="flex flex-col md:flex-row md:h-[300px]">
-        <div className="order-1 md:order-2 w-full md:w-1/2 ">
+      <div className="flex flex-col md:flex-row-reverse md:max-w-[1110px] m-auto">
+        <div className="w-full md:w-1/2 h-87">
           <img
             src={ourBlog}
             alt="ourBlog"
-            className="w-full h-[200px] md:h-full object-cover"
+            className="w-full h-full object-cover"
           />
         </div>
-        <Card className="bg-neutral200 border-none shadow-none rounded-none order-2 md:order-1 w-full md:w-1/2 justify-center">
+        <Card className="bg-neutral200 dark:bg-background w-full gap-8 md:w-1/2 justify-center p-10 md:px-15 md:py-16">
           <CardHeader>
-            <CardTitle className="font-semibold text-lg text-neutral600 text-center">
+            <CardTitle className="font-semibold text-Display-4 uppercase text-neutral600 text-center">
               TableWare
             </CardTitle>
-            <CardContent className="font-bold text-[28px] text-neutral800 text-center ">
-              The secrets to a kitchen room
+            <CardContent className="font-semibold text-Heading-7 text-center uppercase py-6">
+              <h2>The secrets to a kitchen room</h2>
             </CardContent>
-            <CardDescription className="text-center text-neutral700 ">
+            <CardDescription className="text-center text-Paragraph-Medium">
               Lorem ipsum dolor sit amet consectetur adipiscing eli mattis sit
               phasellus mollis sit aliquam sit nullam neque ultrices.
             </CardDescription>
           </CardHeader>
           <CardFooter className="mx-auto">
-            <CardAction className="font-bold text-sm text-neutral700 underline">
-              READ MORE
+            <CardAction className="font-semibold uppercase underline">
+              <Link to="/blog" prefetch="intent">
+                read more
+              </Link>
             </CardAction>
           </CardFooter>
         </Card>

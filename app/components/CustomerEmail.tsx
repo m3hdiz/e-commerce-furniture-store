@@ -1,24 +1,30 @@
 import { Form } from "react-router";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
+import { Separator } from "./ui/separator";
 
 const CustomerEmail = () => {
   return (
-    <Form className="px-[11vw] flex flex-col justify-center items-center gap-4 p-10">
-      <h2 className="text-neutral700 font-semibold text-center">
-        Sign up for emails
-      </h2>
-      <p className="text-neutral800 font-bold text-[28px] text-center">
-        For news, collections & more
-      </p>
-      <Input
-        type="email"
-        name="email"
-        placeholder="Enter your email address"
-        className="w-3/5 py-2 placeholder:text-center border-none border-b border-b-neutral800 focus:outline-none"
-      />
-      <Button variant="newOutline">SING UP</Button>
-    </Form>
+    <div className="p-10 md-py-20 md:px-[11vw]">
+      <Form className="flex flex-col justify-center items-center max-w-[1110px] m-auto gap-6">
+        <p className="text-Display-3 font-semibold text-center text-neutral600">
+          Sign up for emails
+        </p>
+        <h2 className="font-semibold text-Heading-7 text-center uppercase">
+          For news, collections & more
+        </h2>
+        <div className="w-[350px] md:w-[390px] pb-2">
+          <Input
+            type="email"
+            name="email"
+            placeholder="Enter your email address"
+            className="peer transition-all duration-300 text-center border-none focus:outline-none dark:bg-background"
+          />
+          <Separator className="bg-foreground transition-all duration-300 peer-focus:bg-background" />
+        </div>
+        <Button variant="newOutline">SING UP</Button>
+      </Form>
+    </div>
   );
 };
 
