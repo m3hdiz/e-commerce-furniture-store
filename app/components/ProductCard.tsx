@@ -26,7 +26,7 @@ const products = [
   {
     id: 3,
     name: "Mechanical Keyboard",
-    desc: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Consectetur quam asperiores voluptas voluptate rem illo id quos atque quia soluta. ",
+    desc: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Consectetur quam asperiores voluptas.",
     price: 89.99,
   },
   {
@@ -77,7 +77,7 @@ const ProductCard = () => {
   return (
     <>
       {products.slice(0, 8).map((product) => (
-        <Card key={product.id} className="h-[500px] md:h-[530px]">
+        <Card key={product.id}>
           <CardHeader>
             <img
               src={Image}
@@ -85,13 +85,13 @@ const ProductCard = () => {
               className="w-full"
             ></img>
           </CardHeader>
-          <CardTitle className="font-semibold text-Display-2 uppercase">
+          <CardTitle className="font-semibold text-Display-2 uppercase py-6">
             {product.name} <br /> {product.price}
           </CardTitle>
           <CardDescription className="text-sm">{product.desc}</CardDescription>
           <CardFooter className="mt-auto">
             <CardAction className="w-full">
-              <Button className="w-full" variant="newOutline">
+              <Button className="w-full mt-2" variant="newOutline">
                 Add To Cart
               </Button>
             </CardAction>

@@ -24,7 +24,7 @@ const OurBlog = () => {
             className="w-full h-full object-cover"
           />
         </div>
-        <Card className="bg-neutral200 dark:bg-background w-full gap-8 md:w-1/2 justify-center p-10 md:px-15 md:py-16">
+        <Card className="bg-neutral200 dark:bg-warmBlack w-full gap-8 md:h-87 md:w-1/2 justify-center p-10 md:px-15 md:py-16">
           <CardHeader>
             <CardTitle className="font-semibold text-Display-4 uppercase text-neutral600 text-center">
               TableWare

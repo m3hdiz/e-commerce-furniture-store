@@ -14,7 +14,7 @@ import SideBarShop from "./SideBarShop";
 function SideBarFiltration() {
   return (
     <>
-      <div className="md:hidden">
+      <div className="md:hidden ">
         <Sheet>
           <SheetTrigger asChild>
             <div className="flex flex-col items-start gap-1">
@@ -22,7 +22,7 @@ function SideBarFiltration() {
                 <Filter />
                 <h2 className="font-semibold sm:text-sm text-xs">FILTER</h2>
               </div>
-              <p className="font-semibold text-sm  text-neutral-600 ">
+              <p className="font-semibold text-Paragraph-Default">
                 Showing 120 items
               </p>
             </div>

@@ -15,7 +15,7 @@ export default function Shop() {
     <div className="px-5 mt-5 mb-20 sm:px-[11vw]">
       <div className="flex flex-col gap-12.5 justify-center mx-auto max-w-[1110px]">
         <ShopBreadcrumb />
-        <div className="md:flex ">
+        <div className="md:flex gap-x-6">
           <SideBarFiltration />
           <ProductPagination />
         </div>

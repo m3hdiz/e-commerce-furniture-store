@@ -8,7 +8,7 @@ import SigningTab from "./SigningTab";
 
 export default function NavBar() {
   return (
-    <nav className="dark:bg-warmBlack">
+    <nav className="sticky top-0 z-50 bg-background dark:bg-warmBlack">
       <div className="px-[11vw]">
         <section className="flex max-md:grid max-md:grid-cols-3 items-center justify-between h-20.5 max-w-[1110px] mx-auto ">
           <div className="md:hidden">

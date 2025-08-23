@@ -56,7 +56,11 @@ export default function ProductPagination() {
         <CarouselContent>
           {Array.from({ length: 10 }).map((_, index) => (
             <CarouselItem key={index}>
-              <div className={cn("grid grid-cols-2 md:grid-cols-3 gap-2")}>
+              <div
+                className={cn(
+                  "grid grid-cols-2 md:grid-cols-3 p-0.5 gap-x-2.5 gap-y-3 md:gap-x-7.5 md:gap-y-10"
+                )}
+              >
                 {Array.from({ length: cardsPerSlide }).map((_, cardIndex) => (
                   <ProductCard key={cardIndex} />
                 ))}
@@ -65,23 +69,23 @@ export default function ProductPagination() {
           ))}
         </CarouselContent>
       </Carousel>
-      <Carousel className="w-2/5 mx-auto md:mr-[4vw] mb-8">
+      <Carousel className="w-[188px] mx-auto md:mr-[4vw] mt-10">
         <CarouselContent className="flex">
           {Array.from({ length: count }).map((_, index) => (
             <CarouselItem
               key={index}
               className={cn(
-                "basis-1/5 cursor-pointer",
-                current === index + 1 ? "opacity-100" : "opacity-50"
+                "basis-1/4 cursor-pointer",
+                current === index + 1 ? "" : ""
               )}
               onClick={() => handleThumbClick(index)}
             >
               <Card
                 className={cn(
-                  "py-1 px-[2vw] rounded-none flex justify-center items-center",
+                  "size-9 rounded-none flex justify-center items-center",
                   current === index + 1
-                    ? "bg-neutral800 text-white"
-                    : "bg-white text-neutral800"
+                    ? "bg-warmBlack text-neutral200"
+                    : "bg-background text-foreground hover:border border-warmBlack"
                 )}
               >
                 <CardContent className="p-0 flex aspect-square items-center justify-center">
