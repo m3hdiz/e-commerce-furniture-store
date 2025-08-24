@@ -10,23 +10,27 @@ import {
   SheetTrigger,
 } from "./ui/sheet";
 import SideBarShop from "./SideBarShop";
+import { Button } from "./ui/button";
 
 function SideBarFiltration() {
   return (
     <>
       <div className="md:hidden ">
         <Sheet>
-          <SheetTrigger asChild>
-            <div className="flex flex-col items-start gap-1">
-              <div className="flex items-center gap-2 pb-2">
-                <Filter />
-                <h2 className="font-semibold sm:text-sm text-xs">FILTER</h2>
-              </div>
-              <p className="font-semibold text-Paragraph-Default">
-                Showing 120 items
-              </p>
+          <div className="flex flex-col items-start gap-1">
+            <div className="flex items-center gap-2 pb-2">
+              <SheetTrigger asChild>
+                <Button variant="ghost">
+                  <Filter />
+                </Button>
+              </SheetTrigger>
+              <h2 className="font-semibold sm:text-sm text-xs">FILTER</h2>
             </div>
-          </SheetTrigger>
+            <p className="font-semibold text-Paragraph-Default">
+              Showing {/*{Product.length}*/} items
+            </p>
+          </div>
+
           <SheetContent side="left" className="w-[50vw] h-full overflow-y-auto">
             <SheetHeader>
               <SheetTitle className="mx-auto">Filters</SheetTitle>

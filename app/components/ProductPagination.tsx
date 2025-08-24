@@ -1,8 +1,8 @@
 import * as React from "react";
 import ProductCard from "./ProductCard";
-import SortBy from "./SortBy";
 import { Button } from "./ui/button";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import SortBy from "./SortBy";
 
 const products = [
   {
@@ -91,21 +91,38 @@ function useItemsPerPage() {
 export default function ProductPagination() {
   const [currentPage, setCurrentPage] = React.useState(1);
   const itemsPerPage = useItemsPerPage();
+  const [sortBy, setSortBy] = React.useState<"Name" | "Price" | "Brand">(
+    "Name"
+  );
 
   // Calculate indexes
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
 
-  // Slice products for current page
-  const currentItems = products.slice(indexOfFirstItem, indexOfLastItem);
-
   const totalPages = Math.ceil(products.length / itemsPerPage);
 
+  // ✅ Sort products before paginating
+  const sortedProducts = [...products].sort((a, b) => {
+    if (sortBy === "Name") return a.name.localeCompare(b.name);
+    if (sortBy === "Price") return a.price - b.price;
+    if (sortBy === "Brand") return a.desc.localeCompare(b.desc); // assuming "Brand" is inside desc for now
+    return 0;
+  });
+
+  // Slice products for current page
+  const currentItems = sortedProducts.slice(indexOfFirstItem, indexOfLastItem);
+
+  // ⬆️ Scroll to top whenever page changes
+  React.useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, [currentPage, sortBy]);
+
   return (
-    <div className="md:w-3/4">
+    <div className="md:w-full">
       <div className="flex items-center gap-2 sm:text-sm text-xs justify-end mb-1">
         <p className="-mt-20 md:mt-0">Sort by:</p>
-        <SortBy />
+        {/* ✅ Use SortBy component */}
+        <SortBy value={sortBy} onChange={setSortBy} />
       </div>
       {/* Products grid */}
       <div className="grid grid-cols-2 md:grid-cols-3 gap-x-2.5 md:gap-x-7.5 gap-y-10">

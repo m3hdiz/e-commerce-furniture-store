@@ -2,7 +2,7 @@ import { Checkbox } from "./ui/checkbox";
 
 function SideBarShop() {
   return (
-    <aside className="md:w-[20vw] md:mx-auto mx-4 md:pr-2 md:mt-3">
+    <aside className="md:w-64.5 md:mx-auto mx-4 md:pr-5 md:mt-3">
       <p className="font-semibold text-Paragraph-Default md:pb-5 md:border-b border-neutral600 border-b-0 hidden md:block">
         Showing 120 items
       </p>
