@@ -72,7 +72,7 @@ model Product {
   price       Decimal @default(0.0)
   originalPrice Decimal @default(0.0)
   discountPercent Float  @default(0)
-  imageUrl       String 
+  imageUrl       String? 
   rating  Float   @default(0)
   stock Int
   createdAt   DateTime   @default(now())
