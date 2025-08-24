@@ -13,10 +13,10 @@ import valo from "~/src/valo-matte-white-vase.svg";
 import DeleteIcon from "~/src/icons/DeleteIcon";
 import { CartBreadcrumb } from "./HeaderBreadcrumb";
 import { Button } from "./ui/button";
-import { Link, NavLink } from "react-router";
-import { LoaderCircle, LucideLoaderPinwheel } from "lucide-react";
+import { NavLink } from "react-router";
 import React from "react";
 import { Separator } from "./ui/separator";
+import { Input } from "./ui/input";
 
 const cartItems = [
   {
@@ -130,7 +130,7 @@ export default function Cart() {
                         currency: "USD",
                       }).format(item.Price)}
                     </TableCell>
-                    <TableCell className="flex justify-center">
+                    <TableCell className="justify-items-center">
                       <div className="border border-warmBlack dark:border-neutral600 h-12 w-32.5 flex items-center justify-between px-3">
                         <button
                           onClick={handleDecrement}
@@ -166,12 +166,13 @@ export default function Cart() {
                   </TableRow>
                 ))}
               </TableBody>
+              <Separator />
             </Table>
           </div>
           {cartItems.map((item) => (
             <div
               key={item.id}
-              className="md:hidden grid grid-cols-2 gap-y-5 py-7.5 uppercase"
+              className="md:hidden grid grid-cols-2 gap-y-5 uppercase"
             >
               <div className="col-span-2">
                 <button className="cursor-pointer">
@@ -227,14 +228,28 @@ export default function Cart() {
               <Separator className="bg-foreground col-span-2" />
             </div>
           ))}
-          <div className="flex flex-col gap-2.5 md:flex-row md:justify-between">
-            <div className="flex gap-2.5 max-md:hidden">
-              <input type="text" />
-              <button>Apply Coupon</button>
+          <div className="flex flex-col gap-2.5 md:flex-row md:justify-between md:h-12">
+            <div className="flex gap-2.5 max-md:hidden w-[382px]">
+              <Input
+                placeholder="Coupon code"
+                type="text"
+                className="w-[206px] h-full"
+              />
+              <Button variant="solid" className="h-full">
+                Apply Coupon
+              </Button>
             </div>
-            <input className="md:hidden" type="text" />
-            <button className="md:hidden">Apply Coupon</button>
-            <button className="">Update cart</button>
+            <Input
+              placeholder="Coupon code"
+              className="md:hidden"
+              type="text"
+            />
+            <Button variant="solid" className="md:hidden w-full h-full">
+              Apply Coupon
+            </Button>
+            <Button variant="solid" className="h-full w-55">
+              Update cart
+            </Button>
           </div>
           <div className="md:grid md:grid-cols-2">
             <div className="px-12.5 py-10 bg-warmBlack text-neutral100 flex flex-col gap-y-10 md:col-start-2">

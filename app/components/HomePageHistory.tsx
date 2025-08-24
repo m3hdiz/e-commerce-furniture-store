@@ -22,8 +22,8 @@ const HomePageHistory = () => {
                   Made in viet Nam <br /> since 1450
                 </h2>
               </CardTitle>
-              <CardDescription className="text-center">
-                <p className="">
+              <CardDescription className="text-center text-Paragraph-Medium">
+                <p>
                   Lorem ipsum dolor sit amet consectetur adipiscing eli mattis
                   sit phasellus mollis sit aliquam sit nullam neque ultrices.
                 </p>

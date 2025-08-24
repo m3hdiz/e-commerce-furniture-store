@@ -6,7 +6,7 @@ import { Button } from "./ui/button";
 
 const Hero = () => {
   return (
-    <div className="flex flex-col sm:flex-row w-full sm:h-[640px] sm:relative">
+    <div className="flex flex-col sm:flex-row w-full sm:h-[640px] sm:relative text-neutral100">
       <div className="w-full">
         <img
           src={hero}
@@ -27,7 +27,7 @@ const Hero = () => {
           <LogoMobile />
         </div>
         <div className="flex flex-col gap-5">
-          <p className="text-Paragraph-Medium text-center font-li">
+          <p className="text-Paragraph-Medium text-center">
             Handcrafted in Viet Nam since 1650
           </p>
           <h2 className="font-semibold text-Heading-8 text-center">

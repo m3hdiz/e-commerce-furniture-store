@@ -22,7 +22,7 @@ const Hero = () => {
           className="w-full sm:hidden object-cover"
         />
       </div>
-      <div className="bg-warmBlack sm:absolute sm:top-0 sm:left-1/9 h-[354px] sm:h-full sm:w-105 flex flex-col justify-center items-center gap-7 sm:gap-10">
+      <div className="bg-warmBlack text-background dark:text-foreground sm:absolute sm:top-0 sm:left-1/9 h-[354px] sm:h-full sm:w-105 flex flex-col justify-center items-center gap-7 sm:gap-10">
         <div className="max-sm:hidden">
           <LogoContact />
         </div>

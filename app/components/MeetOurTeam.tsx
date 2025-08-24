@@ -12,11 +12,9 @@ import {
 
 export default function MeetOurTeam() {
   return (
-    <div className="sm:mx-[11vw] max-sm:ml-3">
-      <section className="max-w-[1110px] m-auto my-4">
-        <h2 className="font-bold text-4xl text-center mb-6 text-neutral800">
-          MEET OUR TEAM
-        </h2>
+    <div className="my-9 md:my-20 sm:mx-[11vw] max-sm:ml-3">
+      <section className="max-w-[1110px] m-auto">
+        <h2 className="font-bold text-4xl text-center mb-6">MEET OUR TEAM</h2>
         <Carousel
           opts={{
             align: "start",
@@ -27,10 +25,12 @@ export default function MeetOurTeam() {
             <CarouselItem className=" md:basis-1/2 lg:basis-1/4">
               <div className="flex flex-col items-center justify-center gap-3">
                 <img className="w-63.75" src={CEO} alt="CEO" />
-                <h3 className="font-semibold text-sm text-warmBlack">
+                <p className="font-semibold text-Display-2 uppercase">
                   BERNIE PATTERSON
-                </h3>
-                <p className="text-sm text-neutral600">CEO & Founder</p>
+                </p>
+                <p className="text-Paragraph-Default text-neutral600 dark:text-neutral300">
+                  CEO & Founder
+                </p>
               </div>
             </CarouselItem>
             <CarouselItem className=" md:basis-1/2 lg:basis-1/4">
@@ -40,28 +40,34 @@ export default function MeetOurTeam() {
                   src={CreativeDirector}
                   alt="CreativeDirector"
                 />
-                <h3 className="font-semibold text-sm text-warmBlack">
+                <p className="font-semibold text-Display-2 uppercase">
                   OPHELIA VASE
-                </h3>
-                <p className="text-sm text-neutral600">Creative Director</p>
+                </p>
+                <p className="text-Paragraph-Default text-neutral600 dark:text-neutral300">
+                  Creative Director
+                </p>
               </div>
             </CarouselItem>
             <CarouselItem className=" md:basis-1/2 lg:basis-1/4">
               <div className="flex flex-col items-center justify-center gap-3">
                 <img className="w-63.75" src={Artist} alt="Artist" />
-                <h3 className="font-semibold text-sm text-warmBlack">
+                <p className="font-semibold text-Display-2 uppercase">
                   CORBIN HOSSAIN
-                </h3>
-                <p className="text-sm text-neutral600">Artist</p>
+                </p>
+                <p className="text-Paragraph-Default text-neutral600 dark:text-neutral300">
+                  Artist
+                </p>
               </div>
             </CarouselItem>
             <CarouselItem className=" md:basis-1/2 lg:basis-1/4">
               <div className="flex flex-col items-center justify-center gap-3">
                 <img className="w-63.75" src={Marketing} alt="Marketing" />
-                <h3 className="font-semibold text-sm text-warmBlack">
+                <p className="font-semibold text-Display-2 uppercase">
                   SEREN BOWL
-                </h3>
-                <p className="text-sm text-neutral600">Marketing</p>
+                </p>
+                <p className="text-Paragraph-Default text-neutral600 dark:text-neutral300">
+                  Marketing
+                </p>
               </div>
             </CarouselItem>
           </CarouselContent>
