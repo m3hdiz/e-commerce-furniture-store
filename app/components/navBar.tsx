@@ -5,6 +5,20 @@ import ShoppingCart from "~/src/icons/Shopping cart";
 import { NavLink } from "react-router";
 import { Menu as MenuIcon } from "../src/icons/Menu";
 import SigningTab from "./SigningTab";
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@radix-ui/react-tabs";
+import SigninForm from "./SigninForm";
+import SignupForm from "./SignupForm";
+import { Button } from "./ui/button";
+import {
+  Sheet,
+  SheetTrigger,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetDescription,
+  SheetFooter,
+  SheetClose,
+} from "./ui/sheet";
 
 export default function NavBar() {
   return (
@@ -12,7 +26,31 @@ export default function NavBar() {
       <div className="px-[11vw]">
         <section className="flex max-md:grid max-md:grid-cols-3 items-center justify-between h-20.5 max-w-[1110px] mx-auto ">
           <div className="md:hidden">
-            <MenuIcon />
+            <Sheet>
+              <SheetTrigger asChild>
+                <Button variant="avatar">
+                  <MenuIcon />
+                </Button>
+              </SheetTrigger>
+              <SheetContent side="left">
+                <SheetHeader>
+                  <SheetTitle className="mx-auto">
+                    <NavLink to="/">
+                      <LogoWithType />
+                    </NavLink>
+                  </SheetTitle>
+                  <SheetDescription>
+                    Make changes to your profile here. Click save when
+                    you&apos;re done.
+                  </SheetDescription>
+                </SheetHeader>
+                <SheetFooter>
+                  <SheetClose asChild>
+                    <Button variant="newOutline">Close</Button>
+                  </SheetClose>
+                </SheetFooter>
+              </SheetContent>
+            </Sheet>
           </div>
           <div className="justify-self-center">
             <NavLink to="/">

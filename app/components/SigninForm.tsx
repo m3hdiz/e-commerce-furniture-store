@@ -15,9 +15,9 @@ export default function SigninForm() {
   const SigninFetcher = useFetcher();
 
   return (
-    <Card>
+    <Card className="gap-6 my-3">
       <CardHeader>
-        <CardTitle>Sign in</CardTitle>
+        <CardTitle className="flex flex-col gap-2">Sign in</CardTitle>
         <CardDescription>
           You can Sign in to your account here. If you don&apos;t have an
           account yet you can Sign up.

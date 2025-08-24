@@ -15,6 +15,8 @@ import { CartBreadcrumb } from "./HeaderBreadcrumb";
 import { Button } from "./ui/button";
 import { Link, NavLink } from "react-router";
 import { LoaderCircle, LucideLoaderPinwheel } from "lucide-react";
+import React from "react";
+import { Separator } from "./ui/separator";
 
 const cartItems = [
   {
@@ -62,6 +64,20 @@ const taxRate = 8; // for example, 8% tax
 const totals = calculateCartTotals(cartItems, taxRate);
 
 export default function Cart() {
+  const [quantity, setQuantity] = React.useState(1);
+
+  const handleIncrement = () => {
+    if (quantity < 20) {
+      setQuantity(quantity + 1);
+    }
+  };
+
+  const handleDecrement = () => {
+    if (quantity > 1) {
+      setQuantity(quantity - 1);
+    }
+  };
+
   return (
     <div className="px-5 mt-5 mb-20 sm:px-[11vw]">
       <section className="flex flex-col gap-12.5 justify-center mx-auto max-w-[1110px]">
@@ -114,7 +130,33 @@ export default function Cart() {
                         currency: "USD",
                       }).format(item.Price)}
                     </TableCell>
-                    <TableCell>{item.Quantity}</TableCell>
+                    <TableCell className="flex justify-center">
+                      <div className="border border-warmBlack dark:border-neutral600 h-12 w-32.5 flex items-center justify-between px-3">
+                        <button
+                          onClick={handleDecrement}
+                          disabled={quantity === 1}
+                          className={`text-xl ${
+                            quantity === 1
+                              ? "opacity-50 cursor-not-allowed"
+                              : "hover:text-lightBrown cursor-pointer"
+                          }`}
+                        >
+                          −
+                        </button>
+
+                        <span className="text-Display-2 uppercase font-semibold">
+                          {item.Quantity}
+                        </span>
+
+                        <button
+                          onClick={handleIncrement}
+                          disabled={quantity === 20}
+                          className={`text-xl ${quantity === 20 ? "opacity-50 cursor-not-allowed" : "hover:text-lightBrown cursor-pointer"}`}
+                        >
+                          +
+                        </button>
+                      </div>
+                    </TableCell>
                     <TableCell className="text-lightBrown">
                       {new Intl.NumberFormat("en-US", {
                         style: "currency",
@@ -150,7 +192,31 @@ export default function Cart() {
                 }).format(item.Price)}
               </div>
               <p>Quantity:</p>
-              <div className="text-right">{item.Quantity}</div>
+              <div className="border border-warmBlack dark:border-neutral600 h-12 w-32.5 flex items-center justify-between px-3 justify-self-end">
+                <button
+                  onClick={handleDecrement}
+                  disabled={quantity === 1}
+                  className={`text-xl ${
+                    quantity === 1
+                      ? "opacity-50 cursor-not-allowed"
+                      : "hover:text-lightBrown cursor-pointer"
+                  }`}
+                >
+                  −
+                </button>
+
+                <span className="text-Display-2 uppercase font-semibold">
+                  {item.Quantity}
+                </span>
+
+                <button
+                  onClick={handleIncrement}
+                  disabled={quantity === 20}
+                  className={`text-xl ${quantity === 20 ? "opacity-50 cursor-not-allowed" : "hover:text-lightBrown cursor-pointer"}`}
+                >
+                  +
+                </button>
+              </div>
               <p>subtotal:</p>
               <div className="text-lightBrown text-right">
                 {new Intl.NumberFormat("en-US", {
@@ -158,6 +224,7 @@ export default function Cart() {
                   currency: "USD",
                 }).format(item.subtotal)}
               </div>
+              <Separator className="bg-foreground col-span-2" />
             </div>
           ))}
           <div className="flex flex-col gap-2.5 md:flex-row md:justify-between">

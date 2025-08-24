@@ -14,9 +14,9 @@ import {
 export default function SignupForm() {
   const SignupFetcher = useFetcher();
   return (
-    <Card>
+    <Card className="gap-6 my-3">
       <CardHeader>
-        <CardTitle>Sign up</CardTitle>
+        <CardTitle className="flex flex-col gap-2">Sign up</CardTitle>
         <CardDescription>
           Sign up a new account here. After submit, you&apos;ll be logged in.
         </CardDescription>
