@@ -1,5 +1,9 @@
 import { Label } from "./ui/label";
-import { useFetcher, type ActionFunctionArgs } from "react-router";
+import {
+  useActionData,
+  useFetcher,
+  type ActionFunctionArgs,
+} from "react-router";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
 import {
@@ -10,9 +14,21 @@ import {
   CardContent,
   CardFooter,
 } from "./ui/card";
+import React, { useState } from "react";
+import { Value } from "@radix-ui/react-select";
 
 export default function SigninForm() {
   const SigninFetcher = useFetcher();
+  const actionData = useActionData();
+  const [formData, setFormData] = useState({
+    email: actionData?.input?.email || "",
+    name: actionData?.input?.name || "",
+    password: actionData?.input?.password || "",
+  });
+  const handleChangeInput = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.target;
+    setFormData((form) => ({ ...form, [name]: value }));
+  };
 
   return (
     <Card>
@@ -36,6 +52,8 @@ export default function SigninForm() {
               name="username"
               type="text"
               placeholder="Your Username"
+              value={formData.name}
+              onChange={handleChangeInput}
               required
             />
           </div>
@@ -46,6 +64,8 @@ export default function SigninForm() {
               name="password"
               type="password"
               placeholder="Your Password"
+              value={formData.password}
+              onChange={handleChangeInput}
               required
             />
           </div>
