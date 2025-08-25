@@ -13,6 +13,7 @@ import {
 
 export default function SignupForm() {
   const SignupFetcher = useFetcher();
+
   return (
     <Card className="gap-6 my-3">
       <CardHeader>
@@ -24,24 +25,24 @@ export default function SignupForm() {
       <CardContent className="grid gap-6">
         <SignupFetcher.Form
           method="post"
+          action="/login"
           id="signup-form"
           className="grid gap-6"
         >
-          <div className="grid gap-3">
+          {/* <div className="grid gap-3">
             <Label htmlFor="username-reg">Username</Label>
             <Input
-              id="username-reg"
-              name="username-reg"
+              id="username"
+              name="username"
               type="text"
               placeholder="Your Username"
-              required
             />
-          </div>
+          </div> */}
           <div className="grid gap-3">
             <Label htmlFor="email-reg">Email</Label>
             <Input
-              id="email-reg"
-              name="email-reg"
+              id="email"
+              name="email"
               type="email"
               placeholder="Your Email"
               required
@@ -51,27 +52,28 @@ export default function SignupForm() {
             <Label htmlFor="password-reg">Password</Label>
             <Input
               id="password-reg"
-              name="password-reg"
+              name="password"
               type="password"
               placeholder="Your Password"
               required
             />
           </div>
-          <div className="grid gap-3">
+          {/* <div className="grid gap-3">
             <Label htmlFor="confirm-password">Confirm Password</Label>
             <Input
               id="confirm-password"
               name="confirm-password"
               type="password"
               placeholder="Confirm Your Password"
-              required
             />
-          </div>
+          </div> */}
         </SignupFetcher.Form>
       </CardContent>
       <CardFooter>
         <Button
           type="submit"
+          name="action"
+          value="register"
           form="signup-form"
           variant="solid"
           className="w-full"

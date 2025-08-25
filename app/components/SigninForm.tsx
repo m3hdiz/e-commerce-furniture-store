@@ -26,16 +26,17 @@ export default function SigninForm() {
       <CardContent className="grid gap-6">
         <SigninFetcher.Form
           method="post"
+          action="/login"
           id="signin-form"
           className="grid gap-6"
         >
           <div className="grid gap-3">
-            <Label htmlFor="username">Username</Label>
+            <Label htmlFor="email">Email</Label>
             <Input
-              id="username"
-              name="username"
-              type="text"
-              placeholder="Your Username"
+              id="email"
+              name="email"
+              type="email"
+              placeholder="Your Email"
               required
             />
           </div>
@@ -54,6 +55,8 @@ export default function SigninForm() {
       <CardFooter>
         <Button
           type="submit"
+          name="action"
+          value="login"
           form="signin-form"
           variant="solid"
           className="w-full"
