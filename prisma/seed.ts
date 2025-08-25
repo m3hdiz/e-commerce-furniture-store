@@ -1,4 +1,4 @@
-import { prisma } from "../app/db.server";
+import { prisma } from "../app/utils/db.server";
 
 const StatesByCountry = {
   "United States": ["California", "Texas", "Florida", "New York", "Illinois"],

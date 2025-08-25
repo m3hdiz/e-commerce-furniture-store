@@ -25,7 +25,7 @@ export default function SigningTab() {
             <Avatar />
           </Button>
         </SheetTrigger>
-        <SheetContent side="right">
+        <SheetContent side="right" className="overflow-y-auto">
           <SheetHeader>
             <SheetTitle className="mx-auto">
               <NavLink to="/">
