@@ -1,7 +1,7 @@
 import GetInTouch from "~/components/GetInTouch";
 import HeroContact from "~/components/HeroContact";
 import type { Route } from "./+types/Contact";
-import map from "../src/map.svg";
+import Map from "~/components/Map";
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -10,14 +10,12 @@ export function meta({}: Route.MetaArgs) {
   ];
 }
 
-export default function contact() {
+export default function Contact() {
   return (
     <>
       <HeroContact />
       <GetInTouch />
-      <section>
-        <img className="m-auto" src={map} alt="" />
-      </section>
+      <Map />
     </>
   );
 }

@@ -3,69 +3,11 @@ import ProductCard from "./ProductCard";
 import { Button } from "./ui/button";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import SortBy from "./SortBy";
+import type { Product } from "../models/types";
 
-const products = [
-  {
-    id: 1,
-    name: "Wireless Headphones",
-    desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam saepe sed quam.",
-    price: 199.99,
-  },
-  {
-    id: 2,
-    name: "Gaming Mouse",
-    desc: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Totam consequatur fugit ad quo numquam atque.",
-    price: 49.99,
-  },
-  {
-    id: 3,
-    name: "Mechanical Keyboard",
-    desc: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Consectetur quam asperiores voluptas.",
-    price: 89.99,
-  },
-  {
-    id: 4,
-    name: "Smartwatch",
-    desc: "Lorem ipsum dolor sit amet, consectetur adipisicing. ",
-    price: 149.99,
-  },
-  {
-    id: 5,
-    name: "Bluetooth Speaker",
-    desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam saepe sed quam.",
-    price: 79.99,
-  },
-  {
-    id: 6,
-    name: "4K Monitor",
-    desc: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. In alias laboriosam cupiditate magni?",
-    price: 329.99,
-  },
-  {
-    id: 7,
-    name: "Laptop Stand",
-    desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi, doloremque ad.",
-    price: 39.99,
-  },
-  {
-    id: 8,
-    name: "External SSD",
-    desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam saepe sed quam.",
-    price: 159.99,
-  },
-  {
-    id: 9,
-    name: "Webcam",
-    desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam saepe sed quam.",
-    price: 59.99,
-  },
-  {
-    id: 10,
-    name: "Wireless Charger",
-    desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam saepe sed quam.",
-    price: 29.99,
-  },
-];
+interface PaginationProps {
+  products: Product[];
+}
 
 function useItemsPerPage() {
   const [itemsPerPage, setItemsPerPage] = React.useState(8); // default for SSR (mobile)
@@ -88,7 +30,9 @@ function useItemsPerPage() {
   return itemsPerPage;
 }
 
-export default function ProductPagination() {
+export default function ProductPagination({
+  products,
+}: PaginationProps): React.ReactElement {
   const [currentPage, setCurrentPage] = React.useState(1);
   const itemsPerPage = useItemsPerPage();
   const [sortBy, setSortBy] = React.useState<"Name" | "Price" | "Brand">(
@@ -105,7 +49,7 @@ export default function ProductPagination() {
   const sortedProducts = [...products].sort((a, b) => {
     if (sortBy === "Name") return a.name.localeCompare(b.name);
     if (sortBy === "Price") return a.price - b.price;
-    if (sortBy === "Brand") return a.desc.localeCompare(b.desc); // assuming "Brand" is inside desc for now
+    if (sortBy === "Brand") return a.description!.localeCompare(b.description!); // assuming "Brand" is inside desc for now
     return 0;
   });
 
