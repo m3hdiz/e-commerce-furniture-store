@@ -18,7 +18,7 @@ import React from "react";
 import { Separator } from "./ui/separator";
 import { Input } from "./ui/input";
 
-const cartItems = [
+const data = [
   {
     id: 1,
     photo: porcelain,
@@ -61,21 +61,29 @@ function calculateCartTotals(items, taxRatePercent: Number) {
 }
 
 const taxRate = 8; // for example, 8% tax
-const totals = calculateCartTotals(cartItems, taxRate);
+const totals = calculateCartTotals(data, taxRate);
 
 export default function Cart() {
-  const [quantity, setQuantity] = React.useState(1);
+  const [cartItems, setCartItems] = React.useState([...data]);
 
-  const handleIncrement = () => {
-    if (quantity < 20) {
-      setQuantity(quantity + 1);
-    }
+  const handleIncrement = (id: number) => {
+    setCartItems((prev) =>
+      prev.map((item) =>
+        item.id === id
+          ? { ...item, Quantity: Math.min(item.Quantity + 1, 20) }
+          : item
+      )
+    );
   };
 
-  const handleDecrement = () => {
-    if (quantity > 1) {
-      setQuantity(quantity - 1);
-    }
+  const handleDecrement = (id: number) => {
+    setCartItems((prev) =>
+      prev.map((item) =>
+        item.id === id
+          ? { ...item, Quantity: Math.max(item.Quantity - 1, 1) }
+          : item
+      )
+    );
   };
 
   return (
@@ -133,10 +141,10 @@ export default function Cart() {
                     <TableCell>
                       <div className="border m-auto border-warmBlack dark:border-neutral600 h-12 w-32.5 flex items-center justify-between px-3">
                         <button
-                          onClick={handleDecrement}
-                          disabled={quantity === 1}
+                          onClick={() => handleDecrement(item.id)}
+                          disabled={item.Quantity === 1}
                           className={`text-xl ${
-                            quantity === 1
+                            item.Quantity === 1
                               ? "opacity-50 cursor-not-allowed"
                               : "hover:text-lightBrown cursor-pointer"
                           }`}
@@ -149,9 +157,9 @@ export default function Cart() {
                         </span>
 
                         <button
-                          onClick={handleIncrement}
-                          disabled={quantity === 20}
-                          className={`text-xl ${quantity === 20 ? "opacity-50 cursor-not-allowed" : "hover:text-lightBrown cursor-pointer"}`}
+                          onClick={() => handleIncrement(item.id)}
+                          disabled={item.Quantity === 20}
+                          className={`text-xl ${item.Quantity === 20 ? "opacity-50 cursor-not-allowed" : "hover:text-lightBrown cursor-pointer"}`}
                         >
                           +
                         </button>
@@ -195,10 +203,10 @@ export default function Cart() {
               <p>Quantity:</p>
               <div className="border border-warmBlack dark:border-neutral600 h-12 w-32.5 flex items-center justify-between px-3 justify-self-end">
                 <button
-                  onClick={handleDecrement}
-                  disabled={quantity === 1}
+                  onClick={() => handleDecrement(item.id)}
+                  disabled={item.Quantity === 1}
                   className={`text-xl ${
-                    quantity === 1
+                    item.Quantity === 1
                       ? "opacity-50 cursor-not-allowed"
                       : "hover:text-lightBrown cursor-pointer"
                   }`}
@@ -211,9 +219,9 @@ export default function Cart() {
                 </span>
 
                 <button
-                  onClick={handleIncrement}
-                  disabled={quantity === 20}
-                  className={`text-xl ${quantity === 20 ? "opacity-50 cursor-not-allowed" : "hover:text-lightBrown cursor-pointer"}`}
+                  onClick={() => handleIncrement(item.id)}
+                  disabled={item.Quantity === 20}
+                  className={`text-xl ${item.Quantity === 20 ? "opacity-50 cursor-not-allowed" : "hover:text-lightBrown cursor-pointer"}`}
                 >
                   +
                 </button>
