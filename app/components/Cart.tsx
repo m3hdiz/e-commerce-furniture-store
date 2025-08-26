@@ -121,7 +121,7 @@ export default function Cart() {
                       </button>
                     </TableCell>
                     <TableCell className="h-35 w-30">
-                      <img src={item.photo} alt={item.Product} className="" />
+                      <img src={item.photo} alt={item.Product} />
                     </TableCell>
                     <TableCell>{item.Product}</TableCell>
                     <TableCell>
@@ -130,8 +130,8 @@ export default function Cart() {
                         currency: "USD",
                       }).format(item.Price)}
                     </TableCell>
-                    <TableCell className="justify-items-center">
-                      <div className="border border-warmBlack dark:border-neutral600 h-12 w-32.5 flex items-center justify-between px-3">
+                    <TableCell>
+                      <div className="border m-auto border-warmBlack dark:border-neutral600 h-12 w-32.5 flex items-center justify-between px-3">
                         <button
                           onClick={handleDecrement}
                           disabled={quantity === 1}
