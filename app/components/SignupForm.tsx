@@ -86,6 +86,9 @@ export default function SignupForm() {
             onChange={(e) => handleChangeInput(e, "confirmPassword")}
           />
         </SignupFetcher.Form>
+        {SignupFetcher.data?.error && (
+          <p className="text-destructive ">{SignupFetcher.data.error}</p>
+        )}
       </CardContent>
       <CardFooter>
         <Button

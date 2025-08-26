@@ -35,3 +35,41 @@ export const authSessionStorage = createCookieSessionStorage({
     httpOnly: true,
   },
 });
+
+export async function getSession(request: Request) {
+  return authSessionStorage.getSession(request.headers.get("Cookie"));
+}
+
+export async function createUserSession(userId: string, redirectTo: string) {
+  const session = await authSessionStorage.getSession();
+  session.set("userId", userId);
+  return redirect(redirectTo, {
+    headers: {
+      "Set-Cookie": await authSessionStorage.commitSession(session),
+    },
+  });
+}
+
+export async function requireUserId(
+  request: Request,
+  redirectTo: string = new URL(request.url).pathname
+) {
+  const session = await authSessionStorage.getSession(
+    request.headers.get("Cookie")
+  );
+  const userId = session.get("userId");
+  if (!userId) {
+    const searchParams = new URLSearchParams([["redirectTo", redirectTo]]);
+    return redirect(`/login?${searchParams}`);
+  }
+  return userId;
+}
+
+export async function logout(request: Request) {
+  const session = await getSession(request);
+  return redirect("/login", {
+    headers: {
+      "Set-Cookie": await authSessionStorage.destroySession(session),
+    },
+  });
+}

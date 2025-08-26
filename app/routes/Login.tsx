@@ -1,19 +1,25 @@
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@radix-ui/react-tabs";
-import type { ActionFunctionArgs } from "react-router";
 import SigninForm from "~/components/SigninForm";
 import SignupForm from "~/components/SignupForm";
 import { handleSignin, handleSignup } from "~/utils/auth.server";
 
-export async function action({ request }: ActionFunctionArgs) {
+export async function action({ request }: { request: Request }) {
+  const url = new URL(request.url);
+  const redirectTo = url.searchParams.get("redirectTo") ?? "/";
+
   const formData = await request.formData();
   const actionType = formData.get("action");
 
-  if (actionType === "login") return handleSignin(formData);
-  if (actionType === "register") return handleSignup(formData);
+  if (actionType === "register") {
+    return handleSignup(formData, redirectTo);
+  }
+
+  if (actionType === "login") {
+    return handleSignin(formData, redirectTo);
+  }
 
   return { error: "Invalid action" };
 }
-
 export default function Login() {
   return (
     <div className="flex w-full max-w-lg flex-col gap-6 p-3 m-auto">
