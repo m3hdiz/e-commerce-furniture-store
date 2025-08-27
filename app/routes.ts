@@ -16,7 +16,7 @@ export default [
     route("checkout", "routes/Checkout.tsx", [
       index("components/BillingDetails.tsx"),
     ]),
-    route("product", "routes/ProductPage.tsx"),
+    route("item/:id", "routes/Product.tsx"),
     route("login", "routes/Login.tsx"),
     route("favorites", "routes/Favorites.tsx"),
   ]),
