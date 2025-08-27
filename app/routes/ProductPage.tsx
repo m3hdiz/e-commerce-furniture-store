@@ -1,7 +1,7 @@
 import { Product } from "~/components/Product";
 import SimilarItems from "~/components/SimilarItems";
 import GetProduct from "~/models/GetProduct";
-import type { Route } from "./+types/Product";
+import type { Route } from "./+types/ProductPage";
 import AllProducts from "~/models/AllPeoducts";
 
 export async function loader({ params }: Route.LoaderArgs) {

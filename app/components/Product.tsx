@@ -19,8 +19,39 @@ import {
   Twitter,
 } from "~/src/icons/SocialIcons";
 import { ProductBreadcrumb } from "./HeaderBreadcrumb";
-import type { Product as p } from "~/models/types";
 import { Button } from "./ui/button";
+
+interface Review {
+  id: string;
+  createdAt: Date;
+  updatedAt: Date;
+  rating: number;
+  authorId: string;
+  comment: string | null;
+  productId: string;
+}
+
+type ProductColor = {
+  productId: string;
+  colorId: string;
+};
+
+type p = {
+  price: number;
+  originalPrice: number;
+  description: string | null;
+  name: string;
+  id: string;
+  createdAt: Date;
+  updatedAt: Date;
+  categoryId: string;
+  discountPercent: number;
+  imageUrl: string | null;
+  rating: number;
+  stock: number;
+  Review: Review[];
+  ProductColor: ProductColor[];
+};
 
 interface ProductProps {
   product: p;
@@ -43,7 +74,6 @@ export const Product: React.FC<ProductProps> = ({ product }) => {
   //   rating: 4,
   //   reviews: 1256,
   //   stock: "in stock",
-  //   quantity: 1,
   //   thumbnail: thumb,
   //   photos: [A, B, C, D, E],
   // };
@@ -92,11 +122,16 @@ export const Product: React.FC<ProductProps> = ({ product }) => {
                         <span key={i}>{i < product.rating ? "★" : "☆"}</span>
                       ))}
                   </p>
-                  <p>({product.description} Reviews)</p>
+                  <p>({product.Review.length} Reviews)</p>
                 </div>
                 <div className="text-Paragraph-Medium">
-                  Stock:{" "}
-                  <span className="text-lightBrown">{product.stock}</span>
+                  {product.stock === 0 ? (
+                    <span className="text-red-500">Out of stock</span>
+                  ) : (
+                    <>
+                      Stock: <span className="text-lightBrown">In stock </span>
+                    </>
+                  )}
                 </div>
               </div>
               <div className="flex gap-4 text-Display-6">
