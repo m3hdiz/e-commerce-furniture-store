@@ -1,9 +1,9 @@
 import { logout } from "~/utils/sessions.server";
-import type { ActionFunctionArgs } from "react-router";
 import { useFetcher } from "react-router";
 import { Button } from "~/components/ui/button";
+import type { Route } from "../+types/root";
 
-export async function action({ request }: ActionFunctionArgs) {
+export async function action({ request }: Route.ActionArgs) {
   return logout(request);
 }
 

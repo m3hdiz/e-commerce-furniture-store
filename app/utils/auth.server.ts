@@ -17,7 +17,7 @@ export async function handleSignup(formData: FormData, redirectTo: string) {
   });
 
   if (existingUser) {
-    return { error: "این کاربر از قبل وجود دارد" };
+    return { error: "This user has already existed" };
   }
 
   const hashedPassword = await bcrypt.hash(password, 10);
