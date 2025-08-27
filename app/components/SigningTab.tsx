@@ -15,6 +15,7 @@ import { Tabs, TabsList, TabsTrigger, TabsContent } from "./ui/tabs";
 import { Button } from "./ui/button";
 import { NavLink } from "react-router";
 import LogoWithType from "~/src/icons/LogoWithTypeHeader";
+import Logout from "~/routes/Logout";
 
 export default function SigningTab() {
   return (
@@ -38,6 +39,7 @@ export default function SigningTab() {
             </SheetDescription>
           </SheetHeader>
           <div className="flex w-full max-w-sm flex-col gap-6 px-3">
+            <Logout />
             <Tabs defaultValue="Sign in">
               <TabsList>
                 <TabsTrigger value="Sign in">Sign in</TabsTrigger>

@@ -5,21 +5,6 @@ import ShoppingCart from "~/src/icons/Shopping cart";
 import { NavLink } from "react-router";
 import { Menu as MenuIcon } from "../src/icons/Menu";
 import SigningTab from "./SigningTab";
-// const username = formData.get("username");
-// const email = formData.get("email");
-// const password = formData.get("password");
-// const confirmPassword = formData.get("confirmPassword");
-
-// // Example basic validation
-// if (password !== confirmPassword) {
-//   return { error: "Passwords do not match" };
-// }
-
-// Normally you'd create the user in the database here
-// return SignUp();
-
-// Redirect after success
-// return redirect("/welcome");
 
 export default function NavBar() {
   return (
