@@ -40,9 +40,16 @@ export async function getSession(request: Request) {
   return authSessionStorage.getSession(request.headers.get("Cookie"));
 }
 
-export async function createUserSession(userId: string, redirectTo: string) {
+export async function createUserSession(
+  userId: string,
+  firstName: string,
+  lastName: string,
+  redirectTo: string
+) {
   const session = await authSessionStorage.getSession();
   session.set("userId", userId);
+  session.set("fullName", `${firstName ?? ""} ${lastName ?? ""}`);
+
   return redirect(redirectTo, {
     headers: {
       "Set-Cookie": await authSessionStorage.commitSession(session),
@@ -65,6 +72,15 @@ export async function requireUserId(
   return userId;
 }
 
+export async function getUserInfo(request: Request) {
+  const session = await authSessionStorage.getSession(
+    request.headers.get("Cookie")
+  );
+  return {
+    userId: session.get("userId") ?? null,
+    fullName: session.get("fullName") ?? null,
+  };
+}
 export async function logout(request: Request) {
   const session = await getSession(request);
   return redirect("/login", {

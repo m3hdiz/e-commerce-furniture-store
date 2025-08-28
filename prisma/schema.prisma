@@ -93,6 +93,7 @@ model Product {
 model Color {
   id       String         @id @default(dbgenerated("gen_random_uuid()"))
   name     String         @unique 
+  code     String         @unique
   products ProductColor[]
 }
 

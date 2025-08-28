@@ -6,7 +6,12 @@ import { NavLink } from "react-router";
 import { Menu as MenuIcon } from "../src/icons/Menu";
 import SigningTab from "./SigningTab";
 
-export default function NavBar() {
+type NavBarProps = {
+  userId: string | null;
+  fullName: string | null;
+};
+
+export default function NavBar({ userId, fullName }: NavBarProps) {
   return (
     <nav className="dark:bg-warmBlack">
       <div className="px-[11vw]">
@@ -41,7 +46,7 @@ export default function NavBar() {
                 <Search />
               </li>
               <li>
-                <SigningTab />
+                <SigningTab userId={userId} fullName={fullName} />
               </li>
               <li>
                 <NavLink to="favorites">

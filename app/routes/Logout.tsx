@@ -12,7 +12,7 @@ export default function Logout() {
 
   return (
     <fetcher.Form method="post" action="/logout">
-      <Button type="submit" variant="newOutline" className="w-full">
+      <Button type="submit" variant="newOutline" className="w-full my-4">
         Logout
       </Button>
     </fetcher.Form>
