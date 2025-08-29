@@ -1,5 +1,5 @@
-import NavBar from "~/components/navBar";
-import Footer from "~/components/footer";
+import NavBar from "~/components/NavBar";
+import Footer from "~/components/Footer";
 import { Outlet, useLoaderData } from "react-router";
 import { getUserInfo } from "~/utils/sessions.server";
 import type { Route } from "../+types/root";
