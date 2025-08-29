@@ -1,4 +1,4 @@
-import { prisma } from "../db.server";
+import { prisma } from "../utils/db.server";
 
 export async function getOrCreateCart(userId: string) {
   let cart = await prisma.cart.findUnique({

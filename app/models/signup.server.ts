@@ -1,4 +1,4 @@
-import { prisma } from "../db.server";
+import { prisma } from "../utils/db.server";
 
 export function SignUp() {
   return prisma.data.create({

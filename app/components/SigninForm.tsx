@@ -1,6 +1,4 @@
-import { Label } from "./ui/label";
-import { useFetcher, type ActionFunctionArgs } from "react-router";
-import { Input } from "./ui/input";
+import { useActionData, useFetcher } from "react-router";
 import { Button } from "./ui/button";
 import {
   Card,
@@ -10,14 +8,30 @@ import {
   CardContent,
   CardFooter,
 } from "./ui/card";
+import TextField from "./TextField";
+import { useState } from "react";
 
 export default function SigninForm() {
   const SigninFetcher = useFetcher();
+  const actionData = useActionData();
+
+  const [formData, setFormData] = useState({
+    email: actionData?.fields?.email || "",
+    name: actionData?.fields?.name || "",
+    password: actionData?.fields?.password || "",
+    confirmPassword: actionData?.fields?.confirmPassword || "",
+  });
+  const handleChangeInput = (
+    event: React.ChangeEvent<HTMLInputElement>,
+    field: string
+  ) => {
+    setFormData((form) => ({ ...form, [field]: event.target.value }));
+  };
 
   return (
-    <Card>
+    <Card className="gap-6 my-3">
       <CardHeader>
-        <CardTitle>Sign in</CardTitle>
+        <CardTitle className="flex flex-col gap-2">Sign in</CardTitle>
         <CardDescription>
           You can Sign in to your account here. If you don&apos;t have an
           account yet you can Sign up.
@@ -26,34 +40,39 @@ export default function SigninForm() {
       <CardContent className="grid gap-6">
         <SigninFetcher.Form
           method="post"
+          action="/login"
           id="signin-form"
           className="grid gap-6"
         >
-          <div className="grid gap-3">
-            <Label htmlFor="username">Username</Label>
-            <Input
-              id="username"
-              name="username"
-              type="text"
-              placeholder="Your Username"
-              required
-            />
-          </div>
-          <div className="grid gap-3">
-            <Label htmlFor="password">Password</Label>
-            <Input
-              id="password"
-              name="password"
-              type="password"
-              placeholder="Your Password"
-              required
-            />
-          </div>
+          <TextField
+            htmlFor="email-reg"
+            id="email"
+            name="email"
+            type="email"
+            placeholder="Your Email"
+            label="Email"
+            value={formData.email}
+            onChange={(e) => handleChangeInput(e, "email")}
+            required
+          />
+          <TextField
+            htmlFor="password-reg"
+            id="password"
+            name="password"
+            type="password"
+            placeholder="Your Password"
+            label="Password"
+            value={formData.password}
+            onChange={(e) => handleChangeInput(e, "password")}
+            required
+          />
         </SigninFetcher.Form>
       </CardContent>
       <CardFooter>
         <Button
           type="submit"
+          name="action"
+          value="login"
           form="signin-form"
           variant="solid"
           className="w-full"
