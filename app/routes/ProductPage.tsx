@@ -25,8 +25,8 @@ export default function ProductPage({ loaderData }: Route.ComponentProps) {
   if ("error" in loaderData) {
     return <div>Error: {loaderData.error}</div>;
   }
-
   // ✅ loaderData is now narrowed to the product type
+
   return (
     <div>
       <Product product={loaderData.data!} />
