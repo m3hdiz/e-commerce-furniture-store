@@ -1,36 +1,45 @@
+import { Link } from "react-router";
 import hero from "../src/assets/hero.svg";
 import heroMobile from "../src/assets/heroMobile.svg";
-import Logo from "../src/icons/Logo";
+import { Logo, LogoMobile } from "../src/icons/Logo";
 import { Button } from "./ui/button";
 
 const Hero = () => {
   return (
-    <div className="flex flex-col md:flex-row w-full md:h-[460px] md:relative">
-      <div className="w-full ">
+    <div className="flex flex-col sm:flex-row w-full sm:h-[640px] sm:relative text-neutral100">
+      <div className="w-full">
         <img
           src={hero}
           alt="hero"
-          className="w-full h-full hidden md:block object-cover"
+          className="w-full h-full hidden sm:block object-cover"
         />
         <img
           src={heroMobile}
           alt="hero"
-          className="w-full  md:hidden object-cover"
+          className="w-full sm:hidden object-cover"
         />
       </div>
-      <div className="info-panel bg-green px-4 py-15 md:absolute md:bottom-0 md:left-22 h-full  md:max-w-[32vw]">
-        <div className="info-content flex flex-col justify-center items-center gap-5">
+      <div className="bg-green sm:absolute sm:top-0 sm:left-1/9 h-[354px] sm:h-full sm:w-105 flex flex-col justify-center items-center gap-7 sm:gap-10">
+        <div className="max-sm:hidden">
           <Logo />
-          <p className="hero-subtitle text-neutral100 text-center">
+        </div>
+        <div className="sm:hidden">
+          <LogoMobile />
+        </div>
+        <div className="flex flex-col gap-5">
+          <p className="text-Paragraph-Medium text-center">
             Handcrafted in Viet Nam since 1650
           </p>
-          <h2 className="hero-title font-bold text-4xl text-neutral100 text-center">
-            BAT TRANG DINNER SET
+          <h2 className="font-semibold text-Heading-8 text-center">
+            BAT TRANG <br /> DINNER SET
           </h2>
-          <Button variant="hero" size="hero">
-            SHOP NOW
-          </Button>
         </div>
+
+        <Button variant="hero" size="hero">
+          <Link to="/shop" prefetch="intent">
+            SHOP NOW
+          </Link>
+        </Button>
       </div>
     </div>
   );

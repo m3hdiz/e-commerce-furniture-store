@@ -2,8 +2,11 @@ import ArrowRight from "~/src/icons/ArrowRight";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { Label } from "./ui/label";
+import { Form, useFetcher } from "react-router";
+import { Textarea } from "./ui/textarea";
 
 export default function GetInTouch() {
+  const fetcher = useFetcher();
   return (
     <div className="px-5 py-10 sm:px-[11vw] sm:py-12.5">
       <section className="flex flex-col justify-center items-center text-center gap-10 sm:gap-12.5 max-w-[1110px] m-auto">
@@ -44,41 +47,54 @@ export default function GetInTouch() {
             </p>
           </div>
         </div>
-        <div className="grid sm:grid-cols-2 gap-x-5 gap-y-7.5 w-full max-w-[822px]">
-          <div className="flex flex-col space-y-3">
-            <Label className="text-left" htmlFor="Message">
-              Name
-            </Label>
-            <Input className="w-full"></Input>
-          </div>
-          <div className="flex flex-col space-y-3">
-            <Label className="text-left" htmlFor="Message">
-              Email
-            </Label>
-            <Input className="w-full"></Input>
-          </div>
-          <div className="flex flex-col space-y-3">
-            <Label className="text-left" htmlFor="Message">
-              Phone
-            </Label>
-            <Input></Input>
-          </div>
-          <div className="flex flex-col space-y-3">
-            <Label className="text-left" htmlFor="Message">
-              Company
-            </Label>
-            <Input></Input>
-          </div>
-          <div className="col-span-full flex flex-col space-y-3">
-            <Label className="text-left" htmlFor="Message">
-              Message
-            </Label>
-            <Input className="h-35" name="Message" id="Message"></Input>
-          </div>
-          <Button variant="solid" className="col-span-full flex items-center">
-            Send message
-            <ArrowRight />
-          </Button>
+        <div className="w-full max-w-[822px]">
+          <fetcher.Form>
+            <div className="grid sm:grid-cols-2 gap-x-5 gap-y-7.5">
+              <div className="flex flex-col space-y-3">
+                <Label className="text-left" htmlFor="Message">
+                  Name
+                </Label>
+                <Input type="text" placeholder="Samatha Clarken"></Input>
+              </div>
+              <div className="flex flex-col space-y-3">
+                <Label className="text-left" htmlFor="Message">
+                  Email
+                </Label>
+                <Input type="email" placeholder="example@youremail.com"></Input>
+              </div>
+              <div className="flex flex-col space-y-3">
+                <Label className="text-left" htmlFor="Message">
+                  Phone
+                </Label>
+                <Input type="tel" placeholder="(123) 456 - 7890"></Input>
+              </div>
+              <div className="flex flex-col space-y-3">
+                <Label className="text-left" htmlFor="Message">
+                  Company
+                </Label>
+                <Input type="text" placeholder="Moon"></Input>
+              </div>
+              <div className="col-span-full flex flex-col space-y-3">
+                <Label className="text-left" htmlFor="Message">
+                  Message
+                </Label>
+                <Textarea
+                  className="h-35"
+                  name="Message"
+                  id="Message"
+                  placeholder="Type your message here..."
+                ></Textarea>
+              </div>
+              <Button
+                type="submit"
+                variant="solid"
+                className="col-span-full flex items-center"
+              >
+                Send message
+                <ArrowRight />
+              </Button>
+            </div>
+          </fetcher.Form>
         </div>
       </section>
     </div>

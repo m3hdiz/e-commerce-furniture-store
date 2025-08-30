@@ -6,69 +6,73 @@ import { Card, CardDescription, CardHeader, CardTitle } from "./ui/card";
 const AboutPageHistory = () => {
   return (
     <div className="md:px-[11vw]">
-      <div className="flex flex-col md:flex-row md:h-[300px]">
-        <Card className="bg-neutral200 md:px-8 border-none shadow-none rounded-none w-full md:w-1/2 justify-center order-2 md:order-1">
-          <CardHeader>
-            <CardTitle className="font-bold text-[28px] text-neutral800 text-center md:text-[20px]  lg:text-[28px]">
-              1910
-            </CardTitle>
-            <CardDescription className="text-center text-neutral700 ">
-              <p className="max-h-[200px] overflow-auto">
-                Lorem ipsum dolor sit amet consectetur adipiscing eli mattis sit
-                phasellus mollis sit aliquam sit nullam neque ultrices.
-              </p>
-            </CardDescription>
-          </CardHeader>
-        </Card>
-        <div className="w-full  md:w-1/2 order-1 md:order-2">
-          <img
-            src={historyAbout}
-            alt="history"
-            className="w-full h-[200px] md:h-full object-cover"
-          />
+      <div className="max-w-[1110px] m-auto">
+        <div className="flex flex-col md:flex-row">
+          <Card className="bg-neutral200 dark:bg-warmBlack md:h-87 w-full md:w-1/2 justify-center px-10 py-10 md:px-15 md:py-16 gap-8 order-2 md:order-1">
+            <CardHeader>
+              <CardTitle className="font-bold text-Heading-7 text-center uppercase pb-6">
+                <h2>1910</h2>
+              </CardTitle>
+              <CardDescription>
+                <p className="text-center text-Paragraph-Medium text-neutral700 dark:text-neutral300">
+                  Lorem ipsum dolor sit amet consectetur adipiscing eli mattis
+                  sit phasellus mollis sit aliquam sit nullam neque ultrices.
+                </p>
+              </CardDescription>
+            </CardHeader>
+          </Card>
+          <div className="w-full  md:w-1/2 order-1 md:order-2">
+            <img
+              src={historyAbout}
+              alt="history"
+              className="w-full h-[200px] md:h-full object-cover"
+            />
+          </div>
         </div>
-      </div>
-      <div className="flex flex-col md:flex-row md:h-[300px]">
-        <div className="w-full md:w-1/2 ">
-          <img
-            src={historyAbout1}
-            alt="history"
-            className="w-full h-[200px] md:h-full object-cover"
-          />
+        <div className="flex flex-col md:flex-row">
+          <div className="w-full md:w-1/2 ">
+            <img
+              src={historyAbout1}
+              alt="history"
+              className="w-full h-[200px] md:h-full object-cover"
+            />
+          </div>
+          <Card className="bg-neutral200 dark:bg-warmBlack md:h-87 w-full md:w-1/2 justify-center px-10 py-10 md:px-15 md:py-16 gap-8">
+            <CardHeader>
+              <CardTitle className="font-bold text-Heading-7 text-center uppercase pb-6">
+                <h2>1990</h2>
+              </CardTitle>
+              <CardDescription>
+                <p className="text-center text-Paragraph-Medium text-neutral700 dark:text-neutral300">
+                  Maecenas sem eros, rutrum vitae risus eget, vulputate aliquam
+                  nisi. dolor sit amet consectetur adipiscing eli mattis sit
+                  phasellus mollis sit aliquam sit
+                </p>
+              </CardDescription>
+            </CardHeader>
+          </Card>
         </div>
-        <Card className="bg-neutral200 md:px-8 border-none shadow-none rounded-none w-full md:w-1/2  justify-center">
-          <CardHeader>
-            <CardTitle className="font-bold text-[28px] text-neutral800 text-center">
-              1990
-            </CardTitle>
-            <CardDescription className="text-center text-neutral700">
-              Maecenas sem eros, rutrum vitae risus eget, vulputate aliquam
-              nisi. dolor sit amet consectetur adipiscing eli mattis sit
-              phasellus mollis sit aliquam sit
-            </CardDescription>
-          </CardHeader>
-        </Card>
-      </div>
-      <div className="flex flex-col md:flex-row md:h-[300px]">
-        <Card className="bg-neutral200 md:px-8 border-none shadow-none rounded-none w-full md:w-1/2 justify-center order-2 md:order-1">
-          <CardHeader>
-            <CardTitle className="font-bold text-[28px] text-neutral800 text-center md:text-[20px]  lg:text-[28px]">
-              2010
-            </CardTitle>
-            <CardDescription className="text-center text-neutral700 ">
-              <p className="max-h-[200px] overflow-auto">
-                Rutrum vitae risus eget, vulputate aliquam nisi ex gravida neque
-                tempus. sit aliquam sit nullam neque ultrices.
-              </p>
-            </CardDescription>
-          </CardHeader>
-        </Card>
-        <div className="w-full  md:w-1/2 order-1 md:order-2">
-          <img
-            src={historyAbout2}
-            alt="history"
-            className="w-full h-[200px] md:h-full object-cover"
-          />
+        <div className="flex flex-col md:flex-row">
+          <Card className="bg-neutral200 dark:bg-warmBlack md:h-87 w-full md:w-1/2 justify-center px-10 py-10 md:px-15 md:py-16 gap-8 order-2 md:order-1">
+            <CardHeader>
+              <CardTitle className="font-bold text-Heading-7 text-center uppercase pb-6">
+                <h2>2010</h2>
+              </CardTitle>
+              <CardDescription>
+                <p className="text-center text-Paragraph-Medium text-neutral700 dark:text-neutral300">
+                  Rutrum vitae risus eget, vulputate aliquam nisi ex gravida
+                  neque tempus. sit aliquam sit nullam neque ultrices.
+                </p>
+              </CardDescription>
+            </CardHeader>
+          </Card>
+          <div className="w-full  md:w-1/2 order-1 md:order-2">
+            <img
+              src={historyAbout2}
+              alt="history"
+              className="w-full md:h-full object-cover"
+            />
+          </div>
         </div>
       </div>
     </div>

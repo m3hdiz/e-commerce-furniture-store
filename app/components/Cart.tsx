@@ -12,8 +12,13 @@ import julo from "~/src/julo-blue-salad-plate.svg";
 import valo from "~/src/valo-matte-white-vase.svg";
 import DeleteIcon from "~/src/icons/DeleteIcon";
 import { CartBreadcrumb } from "./HeaderBreadcrumb";
+import { Button } from "./ui/button";
+import { NavLink } from "react-router";
+import React from "react";
+import { Separator } from "./ui/separator";
+import { Input } from "./ui/input";
 
-const cartItems = [
+const data = [
   {
     id: 1,
     photo: porcelain,
@@ -56,9 +61,31 @@ function calculateCartTotals(items, taxRatePercent: Number) {
 }
 
 const taxRate = 8; // for example, 8% tax
-const totals = calculateCartTotals(cartItems, taxRate);
+const totals = calculateCartTotals(data, taxRate);
 
 export default function Cart() {
+  const [cartItems, setCartItems] = React.useState([...data]);
+
+  const handleIncrement = (id: number) => {
+    setCartItems((prev) =>
+      prev.map((item) =>
+        item.id === id
+          ? { ...item, Quantity: Math.min(item.Quantity + 1, 20) }
+          : item
+      )
+    );
+  };
+
+  const handleDecrement = (id: number) => {
+    setCartItems((prev) =>
+      prev.map((item) =>
+        item.id === id
+          ? { ...item, Quantity: Math.max(item.Quantity - 1, 1) }
+          : item
+      )
+    );
+  };
+
   return (
     <div className="px-5 mt-5 mb-20 sm:px-[11vw]">
       <section className="flex flex-col gap-12.5 justify-center mx-auto max-w-[1110px]">
@@ -102,7 +129,7 @@ export default function Cart() {
                       </button>
                     </TableCell>
                     <TableCell className="h-35 w-30">
-                      <img src={item.photo} alt={item.Product} className="" />
+                      <img src={item.photo} alt={item.Product} />
                     </TableCell>
                     <TableCell>{item.Product}</TableCell>
                     <TableCell>
@@ -111,7 +138,33 @@ export default function Cart() {
                         currency: "USD",
                       }).format(item.Price)}
                     </TableCell>
-                    <TableCell>{item.Quantity}</TableCell>
+                    <TableCell>
+                      <div className="border m-auto border-warmBlack dark:border-neutral600 h-12 w-32.5 flex items-center justify-between px-3">
+                        <button
+                          onClick={() => handleDecrement(item.id)}
+                          disabled={item.Quantity === 1}
+                          className={`text-xl ${
+                            item.Quantity === 1
+                              ? "opacity-50 cursor-not-allowed"
+                              : "hover:text-lightBrown cursor-pointer"
+                          }`}
+                        >
+                          −
+                        </button>
+
+                        <span className="text-Display-2 uppercase font-semibold">
+                          {item.Quantity}
+                        </span>
+
+                        <button
+                          onClick={() => handleIncrement(item.id)}
+                          disabled={item.Quantity === 20}
+                          className={`text-xl ${item.Quantity === 20 ? "opacity-50 cursor-not-allowed" : "hover:text-lightBrown cursor-pointer"}`}
+                        >
+                          +
+                        </button>
+                      </div>
+                    </TableCell>
                     <TableCell className="text-lightBrown">
                       {new Intl.NumberFormat("en-US", {
                         style: "currency",
@@ -121,12 +174,13 @@ export default function Cart() {
                   </TableRow>
                 ))}
               </TableBody>
+              <Separator />
             </Table>
           </div>
           {cartItems.map((item) => (
             <div
               key={item.id}
-              className="md:hidden grid grid-cols-2 gap-y-5 py-7.5 uppercase"
+              className="md:hidden grid grid-cols-2 gap-y-5 uppercase"
             >
               <div className="col-span-2">
                 <button className="cursor-pointer">
@@ -147,7 +201,31 @@ export default function Cart() {
                 }).format(item.Price)}
               </div>
               <p>Quantity:</p>
-              <div className="text-right">{item.Quantity}</div>
+              <div className="border border-warmBlack dark:border-neutral600 h-12 w-32.5 flex items-center justify-between px-3 justify-self-end">
+                <button
+                  onClick={() => handleDecrement(item.id)}
+                  disabled={item.Quantity === 1}
+                  className={`text-xl ${
+                    item.Quantity === 1
+                      ? "opacity-50 cursor-not-allowed"
+                      : "hover:text-lightBrown cursor-pointer"
+                  }`}
+                >
+                  −
+                </button>
+
+                <span className="text-Display-2 uppercase font-semibold">
+                  {item.Quantity}
+                </span>
+
+                <button
+                  onClick={() => handleIncrement(item.id)}
+                  disabled={item.Quantity === 20}
+                  className={`text-xl ${item.Quantity === 20 ? "opacity-50 cursor-not-allowed" : "hover:text-lightBrown cursor-pointer"}`}
+                >
+                  +
+                </button>
+              </div>
               <p>subtotal:</p>
               <div className="text-lightBrown text-right">
                 {new Intl.NumberFormat("en-US", {
@@ -155,16 +233,31 @@ export default function Cart() {
                   currency: "USD",
                 }).format(item.subtotal)}
               </div>
+              <Separator className="bg-foreground col-span-2" />
             </div>
           ))}
-          <div className="flex flex-col gap-2.5 md:flex-row md:justify-between">
-            <div className="flex gap-2.5 max-md:hidden">
-              <input type="text" />
-              <button>Apply Coupon</button>
+          <div className="flex flex-col gap-2.5 md:flex-row md:justify-between md:h-12">
+            <div className="flex gap-2.5 max-md:hidden w-[382px]">
+              <Input
+                placeholder="Coupon code"
+                type="text"
+                className="w-[206px] h-full"
+              />
+              <Button variant="solid" className="h-full">
+                Apply Coupon
+              </Button>
             </div>
-            <input className="md:hidden" type="text" />
-            <button className="md:hidden">Apply Coupon</button>
-            <button className="">Update cart</button>
+            <Input
+              placeholder="Coupon code"
+              className="md:hidden"
+              type="text"
+            />
+            <Button variant="solid" className="md:hidden w-full h-full">
+              Apply Coupon
+            </Button>
+            <Button variant="solid" className="h-full w-55">
+              Update cart
+            </Button>
           </div>
           <div className="md:grid md:grid-cols-2">
             <div className="px-12.5 py-10 bg-warmBlack text-neutral100 flex flex-col gap-y-10 md:col-start-2">
@@ -185,9 +278,18 @@ export default function Cart() {
                   }).format(totals.total)}
                 </p>
               </div>
-              <button className="w-full border border-neutral400">
-                Proceed to checkout
-              </button>
+              <NavLink to="/checkout" prefetch="intent">
+                {({ isPending }) => (
+                  <Button
+                    variant="newOutline"
+                    className="w-full h-12 border-neutral400"
+                  >
+                    {isPending
+                      ? "Proceeding to checkout..."
+                      : "Proceed to checkout"}
+                  </Button>
+                )}
+              </NavLink>
             </div>
           </div>
         </div>

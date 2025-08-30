@@ -1,30 +1,24 @@
 import ProductCard from "./ProductCard";
-import { Carousel, CarouselContent, CarouselItem } from "./ui/carousel";
+import type { Product } from "../models/types";
 
-const SimilarItems = () => {
+interface SimilarItemsProps {
+  products: Product[];
+}
+
+const SimilarItems: React.FC<SimilarItemsProps> = ({ products }) => {
   return (
-    <div className="md:px-[11vw] py-6">
-      <h2 className="font-bold text-2xl sm:text-4xl text-neutral-800 mb-4 px-[5vw] md:px-0">
-        SIMILAR ITEMS
-      </h2>
-      <Carousel opts={{ align: "start" }} className="w-full">
-        <CarouselContent>
-          {Array.from({ length: 10 }).map((_, index) => (
-            <CarouselItem
-              key={index}
-              className="
-                shrink-0
-                basis-[85%]     
-                sm:basis-[60%]   
-                md:basis-[40%]   
-                lg:basis-[25%] 
-               "
-            >
-              <ProductCard />
-            </CarouselItem>
+    <div className="py-10 px-5 md:py-20 md:px-[11vw]">
+      <div className="max-w-[1110px] m-auto">
+        <h2 className="font-semibold text-Heading-7 uppercase pb-12">
+          SIMILAR ITEMS
+        </h2>
+
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-x-2.5 md:gap-x-7.5 gap-y-10">
+          {products.slice(8, 12).map((product) => (
+            <ProductCard key={product.id} {...product} />
           ))}
-        </CarouselContent>
-      </Carousel>
+        </div>
+      </div>
     </div>
   );
 };

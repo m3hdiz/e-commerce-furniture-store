@@ -1,99 +1,111 @@
 import * as React from "react";
-import { Card, CardContent } from "./ui/card";
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-  type CarouselApi,
-} from "./ui/carousel";
-import { cn } from "~/lib/utils";
 import ProductCard from "./ProductCard";
+import { Button } from "./ui/button";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import SortBy from "./SortBy";
+import type { Product } from "../models/types";
 
-export default function ProductPagination() {
-  const [api, setApi] = React.useState<CarouselApi>();
-  const [current, setCurrent] = React.useState(0);
-  const [count, setCount] = React.useState(0);
-  const [isDesktop, setIsDesktop] = React.useState(true);
+interface PaginationProps {
+  products: Product[];
+}
+
+function useItemsPerPage() {
+  const [itemsPerPage, setItemsPerPage] = React.useState(8); // default for SSR (mobile)
 
   React.useEffect(() => {
-    const handleResize = () => setIsDesktop(window.innerWidth >= 768); // md breakpoint
-    handleResize();
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
+    const checkScreen = () => {
+      if (window.matchMedia("(min-width: 768px)").matches) {
+        setItemsPerPage(9); // md and up
+      } else {
+        setItemsPerPage(8); // mobile
+      }
+    };
+
+    checkScreen(); // run on mount
+    window.addEventListener("resize", checkScreen);
+
+    return () => window.removeEventListener("resize", checkScreen);
   }, []);
 
-  React.useEffect(() => {
-    if (!api) return;
+  return itemsPerPage;
+}
 
-    setCount(api.scrollSnapList().length);
-    setCurrent(api.selectedScrollSnap() + 1);
-
-    api.on("select", () => {
-      setCurrent(api.selectedScrollSnap() + 1);
-    });
-  }, [api]);
-
-  const handleThumbClick = React.useCallback(
-    (index: number) => {
-      api?.scrollTo(index);
-    },
-    [api]
+export default function ProductPagination({
+  products,
+}: PaginationProps): React.ReactElement {
+  const [currentPage, setCurrentPage] = React.useState(1);
+  const itemsPerPage = useItemsPerPage();
+  const [sortBy, setSortBy] = React.useState<"Name" | "Price" | "Brand">(
+    "Name"
   );
 
-  const cardsPerSlide = isDesktop ? 9 : 8;
+  // Calculate indexes
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+
+  const totalPages = Math.ceil(products.length / itemsPerPage);
+
+  // ✅ Sort products before paginating
+  const sortedProducts = [...products].sort((a, b) => {
+    if (sortBy === "Name") return a.name.localeCompare(b.name);
+    if (sortBy === "Price") return a.price - b.price;
+    if (sortBy === "Brand") return a.description!.localeCompare(b.description!); // assuming "Brand" is inside desc for now
+    return 0;
+  });
+
+  // Slice products for current page
+  const currentItems = sortedProducts.slice(indexOfFirstItem, indexOfLastItem);
+
+  // ⬆️ Scroll to top whenever page changes
+  React.useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, [currentPage, sortBy]);
 
   return (
-    <div className="md:w-3/4">
+    <div className="md:w-full">
       <div className="flex items-center gap-2 sm:text-sm text-xs justify-end mb-1">
         <p className="-mt-20 md:mt-0">Sort by:</p>
-        <SortBy />
+        {/* ✅ Use SortBy component */}
+        <SortBy value={sortBy} onChange={setSortBy} />
       </div>
+      {/* Products grid */}
+      <div className="grid grid-cols-2 md:grid-cols-3 gap-x-2.5 md:gap-x-7.5 gap-y-10">
+        {currentItems.map((product) => (
+          <ProductCard key={product.id} {...product} />
+        ))}
+      </div>
+      {/* Pagination controls */}
+      <div className="flex justify-end items-center gap-2 mt-10">
+        <Button
+          variant="ghost"
+          disabled={currentPage === 1}
+          onClick={() => setCurrentPage((prev) => prev - 1)}
+        >
+          <ChevronLeft />
+        </Button>
 
-      <Carousel setApi={setApi} className="w-full">
-        <CarouselContent>
-          {Array.from({ length: 10 }).map((_, index) => (
-            <CarouselItem key={index}>
-              <div className={cn("grid grid-cols-2 md:grid-cols-3 gap-2")}>
-                {Array.from({ length: cardsPerSlide }).map((_, cardIndex) => (
-                  <ProductCard key={cardIndex} />
-                ))}
-              </div>
-            </CarouselItem>
-          ))}
-        </CarouselContent>
-      </Carousel>
-      <Carousel className="w-2/5 mx-auto md:mr-[4vw] mb-8">
-        <CarouselContent className="flex">
-          {Array.from({ length: count }).map((_, index) => (
-            <CarouselItem
-              key={index}
-              className={cn(
-                "basis-1/5 cursor-pointer",
-                current === index + 1 ? "opacity-100" : "opacity-50"
-              )}
-              onClick={() => handleThumbClick(index)}
-            >
-              <Card
-                className={cn(
-                  "py-1 px-[2vw] rounded-none flex justify-center items-center",
-                  current === index + 1
-                    ? "bg-neutral800 text-white"
-                    : "bg-white text-neutral800"
-                )}
-              >
-                <CardContent className="p-0 flex aspect-square items-center justify-center">
-                  <div className="text-sm font-semibold">{index + 1}</div>
-                </CardContent>
-              </Card>
-            </CarouselItem>
-          ))}
-        </CarouselContent>
-        <CarouselPrevious className="border-none" />
-        <CarouselNext className="border-none" />
-      </Carousel>
+        {[...Array(totalPages)].map((_, index) => (
+          <button
+            key={index}
+            onClick={() => setCurrentPage(index + 1)}
+            className={`size-9 ${
+              currentPage === index + 1
+                ? "bg-warmBlack text-background dark:text-foreground"
+                : "bg-background hover:ring"
+            }`}
+          >
+            {index + 1}
+          </button>
+        ))}
+
+        <Button
+          variant="ghost"
+          disabled={currentPage === totalPages}
+          onClick={() => setCurrentPage((prev) => prev + 1)}
+        >
+          <ChevronRight />
+        </Button>
+      </div>
     </div>
   );
 }

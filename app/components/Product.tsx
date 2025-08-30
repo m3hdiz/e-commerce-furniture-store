@@ -19,31 +19,67 @@ import {
   Twitter,
 } from "~/src/icons/SocialIcons";
 import { ProductBreadcrumb } from "./HeaderBreadcrumb";
+import { Button } from "./ui/button";
 
-export default function Product() {
-  const product = {
-    id: 1,
-    title: "Marin White Dinner Plate",
-    price: 35,
-    originalPrice: 50,
-    color: [
-      { name: "Blue", code: "#A1B8BE" },
-      { name: "White", code: "#FFFFFF" },
-      { name: "Orange", code: "#C88242" },
-      { name: "Black", code: "#212F39" },
-      { name: "Pink", code: "#DCB9A8" },
-      { name: "Green", code: "#A7B2A3" },
-    ],
-    rating: 4,
-    reviews: 1256,
-    stock: "in stock",
-    quantity: 1,
-    thumbnail: thumb,
-    photos: [A, B, C, D, E],
-  };
-  const [selectedColor, setSelectedColor] = React.useState<string>(
-    product.color[0].name
-  );
+interface Review {
+  id: string;
+  createdAt: Date;
+  updatedAt: Date;
+  rating: number;
+  authorId: string;
+  comment: string | null;
+  productId: string;
+}
+
+type ProductColor = {
+  productId: string;
+  colorId: string;
+};
+
+type p = {
+  price: number;
+  originalPrice: number;
+  description: string | null;
+  name: string;
+  id: string;
+  createdAt: Date;
+  updatedAt: Date;
+  categoryId: string;
+  discountPercent: number;
+  imageUrl: string | null;
+  rating: number;
+  stock: number;
+  Review: Review[];
+  ProductColor: ProductColor[];
+};
+
+interface ProductProps {
+  product: p;
+}
+
+export const Product: React.FC<ProductProps> = ({ product }) => {
+  // const product = {
+  //   id: 1,
+  //   title: "Marin White Dinner Plate",
+  //   price: 35,
+  //   originalPrice: 50,
+  //   color: [
+  //     { name: "Blue", code: "#A1B8BE" },
+  //     { name: "White", code: "#FFFFFF" },
+  //     { name: "Orange", code: "#C88242" },
+  //     { name: "Black", code: "#212F39" },
+  //     { name: "Pink", code: "#DCB9A8" },
+  //     { name: "Green", code: "#A7B2A3" },
+  //   ],
+  //   rating: 4,
+  //   reviews: 1256,
+  //   stock: "in stock",
+  //   thumbnail: thumb,
+  //   photos: [A, B, C, D, E],
+  // };
+  // const [selectedColor, setSelectedColor] = React.useState<string>(
+  //   product.color[0].name
+  // );
 
   const [quantity, setQuantity] = React.useState(1);
 
@@ -62,20 +98,20 @@ export default function Product() {
   return (
     <div className="px-5 py-5 sm:px-[11vw]">
       <section className="flex flex-col gap-10 max-w-[1110px] m-auto">
-        <ProductBreadcrumb title={product.title} />
+        <ProductBreadcrumb title={product.name} />
         <div className="grid md:grid-cols-2 gap-y-10 md:gap-x-15">
           <div className="flex flex-col gap-8 max-w-[516px]">
-            <img src={product.thumbnail} alt={product.title} />
+            <img src={product.imageUrl!} alt={product.name} />
             <div className="flex gap-1 h-25 overflow-x-auto">
-              {product.photos.map((photo, index) => (
+              {/* {product.photos.map((photo, index) => (
                 <img key={index} src={photo} alt="" />
-              ))}
+              ))} */}
             </div>
           </div>
           <div className="flex flex-col gap-12 pt-2.5 pb-7.5">
             <div className="flex flex-col gap-5">
               <p className="text-Display-5 font-semibold uppercase">
-                {product.title}
+                {product.name}
               </p>
               <div className="flex gap-10">
                 <div className="flex gap-4 text-Paragraph-Medium">
@@ -86,11 +122,16 @@ export default function Product() {
                         <span key={i}>{i < product.rating ? "★" : "☆"}</span>
                       ))}
                   </p>
-                  <p>({product.reviews} Reviews)</p>
+                  <p>({product.Review.length} Reviews)</p>
                 </div>
                 <div className="text-Paragraph-Medium">
-                  Stock:{" "}
-                  <span className="text-lightBrown">{product.stock}</span>
+                  {product.stock === 0 ? (
+                    <span className="text-red-500">Out of stock</span>
+                  ) : (
+                    <>
+                      Stock: <span className="text-lightBrown">In stock </span>
+                    </>
+                  )}
                 </div>
               </div>
               <div className="flex gap-4 text-Display-6">
@@ -113,9 +154,9 @@ export default function Product() {
               </div>
             </div>
             <div className="flex flex-col gap-4">
-              <div>Color: {selectedColor}</div>
+              {/* <div>Color: {selectedColor}</div> */}
               <div className="flex items-center gap-1">
-                {product.color.map((color, index) => (
+                {/* {product.color.map((color, index) => (
                   <div
                     key={index}
                     className={`cursor-pointer p-1 ${selectedColor === color.name ? "border-2 border-warmBlack dark:border-neutral600" : ""}`}
@@ -131,7 +172,7 @@ export default function Product() {
                       }}
                     ></div>
                   </div>
-                ))}
+                ))} */}
               </div>
             </div>
             <div className="space-y-2.5">
@@ -161,17 +202,27 @@ export default function Product() {
                     +
                   </button>
                 </div>
-                <button className="h-12 w-full border text-Display-2 uppercase font-semibold">
-                  ADD TO CART
-                </button>
+                <div className="w-full">
+                  <Button variant="solid" className="h-12 w-full">
+                    ADD TO CART
+                  </Button>
+                </div>
               </div>
               <div className="flex items-center gap-2.5">
-                <button className="border border-warmBlack dark:border-neutral600 text-Display-2 uppercase font-semibold h-12 w-full flex items-center justify-center px-3">
-                  buy now
-                </button>
-                <button className="border border-warmBlack dark:border-neutral600 text-Display-2 uppercase font-semibold h-12 w-12 flex items-center justify-center">
-                  <Heart />
-                </button>
+                <div className="w-full">
+                  <Button
+                    size="solid"
+                    variant="newOutline"
+                    className="h-12 w-full m-auto px-3"
+                  >
+                    buy now
+                  </Button>
+                </div>
+                <div>
+                  <Button variant="newOutline" className="h-12 w-12 m-auto">
+                    <Heart iconColor="warmBlack" />
+                  </Button>
+                </div>
               </div>
               {quantity === 20 && (
                 <p className="text-red-500 animate-bounce text-sm">
@@ -246,4 +297,4 @@ export default function Product() {
       </section>
     </div>
   );
-}
+};

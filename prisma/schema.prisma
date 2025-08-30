@@ -23,8 +23,143 @@ model State {
   @@unique([name, countryId])
 }
 
-model Users {
-  id         String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  created_at DateTime @default(dbgenerated("(now() AT TIME ZONE 'utc+3:30'::text)")) @db.Timestamptz(6)
-  name       String
+model Address {
+  id         String  @id @default(dbgenerated("gen_random_uuid()"))
+  street     String
+  city       String
+  state      String
+  country    String
+  userId     String
+  company    String?
+  orderNotes String?
+  zipCode    String?
+  User       User    @relation(fields: [userId], references: [id])
+  Order      Order[]
+}
+
+model Cart {
+  id       String     @id
+  userId   String     @unique
+  User     User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  CartItem CartItem[]
+}
+
+model CartItem {
+  id        String  @id
+  cartId    String
+  productId String
+  quantity  Int     @default(1)
+  Cart      Cart    @relation(fields: [cartId], references: [id], onDelete: Cascade)
+  Product   Product @relation(fields: [productId], references: [id])
+}
+
+model Category {
+  id        String    @id @default(dbgenerated("gen_random_uuid()"))
+  name      String    @unique
+  createdAt DateTime  @default(now())
+  updatedAt DateTime
+  Product   Product[]
+}
+
+model Color {
+  id           String         @id @default(dbgenerated("gen_random_uuid()"))
+  name         String         @unique
+  ProductColor ProductColor[]
+}
+
+model Favorite {
+  id        String  @id @default(dbgenerated("gen_random_uuid()"))
+  userId    String
+  productId String
+  Product   Product @relation(fields: [productId], references: [id])
+  User      User    @relation(fields: [userId], references: [id])
+
+  @@unique([userId, productId])
+}
+
+model Order {
+  id        String      @id
+  userId    String
+  total     Decimal     @default(0.0)
+  status    OrderStatus @default(PENDING)
+  createdAt DateTime    @default(now())
+  addressId String
+  Address   Address     @relation(fields: [addressId], references: [id])
+  User      User        @relation(fields: [userId], references: [id])
+  OrderItem OrderItem[]
+}
+
+model OrderItem {
+  id        String  @id
+  orderId   String
+  productId String
+  quantity  Int     @default(1)
+  Order     Order   @relation(fields: [orderId], references: [id])
+  Product   Product @relation(fields: [productId], references: [id])
+}
+
+model Product {
+  id              String         @id @default(dbgenerated("gen_random_uuid()"))
+  name            String
+  description     String?
+  price           Decimal        @default(0.0)
+  createdAt       DateTime       @default(now())
+  updatedAt       DateTime
+  categoryId      String
+  discountPercent Float          @default(0)
+  imageUrl        String?
+  originalPrice   Decimal        @default(0.0)
+  rating          Float          @default(0)
+  stock           Int
+  CartItem        CartItem[]
+  Favorite        Favorite[]
+  OrderItem       OrderItem[]
+  Category        Category       @relation(fields: [categoryId], references: [id])
+  ProductColor    ProductColor[]
+  Review          Review[]
+}
+
+model ProductColor {
+  productId String
+  colorId   String
+  Color     Color   @relation(fields: [colorId], references: [id])
+  Product   Product @relation(fields: [productId], references: [id])
+
+  @@id([productId, colorId])
+}
+
+model Review {
+  id        String   @id @default(dbgenerated("gen_random_uuid()"))
+  createdAt DateTime @default(now())
+  updatedAt DateTime
+  authorId  String
+  rating    Float
+  comment   String?
+  productId String
+  User      User     @relation(fields: [authorId], references: [id])
+  Product   Product  @relation(fields: [productId], references: [id])
+}
+
+model User {
+  id        String     @id @default(dbgenerated("gen_random_uuid()"))
+  email     String     @unique
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  firstName String?
+  lastName  String?
+  password  String
+  phone     String?
+  Address   Address[]
+  Cart      Cart?
+  Favorite  Favorite[]
+  Order     Order[]
+  Review    Review[]
+}
+
+enum OrderStatus {
+  PENDING
+  PAID
+  SHIPPED
+  DELIVERED
+  CANCELLED
 }
