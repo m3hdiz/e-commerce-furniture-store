@@ -12,9 +12,10 @@ const NewArrivals: React.FC<NewArrivalsProps> = ({ products }) => {
           DISCOVER NEW ARRIVALS
         </h2>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-x-2.5 md:gap-x-7.5 gap-y-10">
-          {products.slice(0, 4).map((product) => (
-            <ProductCard key={product.id} {...product} />
-          ))}
+          {products &&
+            products
+              .slice(0, 4)
+              .map((product) => <ProductCard key={product.id} {...product} />)}
         </div>
       </div>
     </div>

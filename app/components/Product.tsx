@@ -49,8 +49,8 @@ type p = {
   imageUrl: string | null;
   rating: number;
   stock: number;
-  Review: Review[];
-  ProductColor: ProductColor[];
+  reviews: Review[];
+  colors: ProductColor[];
 };
 
 interface ProductProps {
@@ -122,7 +122,7 @@ export const Product: React.FC<ProductProps> = ({ product }) => {
                         <span key={i}>{i < product.rating ? "★" : "☆"}</span>
                       ))}
                   </p>
-                  <p>({product.Review.length} Reviews)</p>
+                  <p>({product.reviews.length} Reviews)</p>
                 </div>
                 <div className="text-Paragraph-Medium">
                   {product.stock === 0 ? (
