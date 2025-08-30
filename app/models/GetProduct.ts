@@ -5,7 +5,11 @@ export default async function GetProduct(id: string) {
     where: { id },
     include: {
       reviews: true,
-      colors: true,
+      colors: {
+        include: {
+          color: true,
+        },
+      },
     },
   });
 

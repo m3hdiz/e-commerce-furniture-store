@@ -78,7 +78,7 @@ export const Product: React.FC<ProductProps> = ({ product }) => {
   //   photos: [A, B, C, D, E],
   // };
   // const [selectedColor, setSelectedColor] = React.useState<string>(
-  //   product.color[0].name
+  //   product.colors
   // );
 
   const [quantity, setQuantity] = React.useState(1);
@@ -154,12 +154,12 @@ export const Product: React.FC<ProductProps> = ({ product }) => {
               </div>
             </div>
             <div className="flex flex-col gap-4">
-              {/* <div>Color: {selectedColor}</div> */}
+              {/* <div>Color: {selectedColor}</div>
               <div className="flex items-center gap-1">
-                {/* {product.color.map((color, index) => (
+                {product.colors.map((c, index) => (
                   <div
-                    key={index}
-                    className={`cursor-pointer p-1 ${selectedColor === color.name ? "border-2 border-warmBlack dark:border-neutral600" : ""}`}
+                    key={c.colorId}
+                    className={`cursor-pointer p-1 ${selectedColor === c.colorId ? "border-2 border-warmBlack dark:border-neutral600" : ""}`}
                     onClick={() => setSelectedColor(color.name)}
                   >
                     <div
@@ -172,8 +172,8 @@ export const Product: React.FC<ProductProps> = ({ product }) => {
                       }}
                     ></div>
                   </div>
-                ))} */}
-              </div>
+                ))} 
+               </div> */}
             </div>
             <div className="space-y-2.5">
               <div className="flex items-center gap-2.5">
