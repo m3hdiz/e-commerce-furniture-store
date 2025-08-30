@@ -17,7 +17,6 @@ export default [
       index("components/BillingDetails.tsx"),
     ]),
     route("item/:id", "routes/ProductPage.tsx"),
-    route("login", "routes/Login.tsx"),
     route("favorites", "routes/Favorites.tsx"),
   ]),
 ] satisfies RouteConfig;
