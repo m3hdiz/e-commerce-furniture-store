@@ -20,7 +20,12 @@ import {
   SheetClose,
 } from "./ui/sheet";
 
-export default function NavBar() {
+type NavBarProps = {
+  userId: string | null;
+  fullName: string | null;
+};
+
+export default function NavBar({ userId, fullName }: NavBarProps) {
   return (
     <nav className="sticky top-0 z-50 bg-background dark:bg-warmBlack">
       <div className="px-[11vw]">
@@ -119,7 +124,7 @@ export default function NavBar() {
                 <Search />
               </li>
               <li>
-                <SigningTab />
+                <SigningTab userId={userId} fullName={fullName} />
               </li>
               <li>
                 <NavLink to="favorites">

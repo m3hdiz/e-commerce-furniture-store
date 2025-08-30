@@ -1,6 +1,4 @@
-import { Label } from "./ui/label";
-import { useFetcher, type ActionFunctionArgs } from "react-router";
-import { Input } from "./ui/input";
+import { useActionData, useFetcher } from "react-router";
 import { Button } from "./ui/button";
 import {
   Card,
@@ -10,9 +8,25 @@ import {
   CardContent,
   CardFooter,
 } from "./ui/card";
+import TextField from "./TextField";
+import { useState } from "react";
 
 export default function SigninForm() {
   const SigninFetcher = useFetcher();
+  const actionData = useActionData();
+
+  const [formData, setFormData] = useState({
+    email: actionData?.fields?.email || "",
+    name: actionData?.fields?.name || "",
+    password: actionData?.fields?.password || "",
+    confirmPassword: actionData?.fields?.confirmPassword || "",
+  });
+  const handleChangeInput = (
+    event: React.ChangeEvent<HTMLInputElement>,
+    field: string
+  ) => {
+    setFormData((form) => ({ ...form, [field]: event.target.value }));
+  };
 
   return (
     <Card className="gap-6 my-3">
@@ -30,26 +44,28 @@ export default function SigninForm() {
           id="signin-form"
           className="grid gap-6"
         >
-          <div className="grid gap-3">
-            <Label htmlFor="email">Email</Label>
-            <Input
-              id="email"
-              name="email"
-              type="email"
-              placeholder="Your Email"
-              required
-            />
-          </div>
-          <div className="grid gap-3">
-            <Label htmlFor="password">Password</Label>
-            <Input
-              id="password"
-              name="password"
-              type="password"
-              placeholder="Your Password"
-              required
-            />
-          </div>
+          <TextField
+            htmlFor="email-reg"
+            id="email"
+            name="email"
+            type="email"
+            placeholder="Your Email"
+            label="Email"
+            value={formData.email}
+            onChange={(e) => handleChangeInput(e, "email")}
+            required
+          />
+          <TextField
+            htmlFor="password-reg"
+            id="password"
+            name="password"
+            type="password"
+            placeholder="Your Password"
+            label="Password"
+            value={formData.password}
+            onChange={(e) => handleChangeInput(e, "password")}
+            required
+          />
         </SigninFetcher.Form>
       </CardContent>
       <CardFooter>

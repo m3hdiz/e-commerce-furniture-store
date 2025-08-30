@@ -1,4 +1,4 @@
-import { prisma } from "../db.server";
+import { prisma } from "../utils/db.server";
 
 export default async function Countries() {
   const data = await prisma.country.findMany({

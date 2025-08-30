@@ -3,14 +3,14 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "react-router build",
-    "dev": "react-router dev",
+    "build": "rm -rf .react-router && react-router build",
+    "dev": "rm -rf .react-router && react-router dev",
     "start": "react-router-serve ./build/server/index.js",
     "typecheck": "react-router typegen && tsc"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.1",
-    "@prisma/client": "^6.13.0",
+    "@prisma/client": "^6.15.0",
     "@radix-ui/react-accordion": "^1.2.12",
     "@radix-ui/react-checkbox": "^1.3.3",
     "@radix-ui/react-dialog": "^1.1.14",
@@ -35,9 +35,12 @@
     "react-dom": "^19.1.0",
     "react-hook-form": "^7.62.0",
     "react-router": "^7.7.1",
+    "remix-auth": "^4.2.0",
+    "remix-auth-form": "^3.0.0",
     "remix-themes": "^2.0.4",
     "tailwind-merge": "^3.3.1",
-    "zod": "^4.0.16"
+    "zod": "^4.0.16",
+    "zustand": "^5.0.8"
   },
   "devDependencies": {
     "@react-router/dev": "^7.7.1",

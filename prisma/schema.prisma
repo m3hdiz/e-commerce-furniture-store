@@ -23,137 +23,124 @@ model State {
   @@unique([name, countryId])
 }
 
-model Address {
-  id         String  @id @default(dbgenerated("gen_random_uuid()"))
-  street     String
-  city       String
-  state      String
-  country    String
-  userId     String
-  company    String?
-  orderNotes String?
-  zipCode    String?
-  User       User    @relation(fields: [userId], references: [id])
-  Order      Order[]
+
+model User {
+  id  String @id @default(dbgenerated("gen_random_uuid()"))
+  email String @unique
+  firstName String? 
+  lastName String? 
+  phone String?
+  password String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  reviews  Review[] 
+  favorites Favorite[] 
+  address   Address[]
+  orders    Order[]
+  cart      Cart?
 }
 
-model Cart {
-  id       String     @id
-  userId   String     @unique
-  User     User       @relation(fields: [userId], references: [id], onDelete: Cascade)
-  CartItem CartItem[]
-}
-
-model CartItem {
-  id        String  @id
-  cartId    String
+model Review{
+  id   String @id  @default(dbgenerated("gen_random_uuid()"))
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  authorId String 
+  author User @relation(fields: [authorId],references: [id])
+  rating Float 
+  comment   String?
   productId String
-  quantity  Int     @default(1)
-  Cart      Cart    @relation(fields: [cartId], references: [id], onDelete: Cascade)
-  Product   Product @relation(fields: [productId], references: [id])
+  product   Product @relation(fields: [productId], references: [id])
 }
-
-model Category {
-  id        String    @id @default(dbgenerated("gen_random_uuid()"))
-  name      String    @unique
-  createdAt DateTime  @default(now())
-  updatedAt DateTime
-  Product   Product[]
-}
-
-model Color {
-  id           String         @id @default(dbgenerated("gen_random_uuid()"))
-  name         String         @unique
-  ProductColor ProductColor[]
-}
-
-model Favorite {
-  id        String  @id @default(dbgenerated("gen_random_uuid()"))
-  userId    String
+model Favorite{
+  id   String @id  @default(dbgenerated("gen_random_uuid()"))
+  userId String 
+  user User @relation(fields: [userId],references: [id])
   productId String
-  Product   Product @relation(fields: [productId], references: [id])
-  User      User    @relation(fields: [userId], references: [id])
-
+  product   Product @relation(fields: [productId], references: [id])
   @@unique([userId, productId])
 }
 
-model Order {
-  id        String      @id
-  userId    String
-  total     Decimal     @default(0.0)
-  status    OrderStatus @default(PENDING)
-  createdAt DateTime    @default(now())
-  addressId String
-  Address   Address     @relation(fields: [addressId], references: [id])
-  User      User        @relation(fields: [userId], references: [id])
-  OrderItem OrderItem[]
-}
-
-model OrderItem {
-  id        String  @id
-  orderId   String
-  productId String
-  quantity  Int     @default(1)
-  Order     Order   @relation(fields: [orderId], references: [id])
-  Product   Product @relation(fields: [productId], references: [id])
-}
-
 model Product {
-  id              String         @id @default(dbgenerated("gen_random_uuid()"))
-  name            String
-  description     String?
-  price           Decimal        @default(0.0)
-  createdAt       DateTime       @default(now())
-  updatedAt       DateTime
-  categoryId      String
-  discountPercent Float          @default(0)
-  imageUrl        String?
-  originalPrice   Decimal        @default(0.0)
-  rating          Float          @default(0)
-  stock           Int
-  CartItem        CartItem[]
-  Favorite        Favorite[]
-  OrderItem       OrderItem[]
-  Category        Category       @relation(fields: [categoryId], references: [id])
-  ProductColor    ProductColor[]
-  Review          Review[]
+  id          String     @id @default(dbgenerated("gen_random_uuid()"))
+  name        String
+  description String?
+  price       Decimal @default(0.0)
+  originalPrice Decimal @default(0.0)
+  discountPercent Float  @default(0)
+  imageUrl       String? 
+  rating  Float   @default(0)
+  stock Int
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+
+  reviews     Review[]
+  favorites   Favorite[]
+
+  colors      ProductColor[]
+
+  categoryId  String
+  category    Category   @relation(fields: [categoryId], references: [id])
+
+  orderItem   OrderItem[]
+  cartItems   CartItem[]
 }
+
+model Color {
+  id       String         @id @default(dbgenerated("gen_random_uuid()"))
+  name     String         @unique 
+  code     String         @unique
+  products ProductColor[]
+}
+
 
 model ProductColor {
   productId String
   colorId   String
-  Color     Color   @relation(fields: [colorId], references: [id])
-  Product   Product @relation(fields: [productId], references: [id])
+
+  product Product @relation(fields: [productId], references: [id])
+  color   Color   @relation(fields: [colorId], references: [id])
 
   @@id([productId, colorId])
 }
 
-model Review {
-  id        String   @id @default(dbgenerated("gen_random_uuid()"))
-  createdAt DateTime @default(now())
-  updatedAt DateTime
-  authorId  String
-  rating    Float
-  comment   String?
-  productId String
-  User      User     @relation(fields: [authorId], references: [id])
-  Product   Product  @relation(fields: [productId], references: [id])
-}
-
-model User {
+model Category {
   id        String     @id @default(dbgenerated("gen_random_uuid()"))
-  email     String     @unique
+  name      String     @unique
   createdAt DateTime   @default(now())
   updatedAt DateTime   @updatedAt
-  firstName String?
-  lastName  String?
-  password  String
-  phone     String?
-  Address   Address[]
-  Cart      Cart?
-  Favorite  Favorite[]
-  Order     Order[]
-  Review    Review[]
+
+  products  Product[]
+}
+
+model Address {
+  id        String   @id @default(dbgenerated("gen_random_uuid()"))
+  street    String
+  city      String
+  state     String
+  zipCode String?
+  country   String
+  company String?
+  orderNotes String?
+
+  userId    String   
+  user      User     @relation(fields: [userId], references: [id])
+  orders Order[] @relation("OrderAddress")
+}
+
+model Cart {
+  id        String     @id @default(cuid())
+  userId    String     @unique
+  user   User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  cartItems CartItem[]
+}
+
+model CartItem {
+  id        String  @id @default(cuid())
+  cartId    String
+  productId String
+  quantity  Int     @default(1)
+  cart      Cart    @relation(fields: [cartId], references: [id], onDelete: Cascade)
+  product   Product @relation(fields: [productId], references: [id])
 }
 
 enum OrderStatus {
@@ -162,4 +149,26 @@ enum OrderStatus {
   SHIPPED
   DELIVERED
   CANCELLED
+}
+
+model Order {
+  id         String      @id @default(cuid())
+  userId     String
+  user       User        @relation(fields: [userId], references: [id])
+  total      Decimal @default(0.0)
+  status     OrderStatus     @default(PENDING)
+  createdAt  DateTime    @default(now())
+  orderItems OrderItem[]
+  addressId  String
+  address    Address     @relation("OrderAddress",fields: [addressId], references: [id])
+
+}
+
+model OrderItem {
+  id        String  @id @default(cuid())
+  orderId   String
+  productId String
+  quantity  Int     @default(1)
+  order     Order   @relation(fields: [orderId], references: [id])
+  product   Product @relation(fields: [productId], references: [id])
 }

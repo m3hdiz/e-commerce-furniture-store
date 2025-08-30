@@ -1,4 +1,4 @@
-import { prisma } from "../db.server";
+import { prisma } from "../utils/db.server";
 
 export default async function GetProduct(id: string) {
   const data = await prisma.product.findUnique({

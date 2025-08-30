@@ -1,6 +1,4 @@
-import { Label } from "./ui/label";
 import { useFetcher } from "react-router";
-import { Input } from "./ui/input";
 import { Button } from "./ui/button";
 import {
   Card,
@@ -10,9 +8,25 @@ import {
   CardContent,
   CardFooter,
 } from "./ui/card";
+import TextField from "./TextField";
+import { useActionData } from "react-router";
+import { useState } from "react";
 
 export default function SignupForm() {
   const SignupFetcher = useFetcher();
+  const actionData = useActionData();
+  const [formData, setFormData] = useState({
+    email: actionData?.fields?.email || "",
+    name: actionData?.fields?.name || "",
+    password: actionData?.fields?.password || "",
+    confirmPassword: actionData?.fields?.confirmPassword || "",
+  });
+  const handleChangeInput = (
+    event: React.ChangeEvent<HTMLInputElement>,
+    field: string
+  ) => {
+    setFormData((form) => ({ ...form, [field]: event.target.value }));
+  };
 
   return (
     <Card className="gap-6 my-3">
@@ -29,45 +43,52 @@ export default function SignupForm() {
           id="signup-form"
           className="grid gap-6"
         >
-          {/* <div className="grid gap-3">
-            <Label htmlFor="username-reg">Username</Label>
-            <Input
-              id="username"
-              name="username"
-              type="text"
-              placeholder="Your Username"
-            />
-          </div> */}
-          <div className="grid gap-3">
-            <Label htmlFor="email-reg">Email</Label>
-            <Input
-              id="email"
-              name="email"
-              type="email"
-              placeholder="Your Email"
-              required
-            />
-          </div>
-          <div className="grid gap-3">
-            <Label htmlFor="password-reg">Password</Label>
-            <Input
-              id="password-reg"
-              name="password"
-              type="password"
-              placeholder="Your Password"
-              required
-            />
-          </div>
-          {/* <div className="grid gap-3">
-            <Label htmlFor="confirm-password">Confirm Password</Label>
-            <Input
-              id="confirm-password"
-              name="confirm-password"
-              type="password"
-              placeholder="Confirm Your Password"
-            />
-          </div> */}
+          <TextField
+            htmlFor="username-reg"
+            id="username"
+            name="username"
+            type="text"
+            placeholder="Your Username"
+            label="Username"
+            value={formData.name}
+            onChange={(e) => handleChangeInput(e, "name")}
+          />
+          <TextField
+            htmlFor="email-reg"
+            id="email"
+            name="email"
+            type="email"
+            placeholder="Your Email"
+            label="Email"
+            value={formData.email}
+            onChange={(e) => handleChangeInput(e, "email")}
+            required
+          />
+          <TextField
+            htmlFor="password-reg"
+            id="password"
+            name="password"
+            type="password"
+            placeholder="Your Password"
+            label="Password"
+            value={formData.password}
+            onChange={(e) => handleChangeInput(e, "password")}
+            required
+          />
+          <TextField
+            htmlFor="confirm-password"
+            id="confirm-password"
+            name="confirmPassword"
+            type="password"
+            placeholder="Confirm Your Password"
+            label="Confirm Password"
+            value={formData.confirmPassword}
+            onChange={(e) => handleChangeInput(e, "confirmPassword")}
+          />
         </SignupFetcher.Form>
+        {SignupFetcher.data?.error && (
+          <p className="text-destructive ">{SignupFetcher.data.error}</p>
+        )}
       </CardContent>
       <CardFooter>
         <Button

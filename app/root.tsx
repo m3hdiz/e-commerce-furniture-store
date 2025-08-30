@@ -5,7 +5,7 @@ import {
   useTheme,
 } from "remix-themes";
 
-import { themeSessionResolver } from "./sessions.server";
+import { themeSessionResolver } from "./utils/sessions.server";
 import {
   isRouteErrorResponse,
   Links,
