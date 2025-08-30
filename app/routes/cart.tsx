@@ -1,5 +1,6 @@
-import Cart from "~/components/Cart";
+import CartComponent from "~/components/CartComponent";
 import type { Route } from "./+types/Cart";
+import { useOutletContext } from "react-router";
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -9,9 +10,10 @@ export function meta({}: Route.MetaArgs) {
 }
 
 export default function cart() {
+  const { cartItems } = useOutletContext<{ cartItems: any }>();
   return (
     <>
-      <Cart />
+      <CartComponent cartItems={cartItems} />
     </>
   );
 }

@@ -13,52 +13,25 @@ import valo from "~/src/valo-matte-white-vase.svg";
 import DeleteIcon from "~/src/icons/DeleteIcon";
 import { CartBreadcrumb } from "./HeaderBreadcrumb";
 
-const cartItems = [
-  {
-    id: 1,
-    photo: porcelain,
-    Product: "Porcelain Dinner Plate (27cm)",
-    Price: 59,
-    subtotal: 98,
-    Quantity: 2,
-  },
-  {
-    id: 2,
-    photo: julo,
-    Product: "Ophelia Matte Natural  Vase",
-    Price: 168,
-    subtotal: 68,
-    Quantity: 1,
-  },
-  {
-    id: 3,
-    photo: valo,
-    Product: "Porcelain Dinner Plate",
-    Price: 70,
-    subtotal: 70,
-    Quantity: 1,
-  },
-];
+// function calculateCartTotals(items, taxRatePercent: Number) {
+//   const subtotal = items.reduce(
+//     (sum, item) => sum + item.Price * item.Quantity,
+//     0
+//   );
+//   const tax = subtotal * (taxRatePercent / 100);
+//   const total = subtotal + tax;
 
-function calculateCartTotals(items, taxRatePercent: Number) {
-  const subtotal = items.reduce(
-    (sum, item) => sum + item.Price * item.Quantity,
-    0
-  );
-  const tax = subtotal * (taxRatePercent / 100);
-  const total = subtotal + tax;
+//   return {
+//     subtotal,
+//     tax,
+//     total,
+//   };
+// }
 
-  return {
-    subtotal,
-    tax,
-    total,
-  };
-}
+// const taxRate = 8; // for example, 8% tax
+// const totals = calculateCartTotals(cartItems, taxRate);
 
-const taxRate = 8; // for example, 8% tax
-const totals = calculateCartTotals(cartItems, taxRate);
-
-export default function Cart() {
+export default function CartComponent({ cartItems }: { cartItems: any }) {
   return (
     <div className="px-5 mt-5 mb-20 sm:px-[11vw]">
       <section className="flex flex-col gap-12.5 justify-center mx-auto max-w-[1110px]">
@@ -94,7 +67,7 @@ export default function Cart() {
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {cartItems.map((item) => (
+                {cartItems.map((item: any) => (
                   <TableRow key={item.id}>
                     <TableCell>
                       <button className="cursor-pointer">
@@ -123,7 +96,7 @@ export default function Cart() {
               </TableBody>
             </Table>
           </div>
-          {cartItems.map((item) => (
+          {cartItems.map((item: any) => (
             <div
               key={item.id}
               className="md:hidden grid grid-cols-2 gap-y-5 py-7.5 uppercase"
@@ -172,17 +145,17 @@ export default function Cart() {
               <div className="grid grid-cols-2">
                 <p className="text-Display-3 font-medium">Subtotal</p>
                 <p className="text-right">
-                  {new Intl.NumberFormat("en-US", {
+                  {/* {new Intl.NumberFormat("en-US", {
                     style: "currency",
                     currency: "USD",
-                  }).format(totals.subtotal)}
+                  }).format(totals.subtotal)} */}
                 </p>
                 <p className="text-Display-3 font-medium">Cart totals</p>
                 <p className="text-right">
-                  {new Intl.NumberFormat("en-US", {
+                  {/* {new Intl.NumberFormat("en-US", {
                     style: "currency",
                     currency: "USD",
-                  }).format(totals.total)}
+                  }).format(totals.total)} */}
                 </p>
               </div>
               <button className="w-full border border-neutral400">
