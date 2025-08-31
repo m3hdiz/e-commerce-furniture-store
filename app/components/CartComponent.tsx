@@ -7,84 +7,70 @@ import {
   TableRow,
 } from "./ui/table";
 import Trash from "~/src/icons/Trash";
-import porcelain from "~/src/porcelain-dinner-plate.svg";
-import julo from "~/src/julo-blue-salad-plate.svg";
-import valo from "~/src/valo-matte-white-vase.svg";
 import DeleteIcon from "~/src/icons/DeleteIcon";
 import { CartBreadcrumb } from "./HeaderBreadcrumb";
 import { Button } from "./ui/button";
 import { NavLink } from "react-router";
-import React from "react";
 import { Separator } from "./ui/separator";
 import { Input } from "./ui/input";
+import type { Product } from "~/models/types";
+import { useState } from "react";
 
-const data = [
-  {
-    id: 1,
-    photo: porcelain,
-    Product: "Porcelain Dinner Plate (27cm)",
-    Price: 59,
-    subtotal: 98,
-    Quantity: 2,
-  },
-  {
-    id: 2,
-    photo: julo,
-    Product: "Ophelia Matte Natural  Vase",
-    Price: 168,
-    subtotal: 68,
-    Quantity: 1,
-  },
-  {
-    id: 3,
-    photo: valo,
-    Product: "Porcelain Dinner Plate",
-    Price: 70,
-    subtotal: 70,
-    Quantity: 1,
-  },
-];
-
-function calculateCartTotals(items, taxRatePercent: Number) {
-  const subtotal = items.reduce(
-    (sum, item) => sum + item.Price * item.Quantity,
-    0
-  );
-  const tax = subtotal * (taxRatePercent / 100);
-  const total = subtotal + tax;
-
-  return {
-    subtotal,
-    tax,
-    total,
+interface CartProps {
+  cart?: {
+    id: string;
+    userId: string;
+    cartItems: {
+      id: string;
+      productId: string;
+      quantity: number;
+      product: Product;
+    }[];
   };
 }
 
-const taxRate = 8; // for example, 8% tax
-const totals = calculateCartTotals(data, taxRate);
+export default function CartComponent({ cart }: CartProps) {
+  const [cartItems, setCartItems] = useState(cart?.cartItems ?? []);
 
-export default function Cart() {
-  const [cartItems, setCartItems] = React.useState([...data]);
-
-  const handleIncrement = (id: number) => {
+  const handleIncrement = (id: string) => {
     setCartItems((prev) =>
       prev.map((item) =>
         item.id === id
-          ? { ...item, Quantity: Math.min(item.Quantity + 1, 20) }
+          ? { ...item, quantity: Math.min(item.quantity + 1, 20) }
           : item
       )
     );
   };
 
-  const handleDecrement = (id: number) => {
+  const handleDecrement = (id: string) => {
     setCartItems((prev) =>
       prev.map((item) =>
         item.id === id
-          ? { ...item, Quantity: Math.max(item.Quantity - 1, 1) }
+          ? { ...item, quantity: Math.max(item.quantity - 1, 1) }
           : item
       )
     );
   };
+
+  const handleDelete = async (cartItemId: string) => {
+    try {
+      setCartItems((items) => items.filter((item) => item.id !== cartItemId));
+    } catch (error) {
+      console.error(error);
+      alert("Failed to delete cart item");
+    }
+  };
+
+  if (!cart || cartItems.length === 0) {
+    return (
+      <div className="px-5 mt-5 mb-20 sm:px-[11vw]">
+        <CartBreadcrumb />
+        <p className="text-center m-auto flex justify-center items-center h-60">
+          Cart is empty
+        </p>
+      </div>
+    );
+  }
 
   return (
     <div className="px-5 mt-5 mb-20 sm:px-[11vw]">
@@ -94,6 +80,7 @@ export default function Cart() {
           <p className="text-Display-6 font-medium">
             Cart ({cartItems.length} item)
           </p>
+
           <div>
             <Table className="max-md:hidden">
               <TableHeader className="bg-warmBlack">
@@ -124,27 +111,37 @@ export default function Cart() {
                 {cartItems.map((item) => (
                   <TableRow key={item.id}>
                     <TableCell>
-                      <button className="cursor-pointer">
+                      <button
+                        className="cursor-pointer"
+                        onClick={() => handleDelete(item.id)}
+                      >
                         <DeleteIcon />
                       </button>
                     </TableCell>
                     <TableCell className="h-35 w-30">
-                      <img src={item.photo} alt={item.Product} />
+                      <img
+                        src={item.product.imageUrl || item.product.name}
+                        alt={item.product.name}
+                      />
                     </TableCell>
-                    <TableCell>{item.Product}</TableCell>
+                    <TableCell>{item.product.name}</TableCell>
                     <TableCell>
                       {new Intl.NumberFormat("en-US", {
                         style: "currency",
                         currency: "USD",
-                      }).format(item.Price)}
+                      }).format(
+                        item.product?.price
+                          ? parseFloat(item.product.price.toString())
+                          : 0
+                      )}
                     </TableCell>
                     <TableCell>
                       <div className="border m-auto border-warmBlack dark:border-neutral600 h-12 w-32.5 flex items-center justify-between px-3">
                         <button
                           onClick={() => handleDecrement(item.id)}
-                          disabled={item.Quantity === 1}
+                          disabled={item.quantity === 1}
                           className={`text-xl ${
-                            item.Quantity === 1
+                            item.quantity === 1
                               ? "opacity-50 cursor-not-allowed"
                               : "hover:text-lightBrown cursor-pointer"
                           }`}
@@ -153,13 +150,17 @@ export default function Cart() {
                         </button>
 
                         <span className="text-Display-2 uppercase font-semibold">
-                          {item.Quantity}
+                          {item.quantity}
                         </span>
 
                         <button
                           onClick={() => handleIncrement(item.id)}
-                          disabled={item.Quantity === 20}
-                          className={`text-xl ${item.Quantity === 20 ? "opacity-50 cursor-not-allowed" : "hover:text-lightBrown cursor-pointer"}`}
+                          disabled={item.quantity === 20}
+                          className={`text-xl ${
+                            item.quantity === 20
+                              ? "opacity-50 cursor-not-allowed"
+                              : "hover:text-lightBrown cursor-pointer"
+                          }`}
                         >
                           +
                         </button>
@@ -169,7 +170,10 @@ export default function Cart() {
                       {new Intl.NumberFormat("en-US", {
                         style: "currency",
                         currency: "USD",
-                      }).format(item.subtotal)}
+                      }).format(
+                        Number(item.product?.price?.toString() ?? 0) *
+                          Number(item.quantity ?? 1)
+                      )}
                     </TableCell>
                   </TableRow>
                 ))}
@@ -177,36 +181,44 @@ export default function Cart() {
               <Separator />
             </Table>
           </div>
+
+          {/* Mobile Cards */}
           {cartItems.map((item) => (
             <div
               key={item.id}
               className="md:hidden grid grid-cols-2 gap-y-5 uppercase"
             >
               <div className="col-span-2">
-                <button className="cursor-pointer">
+                <button
+                  className="cursor-pointer"
+                  onClick={() => handleDelete(item.id)}
+                >
                   <DeleteIcon />
                 </button>
               </div>
               <div className="col-span-2 flex gap-5 items-center">
                 <div className="h-35 w-30">
-                  <img src={item.photo} alt={item.Product} className="" />
+                  <img
+                    src={item.product.imageUrl ?? "/placeholder-image.svg"}
+                    alt={item.product.name ?? "Product image"}
+                  />
                 </div>
-                <div>{item.Product}</div>
+                <div>{item.product.name}</div>
               </div>
               <p>Price:</p>
               <div className="text-right">
                 {new Intl.NumberFormat("en-US", {
                   style: "currency",
                   currency: "USD",
-                }).format(item.Price)}
+                }).format(item.product.price)}
               </div>
               <p>Quantity:</p>
               <div className="border border-warmBlack dark:border-neutral600 h-12 w-32.5 flex items-center justify-between px-3 justify-self-end">
                 <button
                   onClick={() => handleDecrement(item.id)}
-                  disabled={item.Quantity === 1}
+                  disabled={item.quantity === 1}
                   className={`text-xl ${
-                    item.Quantity === 1
+                    item.quantity === 1
                       ? "opacity-50 cursor-not-allowed"
                       : "hover:text-lightBrown cursor-pointer"
                   }`}
@@ -215,13 +227,17 @@ export default function Cart() {
                 </button>
 
                 <span className="text-Display-2 uppercase font-semibold">
-                  {item.Quantity}
+                  {item.quantity}
                 </span>
 
                 <button
                   onClick={() => handleIncrement(item.id)}
-                  disabled={item.Quantity === 20}
-                  className={`text-xl ${item.Quantity === 20 ? "opacity-50 cursor-not-allowed" : "hover:text-lightBrown cursor-pointer"}`}
+                  disabled={item.quantity === 20}
+                  className={`text-xl ${
+                    item.quantity === 20
+                      ? "opacity-50 cursor-not-allowed"
+                      : "hover:text-lightBrown cursor-pointer"
+                  }`}
                 >
                   +
                 </button>
@@ -231,11 +247,15 @@ export default function Cart() {
                 {new Intl.NumberFormat("en-US", {
                   style: "currency",
                   currency: "USD",
-                }).format(item.subtotal)}
+                }).format(
+                  Number(item.product?.price?.toString() ?? 0) *
+                    Number(item.quantity ?? 1)
+                )}
               </div>
               <Separator className="bg-foreground col-span-2" />
             </div>
           ))}
+
           <div className="flex flex-col gap-2.5 md:flex-row md:justify-between md:h-12">
             <div className="flex gap-2.5 max-md:hidden w-[382px]">
               <Input
@@ -259,24 +279,15 @@ export default function Cart() {
               Update cart
             </Button>
           </div>
+
           <div className="md:grid md:grid-cols-2">
             <div className="px-12.5 py-10 bg-warmBlack text-neutral100 flex flex-col gap-y-10 md:col-start-2">
               <p className="text-Display-5 font-medium">Cart totals</p>
               <div className="grid grid-cols-2">
                 <p className="text-Display-3 font-medium">Subtotal</p>
-                <p className="text-right">
-                  {new Intl.NumberFormat("en-US", {
-                    style: "currency",
-                    currency: "USD",
-                  }).format(totals.subtotal)}
-                </p>
+                <p className="text-right">{/* محاسبه subtotal */}</p>
                 <p className="text-Display-3 font-medium">Cart totals</p>
-                <p className="text-right">
-                  {new Intl.NumberFormat("en-US", {
-                    style: "currency",
-                    currency: "USD",
-                  }).format(totals.total)}
-                </p>
+                <p className="text-right">{/* محاسبه total */}</p>
               </div>
               <NavLink to="/checkout" prefetch="intent">
                 {({ isPending }) => (
