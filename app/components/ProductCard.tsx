@@ -8,9 +8,10 @@ import {
 } from "./ui/card";
 import { Button } from "./ui/button";
 import type { Product } from "../models/types";
-import { Link } from "react-router";
+import { Link, useFetcher } from "react-router";
 
 export default function ProductCard(product: Product) {
+  const CartFetcher = useFetcher();
   return (
     <Card key={product.id} className="md:h-130">
       <CardHeader>
@@ -30,9 +31,13 @@ export default function ProductCard(product: Product) {
       </CardDescription>
       <CardFooter className="mt-auto">
         <CardAction className="w-full">
-          <Button className="w-full mt-2" variant="newOutline">
-            Add To Cart
-          </Button>
+          <CartFetcher.Form method="post" action="/cart">
+            <input type="hidden" name="productId" value={product.id} />
+            <input type="hidden" name="quantity" value={1} />
+            <Button className="w-full mt-2" variant="newOutline">
+              Add To Cart
+            </Button>
+          </CartFetcher.Form>
         </CardAction>
       </CardFooter>
     </Card>
