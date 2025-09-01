@@ -16,7 +16,7 @@ import { Button } from "./ui/button";
 import { NavLink } from "react-router";
 import LogoWithType from "~/src/icons/LogoWithTypeHeader";
 import Logout from "~/routes/Logout";
-import Hello from "../src/assets/gifts/hello.gif";
+import Hello from "../src/assets/gifs/hello.gif";
 
 type SigningTabProps = {
   userId: string | null;

@@ -20,6 +20,7 @@ import {
 } from "~/src/icons/SocialIcons";
 import { ProductBreadcrumb } from "./HeaderBreadcrumb";
 import { Button } from "./ui/button";
+import { useFetcher } from "react-router";
 
 interface Review {
   id: string;
@@ -58,6 +59,7 @@ interface ProductProps {
 }
 
 export const Product: React.FC<ProductProps> = ({ product }) => {
+  const CartFetcher = useFetcher();
   // const product = {
   //   id: 1,
   //   title: "Marin White Dinner Plate",
@@ -203,9 +205,13 @@ export const Product: React.FC<ProductProps> = ({ product }) => {
                   </button>
                 </div>
                 <div className="w-full">
-                  <Button variant="solid" className="h-12 w-full">
-                    ADD TO CART
-                  </Button>
+                  <CartFetcher.Form method="post" action="/cart">
+                    <input type="hidden" name="productId" value={product.id} />
+                    <input type="hidden" name="quantity" value={1} />
+                    <Button variant="solid" className="h-12 w-full">
+                      Add To Cart
+                    </Button>
+                  </CartFetcher.Form>
                 </div>
               </div>
               <div className="flex items-center gap-2.5">
