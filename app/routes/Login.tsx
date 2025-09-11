@@ -1,4 +1,9 @@
-import { Tabs, TabsList, TabsTrigger, TabsContent } from "@radix-ui/react-tabs";
+import {
+  Tabs,
+  TabsList,
+  TabsTrigger,
+  TabsContent,
+} from "../components/ui/tabs";
 import SigninForm from "~/components/SigninForm";
 import SignupForm from "~/components/SignupForm";
 import { handleSignin, handleSignup } from "~/utils/auth.server";
@@ -22,7 +27,7 @@ export async function action({ request }: { request: Request }) {
 }
 export default function Login() {
   return (
-    <div className="flex w-full max-w-lg flex-col gap-6 p-3 m-auto">
+    <div className="flex w-lg flex-col gap-6 p-3 m-auto my-20">
       <Tabs defaultValue="Sign in">
         <TabsList className="flex gap-5">
           <TabsTrigger value="Sign in">Sign in</TabsTrigger>
