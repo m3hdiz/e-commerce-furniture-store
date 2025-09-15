@@ -6,7 +6,8 @@
     "build": "rm -rf .react-router && react-router build",
     "dev": "rm -rf .react-router && react-router dev",
     "start": "react-router-serve ./build/server/index.js",
-    "typecheck": "react-router typegen && tsc"
+    "typecheck": "react-router typegen && tsc",
+    "postinstall": "prisma generate"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.1",
