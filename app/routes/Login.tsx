@@ -27,7 +27,7 @@ export async function action({ request }: { request: Request }) {
 }
 export default function Login() {
   return (
-    <div className="flex w-lg flex-col gap-6 p-3 m-auto my-20">
+    <div className="flex max-w-lg flex-col gap-6 p-3 m-auto my-20">
       <Tabs defaultValue="Sign in">
         <TabsList className="flex gap-5">
           <TabsTrigger value="Sign in">Sign in</TabsTrigger>
