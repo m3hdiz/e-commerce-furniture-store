@@ -5,9 +5,6 @@ import ShoppingCart from "~/src/icons/Shopping cart";
 import { NavLink } from "react-router";
 import { Menu as MenuIcon } from "../src/icons/Menu";
 import SigningTab from "./SigningTab";
-import { Tabs, TabsList, TabsTrigger, TabsContent } from "@radix-ui/react-tabs";
-import SigninForm from "./SigninForm";
-import SignupForm from "./SignupForm";
 import { Button } from "./ui/button";
 import {
   Sheet,
